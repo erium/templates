@@ -1,0 +1,14 @@
+{
+    "name": "Project Workspace",
+    "isOverview": false,
+    "description": "All files and folders for a data project workspace",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}",
+        "folder_name": "__new_workspace__",
+        "workspace_name": "New Workspace"
+    },
+    "userArguments": {},
+    "files": []
+}

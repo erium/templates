@@ -1,0 +1,100 @@
+{
+    "name": "Design of Experiments",
+    "description": "To design a task that studies the relationship between input and output variables",
+    "templates": [
+        {
+            "name": "Overview",
+            "isOverview": true,
+            "description": "Overview board for design of experiments templates",
+            "automaticArguments": {
+                "use_case_name": "doe_overview",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
+            "files": [
+                {
+                    "type": "board",
+                    "path": "doe_overview.board",
+                    "active": true
+                }
+            ]
+        },
+        {
+            "name": "Bayesian Optimization",
+            "isOverview": false,
+            "description": "To optimize the parameters using a bayesian model",
+            "automaticArguments": {
+                "use_case_name": "bayesian_optimization",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
+            "files": [
+                {
+                    "type": "board",
+                    "path": "bayesian_optimization.board",
+                    "active": true
+                },
+                {
+                    "type": "notebook",
+                    "path": "bayesian_optimization.ipynb",
+                    "active": true
+                }
+            ]
+        },
+        {
+            "name": "Bayesian Modelling",
+            "isOverview": false,
+            "description": "To estimate the parameters by modelling parametrized equations",
+            "automaticArguments": {
+                "use_case_name": "bayesian_modelling",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
+            "files": [
+                {
+                    "type": "board",
+                    "path": "bayesian_modelling.board",
+                    "active": true
+                },
+                {
+                    "type": "notebook",
+                    "path": "bayesian_modelling.ipynb"
+                }
+            ]
+        },
+        {
+            "name": "Classical DOE",
+            "isOverview": false,
+            "description": "To estimate the parameters if all trials have to be run in parallel",
+            "automaticArguments": {
+                "use_case_name": "classical_doe",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
+            "files": [
+                {
+                    "type": "board",
+                    "path": "classical_doe.board",
+                    "active": true
+                },
+                {
+                    "type": "notebook",
+                    "path": "classical_doe.ipynb",
+                    "active": true
+                }
+            ]
+        }
+    ]
+}

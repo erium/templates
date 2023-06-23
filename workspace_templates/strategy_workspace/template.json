@@ -1,0 +1,13 @@
+{
+    "name": "Strategy Workspace",
+    "isOverview": false,
+    "description": "All files and folders of the data strategy workspace",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}",
+        "workspace_name": "DataStrategy"
+    },
+    "userArguments": {},
+    "files": []
+}

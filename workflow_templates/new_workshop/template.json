@@ -1,0 +1,12 @@
+{
+    "name": "Data Strategy Workshop",
+    "isOverview": false,
+    "description": "Board for a new data strategy workshop",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}"
+    },
+    "userArguments": {},
+    "files": []
+}

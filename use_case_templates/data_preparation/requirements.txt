@@ -1,0 +1,3 @@
+cookiecutter >=1.7.3
+halerium-utilities >=0.4.0
+mdutils >=1.5.1

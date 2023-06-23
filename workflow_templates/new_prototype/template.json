@@ -1,0 +1,14 @@
+{
+    "name": "Data Prototype",
+    "isOverview": false,
+    "description": "Folder structure for a new data analysis prototype.",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}",
+        "prototype_name": "new prototype"
+    },
+    "userArguments": {
+    },
+    "files": []
+}

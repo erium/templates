@@ -1,0 +1,90 @@
+.IntroCond-RegularAlt {
+	font-family: IntroCond-RegularAlt;
+}
+.IntroCond-LigtAlt {
+	font-family: IntroCond-LightAlt;
+}
+
+body {
+    /* font-family: IntroCond-RegularAlt; */
+    /* font-family: 'Intro Demo', sans-serif; */
+    font-family: 'Verdana', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 2px;
+    text-align: left;
+    color: black;
+    padding-top: 20px;
+
+    margin: auto;
+    padding-right: 1em;
+    padding-left: 2em;
+    max-width: 60em; 
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+ 
+}
+pre {
+    border: 1px dotted gray;
+    background-color: #ececec;
+    color: #1111111;
+    padding: 0.5em;
+}
+code {
+    font-family: monospace;
+    background-color: #F4F3FF;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a { 
+    text-decoration: none;
+    color: #4A5FF0; 
+}
+h1, h2, h3, h4, h5 { /* font-family: IntroCond-LightAlt; */
+                     /* font-weight: bold; */
+                     /* border-bottom: 1px dotted black; */
+                     color: #4A5FF0; }
+h1 {
+        font-size: 48px;
+}
+
+h2 {
+        font-size: 32px;
+}
+
+h3 {
+        font-size: 16px;
+}
+
+h4 {
+        font-size: 12px;
+}
+
+h5 {
+        font-size: 12px;
+}
+
+h1.title {
+        padding-bottom: 1rem !important;
+        /* font-size: 200%;*/
+        /* font-weight: bold;*/
+        /* padding-top: 0.2em;*/
+        /* padding-bottom: 0.2em;*/
+        /* text-align: left;*/
+        /* border: none; */
+}
+
+dt code {
+        font-weight: bold;
+}
+dd p {
+        margin-top: 0;
+}
+
+#footer {
+        padding-top: 1em;
+        font-size: 70%;
+        color: gray;
+        text-align: center;
+        }

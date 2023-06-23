@@ -1,0 +1,4 @@
+autokeras >=1.0.20
+cookiecutter >=1.7.3
+halerium-utilities >=0.4.0
+lazypredict >=0.2.12

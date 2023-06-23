@@ -1,0 +1,71 @@
+{
+    "name": "Prediction",
+    "description": "To predict an output based on input parameters provided",
+    "templates": [
+        {
+            "name": "Overview",
+            "isOverview": true,
+            "description": "Overview board for prediction templates",
+            "automaticArguments": {
+                "use_case_name": "prediction_overview",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
+            "files": [
+                {
+                    "type": "board",
+                    "path": "prediction_overview.board",
+                    "active": true
+                }
+            ]
+        },
+        {
+            "name": "Regression",
+            "isOverview": false,
+            "description": "To estimate the relationships between a dependent variable and one or more independent variables",
+            "automaticArguments": {
+                "use_case_name": "regression",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
+            "files": [
+                {
+                    "type": "board",
+                    "path": "regression.board",
+                    "active": true
+                },
+                {
+                    "type": "notebook",
+                    "path": "regression.ipynb",
+                    "active": true
+                }
+            ]
+        },
+        {
+            "name": "Simple Prediction",
+            "isOverview": false,
+            "description": "To perform simple regression and classification with keras and scikit-learn models without parameter tuning and preprocessing",
+            "automaticArguments": {
+                "use_case_name": "simple_prediction",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
+            "files": [
+                {
+                    "type": "notebook",
+                    "path": "simple_prediction.ipynb",
+                    "active": true
+                }
+            ]
+        }
+    ]
+}

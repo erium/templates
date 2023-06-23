@@ -1,0 +1,4 @@
+{
+  "timestamp": "YYYY-MM-DD",
+  "file_name": "{{cookiecutter.timestamp}} Data Strategy Workshop"
+}
