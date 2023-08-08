@@ -1,0 +1,12 @@
+{
+    "name": "Bot vs Bot",
+    "isOverview": false,
+    "description": "Use two bots to complete a task.",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}"
+    },
+    "userArguments": {},
+    "files": []
+}

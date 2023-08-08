@@ -4,7 +4,7 @@
       "id": "769cdcec-dadb-49d4-bb01-9bb1aa6d3928",
       "title": "",
       "type_specific": {
-        "message": "# Data\n\nHere, map the structure of the data landscape. Collect relevant data sources, aggregators, and the derived data products."
+        "message": "# Data\n\nHere, map the structure of the data landscape. Collect relevant data sources, aggregators and the derived data products."
       },
       "edge_connections": [
         {
