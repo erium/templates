@@ -97,6 +97,34 @@
             "description": "Boards with Prompt-Trees for generic tasks.",
             "templates": [
                 {
+                    "name": "Document Chatbot",
+                    "isOverview": false,
+                    "description": "Perform document-based inquiries, providing instant, accurate responses based on the content of specific documents.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "generic/document_chatbot",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
+                    "name": "Meeting Report Generator",
+                    "isOverview": false,
+                    "description": "Efficiently capture, organize, and present key takeaways, decisions, and action items from meetings.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "generic/meeting_report_generator",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
                     "name": "Bot vs Bot",
                     "isOverview": false,
                     "description": "Use two bots to complete a task.",
@@ -111,6 +139,20 @@
                     "files": []
                 },
                 {
+                    "name": "Blogpost with Image Generator",
+                    "isOverview": false,
+                    "description": "Use Text- and Imagebots to generate a Blogpost on any topic.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "generic/blogpost_with_image",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
                     "name": "Bot Generator",
                     "isOverview": false,
                     "description": "Generate a bot to complete a task.",
@@ -119,6 +161,54 @@
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
                         "source_directory": "generic/bot_generator",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                }
+            ]
+        },
+        {
+            "name": "Code Generation Prompts",
+            "description": "Boards with Prompt-Trees for code generation tasks.",
+            "templates": [
+                {
+                    "name": "Code Refactoring and Review",
+                    "isOverview": false,
+                    "description": "Refactor and Review existing code.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "code_generation/code_refactoring_and_review",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
+                    "name": "Code Comments and Documentation Generator",
+                    "isOverview": false,
+                    "description": "Generate insightful code comments and comprehensive documentation.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "code_generation/code_comments_and_documentation_generator",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
+                    "name": "Code and Unit Tests Generator",
+                    "isOverview": false,
+                    "description": "Generate foundational code structures and corresponding unit tests based on user-defined specifications.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "code_generation/code_and_unit_tests_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},

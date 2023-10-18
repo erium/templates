@@ -1,0 +1,12 @@
+{
+    "name": "Meeting Report Generator",
+    "isOverview": false,
+    "description": "Efficiently capture, organize, and present key takeaways, decisions, and action items from meetings.",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}"
+    },
+    "userArguments": {},
+    "files": []
+}

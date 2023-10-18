@@ -1,0 +1,12 @@
+{
+    "name": "Code and Unit Tests Generator",
+    "isOverview": false,
+    "description": "Generate foundational code structures and corresponding unit tests based on user-defined specifications.",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}"
+    },
+    "userArguments": {},
+    "files": []
+}

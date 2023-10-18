@@ -1,0 +1,12 @@
+{
+    "name": "Code Comments and Documentation Generator",
+    "isOverview": false,
+    "description": "Generate insightful code comments and comprehensive documentation.",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}"
+    },
+    "userArguments": {},
+    "files": []
+}
