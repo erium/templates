@@ -73,6 +73,32 @@
             ]
         },
         {
+            "name": "Chatbots",
+            "description": "Custom chatbots for questionnaires etc.",
+            "templates": [
+                {
+                    "name": "Polybot",
+                    "isOverview": false,
+                    "description": "Start a chatbot with a dedicated frontend. The bot supports various personalities.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "chatbots/polybot",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": [
+                        {
+                            "type": "board",
+                            "path": "START_POLYBOT.board",
+                            "active": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "Image Generation Prompts",
             "description": "Boards with Prompt-Trees for image generation.",
             "templates": [
