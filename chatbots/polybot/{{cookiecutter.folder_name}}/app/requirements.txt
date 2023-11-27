@@ -1,0 +1,11 @@
+asyncio
+chromadb
+fastapi
+httpx
+langchain
+openai==0.28
+sseclient-py
+uvicorn
+tiktoken
+unstructured[local-inference]
+websockets

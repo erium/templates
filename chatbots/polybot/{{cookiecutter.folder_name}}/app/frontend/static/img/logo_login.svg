@@ -1,0 +1,32 @@
+<svg width="230" height="100" viewBox="0 0 230 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path id="vy8tcffx8a" d="M0 0h230v100H0z"/>
+        <path id="m38hs4dm4c" d="M0 0h20.063v21.66H0z"/>
+        <path id="ggv4fofy6e" d="M0 0h18.38v21.616H0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="ozsva502ab" fill="#fff">
+            <use xlink:href="#vy8tcffx8a"/>
+        </mask>
+        <g mask="url(#ozsva502ab)">
+            <path fill="#000" d="M97.179 73.093v21.629h16.812v-2.38H99.808V84.68h13.478v-2.255H99.808v-7.076h13.839v-2.256zM122.702 84.65v-9.301h6.698c2.848 0 4.945 1.854 4.945 4.635 0 2.811-2.16 4.665-4.945 4.665h-6.698zm6.698-11.588h-9.296v21.66h2.63v-7.94h6.29l6.315 7.94h2.754v-.37l-6.44-7.91c3.068-.742 5.228-3.09 5.228-6.427 0-3.925-2.974-6.953-7.481-6.953zM149.1 75.133h3.536v-2.04h-9.703v2.04h3.537v17.519h-3.787v2.07h10.204v-2.07h-3.788zM172.036 87.337c0 3.43-2.441 5.346-5.759 5.346-3.35 0-5.79-1.916-5.79-5.346V73.093h-2.63v14.275c0 4.851 3.662 7.632 8.42 7.632 4.726 0 8.326-2.78 8.326-7.632V73.093h-2.567v14.244z"/>
+            <g transform="translate(179.937 73.062)">
+                <mask id="srn4ei6dcd" fill="#fff">
+                    <use xlink:href="#m38hs4dm4c"/>
+                </mask>
+                <path fill="#000" mask="url(#srn4ei6dcd)" d="m19.061 0-9.014 12.081L1.033 0H0v21.66h2.63V6.056l7.198 9.764h.407l7.199-9.764V21.66h2.63V0z"/>
+            </g>
+            <g transform="translate(30 73.093)">
+                <mask id="unxl4lsa7f" fill="#fff">
+                    <use xlink:href="#ggv4fofy6e"/>
+                </mask>
+                <path fill="#000" mask="url(#unxl4lsa7f)" d="M15.753 21.616V11.487H2.596v10.129H0V0h2.596v9.11h13.157V0h2.627v21.616z"/>
+            </g>
+            <path d="M58.602 87.143h9.196L63.2 77.046l-4.598 10.097zm-.876 2.224-2.565 5.342h-2.722v-.34L62.637 73h1.188L73.93 94.37v.339h-2.69l-2.565-5.342H57.726zM80.557 92.393h11.985v2.316H77.93V73.093h2.627z" fill="#000"/>
+            <g transform="translate(90 8)" stroke="#000" stroke-width="1.5">
+                <circle cx="25" cy="25" r="25"/>
+                <path d="M25 1.75 45.178 13.4v23.3L25 48.35 4.822 36.7V13.4zM17 20v10M33 20v10M17 25h16"/>
+            </g>
+        </g>
+    </g>
+</svg>

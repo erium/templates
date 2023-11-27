@@ -1,0 +1,49 @@
+<!DOCTYPE html5>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Halerium</title>
+  <meta name="description" content="" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <link rel="shortcut icon" href="{{ url_for('static', path='/img/hal.png')}}" />
+  <link href="{{ url_for('static', path='/style/main.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', path='/style/chat.css') }}" rel="stylesheet" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="flex col">
+    <div class="flex col container">
+      <div class="logo"></div>
+      <div class="app" id="app">
+        <div class="chat" id="chat">
+          <ul id="messages">
+            <li class="sender-walter"><span class="name">{{ botname }}</span> <span class="timestamp">{{ timestamp
+                }}</span></li>
+            <li class="msg-walter">{{ greeting }}</li>
+          </ul>
+        </div>
+        <div class="user-interaction-container" id="user-interaction-container">
+          <div class="user-input-container" id="user-input-container">
+            <textarea class="user-input" id="user-input" rows="1" placeholder="Nachricht senden"></textarea>
+          </div>
+          <button id="send" class="send" onclick="wsSendPrompt(event)"></button>
+          <input type="hidden" id="username" value="{{ username }}" />
+          <input type="hidden" id="wsurl" value="{{ ws_url }}" />
+        </div>
+      </div>
+      <span style="text-align: center;">
+        <p id="go-to-login"></p>
+      </span>
+    </div>
+  </div>
+</body>
+<script type="application/javascript" src="{{ url_for('static', path='js/chat.js') }}"></script>
+<script>
+  document.getElementById("go-to-login").innerHTML = "<a href='" + window.location.origin + "/'>Logout</a>";
+</script>
+
+</html>
