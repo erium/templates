@@ -11,7 +11,6 @@ from subprocess import PIPE, STDOUT
 import time
 
 
-
 app = Flask(__name__)
 
 
@@ -47,7 +46,7 @@ def stop_kernel():
         tuple: A tuple containing the result of the request and the status code.
     """
     try:
-        kernel = IPKernelApp.instance()
+        kernel = MyIPKernelApp.instance()
         kernel.close()
         return jsonify({'success': 'Kernel stopped! '}), 200
     except Exception as e:
@@ -57,10 +56,12 @@ def stop_kernel():
 @app.route('/execute_kernel_command', methods=['POST'])
 def execute_kernel_command():
     """
-    Executes a command in a running IPython kernel. Always include a return statement in your code!
+    Executes a command in a running IPython kernel.
+    Always include a return statement in your code!
+    Do not use this to execute bash commands or install python packages or install packages with apt!
 
     Args:
-        command (str): the shell command that should be run in the IPython Kernel (e.g.: ls)
+        command (str): the python command that should be run in the IPython Kernel (e.g.: a = np.array([1,2,3,4]))
 
     Returns:
         tuple: A tuple containing the result of the command and the status code.
@@ -76,7 +77,7 @@ def execute_kernel_command():
         # Check if 'command' is present and not empty
         if 'command' in data and data['command']:
             command = data['command']
-            kernel = IPKernelApp.instance()
+            kernel = MyIPKernelApp.instance()
             if kernel.shell is None:
                 return jsonify({'error': f'kernel has to be started first!'})
 
@@ -126,6 +127,7 @@ def alive():
 def execute_command():
     """
     Executes a command in the shell (i.e. bash).
+    Do not use this to execute python code or install python packages or install packages with apt!
 
     Args:
         command (str): the shell command, for example ls -lach or wget -b http://example.com/beefy-file.tar.gz
@@ -171,7 +173,7 @@ def pip_install():
         data = request.get_json()
         if 'package' in data:
             package = data['package']
-            #command = f"pip install -q {package}"
+            # command = f"pip install -q {package}"
             command = ["pip", "install", "-q", package]
 
             # open subprocess and pipe stdout and stderr
@@ -198,7 +200,7 @@ def apt_get_install():
     This CANNOT be used for python packages. Use pip instead.
 
     Args:
-        package (str): the package that should be installed. 
+        package (str): the package that should be installed.
 
     Returns:
         tuple: A tuple containing the result of the command and the status code.
@@ -219,7 +221,6 @@ def apt_get_install():
 
                     return jsonify({'apt-get update error': update_output}), 200
 
-            
             # apt-get install
             package = data['package']
             command = ['sudo', 'apt-get', 'install', '-y', package]
@@ -257,7 +258,8 @@ def write_to_file():
         if 'contents' in data and 'filetype' in data and 'filename' in data:
             with open(f"{data['filename']}.{data['filetype']}", 'w') as f:
                 f.write(data['contents'])
-            return jsonify({'output': f'Successfully wrote contents to file {data["filename"]}.{data["filetype"]}!'}), 200
+            return jsonify(
+                {'output': f'Successfully wrote contents to file {data["filename"]}.{data["filetype"]}!'}), 200
         else:
             return jsonify({'error': 'Missing parameters'}), 400
     except Exception as e:

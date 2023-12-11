@@ -195,6 +195,32 @@
             ]
         },
         {
+            "name": "Enhanced Bots",
+            "description": "Bots enhanced by plugins and functions.",
+            "templates": [
+                {
+                    "name": "Bots with Plugins",
+                    "isOverview": false,
+                    "description": "Create boards in which ChatGPT has access to customizable functions such as code execution and file reading ",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "enhanced_bots/bots_with_plugins",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": [
+                        {
+                            "type": "board",
+                            "path": "START_FUNCTIONSERVER.board",
+                            "active": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "Code Generation Prompts",
             "description": "Boards with Prompt-Trees for code generation tasks.",
             "templates": [
@@ -239,32 +265,6 @@
                     },
                     "userArguments": {},
                     "files": []
-                }
-            ]
-        },
-        {
-            "name": "Enhanced Bots",
-            "description": "Bots enhanced by plugins and functions.",
-            "templates": [
-                {
-                    "name": "Bots with Plugins",
-                    "isOverview": false,
-                    "description": "Create boards in which ChatGPT has access to customizable functions such as code execution and file reading ",
-                    "automaticArguments": {
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "bots_with_plugins/code_controller",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "START_FUNCTIONSERVER.board",
-                            "active": true
-                        }
-                    ]
                 }
             ]
         }
