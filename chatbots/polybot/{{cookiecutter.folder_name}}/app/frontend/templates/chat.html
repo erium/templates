@@ -4,13 +4,15 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Halerium</title>
+  <title>{{ botname }}</title>
   <meta name="description" content="" />
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
   <link rel="shortcut icon" href="{{ url_for('static', path='/img/hal.png')}}" />
   <link href="{{ url_for('static', path='/style/main.css') }}" rel="stylesheet" />
   <link href="{{ url_for('static', path='/style/chat.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 
@@ -21,29 +23,28 @@
       <div class="app" id="app">
         <div class="chat" id="chat">
           <ul id="messages">
-            <li class="sender-walter"><span class="name">{{ botname }}</span> <span class="timestamp">{{ timestamp
-                }}</span></li>
-            <li class="msg-walter">{{ greeting }}</li>
+            <li class="sender-assistant"><span class="name">{{ botname }}</span> <span class="timestamp" id="fmt"></span></li>
+            <li class="msg-assistant">{{ greeting }}</li>
           </ul>
         </div>
         <div class="user-interaction-container" id="user-interaction-container">
           <div class="user-input-container" id="user-input-container">
             <textarea class="user-input" id="user-input" rows="1" placeholder="Nachricht senden"></textarea>
           </div>
-          <button id="send" class="send" onclick="wsSendPrompt(event)"></button>
+          <button id="send" class="send"></button>
           <input type="hidden" id="username" value="{{ username }}" />
           <input type="hidden" id="wsurl" value="{{ ws_url }}" />
+          <input type="hidden" id="appurl" value="{{ app_url }}" />
+          <input type="hidden" id="botname" value="{{ botname }}" />
         </div>
       </div>
       <span style="text-align: center;">
-        <p id="go-to-login"></p>
+        <p id="go-to-login"><a href="{{ app_url }}" target="_self">Logout</a></p>
       </span>
     </div>
   </div>
 </body>
-<script type="application/javascript" src="{{ url_for('static', path='js/chat.js') }}"></script>
-<script>
-  document.getElementById("go-to-login").innerHTML = "<a href='" + window.location.origin + "/'>Logout</a>";
-</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script type="module" src="{{ url_for('static', path='js/chat.js') }}"></script>
 
 </html>

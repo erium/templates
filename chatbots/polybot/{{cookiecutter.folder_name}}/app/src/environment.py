@@ -1,26 +1,48 @@
 import os
+from .prettyprint import prettyprint as print, MessageType as mt
 
 
 class Environment:
-    def __init__(self, local: bool = False, args: dict = {}) -> None:
+    def __init__(self, args: dict = {}) -> None:
         """
         Initializes an instance of the Environment class.
         """
 
-        self.local = local
-        if not args:
+        # If the environment is local, use the local environment variables.
+        self.is_local = self._is_local()
+
+        print(
+            f"Environment is {'local' if self.is_local else 'Halerium'}", msg_type=mt.INFO
+        )
+
+        if not self.is_local:
             self.base_url = self.get_base_url()
             self.tenant = self.get_tenant()
             self.workspace = self.get_workspace()
             self.runner_id = self.get_runner_id()
             self.runner_token = self.get_runner_token()
 
+        elif self.is_local and args:
+            self.base_url = args.get("base_url")
+            self.tenant = args.get("tenant")
+            self.workspace = args.get("workspace")
+            self.runner_id = args.get("runner_id")
+            self.runner_token = args.get("runner_token")
         else:
-            self.base_url = args["base_url"]
-            self.tenant = args["tenant"]
-            self.workspace = args["workspace"]
-            self.runner_id = args["runner_id"]
-            self.runner_token = args["runner_token"]
+            print(
+                "Local environment requires arguments. Please provide a dict containing\n- base_url\n- tenant\n- workspace\n- runner_id\n- runner_token",
+                msg_type=mt.ERROR,
+            )
+            raise Exception("Missing arguments for local environment.")
+
+    def _is_local(self) -> bool:
+        """
+        Returns True if the environment is local.
+
+        Returns:
+        bool: True if the environment is local.
+        """
+        return os.getenv("HALERIUM_BASE_URL") is None
 
     def get_base_url(self) -> str:
         """
@@ -29,7 +51,7 @@ class Environment:
         Returns:
         str: The base URL for the environment.
         """
-        if self.local:
+        if self.is_local:
             return "127.0.0.1"
         else:
             return os.getenv("HALERIUM_BASE_URL")
@@ -122,7 +144,11 @@ class Environment:
         Returns:
         dict: The headers for the prompt server.
         """
-        return {"halerium-runner-token": self.runner_token}
+        return {
+            "halerium-runner-token": self.runner_token,
+            "X-Accel-Buffering": "no"
+            }
+
 
     def get_app_url(self, port: int | str = None) -> str:
         """
@@ -134,10 +160,10 @@ class Environment:
         Returns:
         str: The app URL for the environment.
         """
-        if not self.local:
+        if not self.is_local:
             return f'{self.base_url}/apps/{self.runner_id}{"/" + str(port) if port else "/"}'
         else:
-            return f'{self.base_url}{":" + str(port) if port else ":8501"}'
+            return f'127.0.0.1{":" + str(port) if port else ":8501"}'
 
     def get_websocket_url(self, port: int | str = None) -> str:
         """
@@ -149,14 +175,14 @@ class Environment:
         Returns:
         str: The websocket URL for the environment.
         """
-        if not self.local:
+        if not self.is_local:
             return f'ws{self.base_url.replace("https", "")}/apps/{self.runner_id}{"/" + str(port) + "/" if port else "/"}'
         else:
-            return f'ws://{self.base_url}{":" + str(port) + "/" if port else ":8501/"}'
+            return f'ws://127.0.0.1{":" + str(port) + "/" if port else ":8501/"}'
 
 
 if __name__ == "__main__":
-    env = Environment(False)
+    env = Environment(True)
 
     print(env.base_url)
     print(env.get_app_url(8501))

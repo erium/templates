@@ -24,7 +24,7 @@ import uvicorn
 # backend
 from .src.email_service import Postman
 from .src.chatbot import Chatbot
-from .src import personality_loader as pl
+from .src.configuration import Configuration
 from .src.environment import Environment
 
 # infrastructure
@@ -33,6 +33,7 @@ import configparser
 from datetime import datetime
 import json
 import os
+from pathlib import Path
 from pydantic import BaseModel, Field
 from .src.prettyprint import prettyprint as print, MessageType as mt
 import time
@@ -41,32 +42,34 @@ import uuid
 
 SESSIONS = {}
 
-def main(public):
+def main():
     # change to script directory
     file_path = os.path.abspath(__file__)
     dir_path = os.path.dirname(file_path)
     os.chdir(dir_path)
 
-    # set up configparser
-    configs = configparser.ConfigParser()
-    configs.read("config.conf")
+    # load global configs
+    config_global = configparser.ConfigParser()
+    config_global.read('config.conf')
+
+    # load user configuration
+    c = Configuration()
+    config_user = c.load()
+    model_intro = config_user.get('intro')
+    model_version = config_user.get('model_version')
+    bot_name = config_user.get('bot_name')
+    is_public = config_user.get('public_hosting').lower() == 'true'
 
     # get environment parameters
     env = Environment()
-    PORT = 0  # int(configs["app"]["port"])
-    if public:
+    PORT = 8501
+    if is_public:
         PORT = 8499
-    else:
-        PORT = 8501
 
+    # set environment routes
     APP_URL = env.get_app_url(port=PORT)
     WS_URL = env.get_websocket_url(port=PORT)
 
-    # set up chat
-    BOT_NAME = configs["app"]["bot_name"]
-
-    # set up custom vector database
-    CUSTOM_DB = None
 
     class Data(BaseModel):
         username: str = Field(..., min_length=1, max_length=50)
@@ -74,16 +77,14 @@ def main(public):
         ip: str = Field(..., min_length=8, max_length=50)
 
     print(
-        f"App is running {'publicly' if public else 'privately'} at {APP_URL}",
-        type=mt.INFO,
+        f"App is running {'publicly' if is_public else 'privately'} at {APP_URL}",
+        msg_type=mt.INFO,
     )
 
     # set up API
-    app = FastAPI(debug=configs["app"]["debug"] == "True")
-    app.mount(
-        "/static", StaticFiles(directory=configs["paths"]["static"]), name="static"
-    )
-    templates = Jinja2Templates(configs["paths"]["templates"])
+    app = FastAPI(debug=True)
+    app.mount("/static", StaticFiles(directory=Path(config_global["paths"]["static"])), name="static")
+    templates = Jinja2Templates(Path(config_global["paths"]["templates"]))
     app.root_path = f"/apps/{env.runner_id}/{PORT}/"
 
     @app.get("/", response_class=HTMLResponse)
@@ -91,19 +92,16 @@ def main(public):
         """
         Serves the login template
         """
-        personalities = pl.load_personalities(configs["paths"]["persona_dir"])
-        botname = "P o l y B o t"
         intro_wide = (
             intro_narrow
-        ) = "Nutzen Sie Halerium PolyBot für die individualisierte Informationsbeschaffung aus ausgewählten Dokumenten."
+        ) = model_intro
         return templates.TemplateResponse(
             "login.html",
             {
                 "request": request,
-                "botname": botname,
+                "botname": bot_name,
                 "intro_wide": intro_wide,
                 "intro_narrow": intro_narrow,
-                "p": personalities,
                 "form_post_url": app.root_path,
             },
         )
@@ -114,13 +112,14 @@ def main(public):
         username: str = Form(...),
         useremail: str = Form("nan"),
         ip: str = Form("nan"),
-        personalityPicker: str = Form(...),
     ):
         """
         POST method to collect user data.
         Userdata collected are Username, email, and ip address.
 
         Success with IP address may vary (depends on ipify.org, an external API)
+
+        Serves the chat.html template
         """
         global SESSIONS
         # Generate a new session id
@@ -128,12 +127,13 @@ def main(public):
 
         # set up customized chatbot
         chatbot = Chatbot(
+            config_global=config_global,
+            config_user=config_user,
+            env=env,
             username=username,
             email=useremail,
             ip=ip,
             session_id=session_id,
-            personality=personalityPicker,
-            botname=BOT_NAME,
         )
 
         # Store the session data
@@ -142,7 +142,7 @@ def main(public):
             "email": useremail,
             "ip": ip,
             "chatbot": chatbot,
-            "personality": personalityPicker,
+            "personality": chatbot.system_prompt,
             "model_version": chatbot.model_version,
         }
 
@@ -153,18 +153,23 @@ def main(public):
                 for k, v in SESSIONS[session_id].items()
                 if not k == "chatbot"
             ],
-            type=mt.INFO,
+            msg_type=mt.INFO,
         )
-        greeting = chatbot.trigger_initial_prompt()
+        greeting = ""
+        async for token in chatbot.evaluate():
+            if isinstance(token, str): # token is bool = True if completed
+                greeting += token
+        
         response = templates.TemplateResponse(
             "chat.html",
             {
                 "request": request,
                 "timestamp": datetime.now().strftime("%Y.%m.%d, %H:%M:%S"),
-                "botname": f"{BOT_NAME}",
+                "botname": bot_name,
                 "greeting": greeting,
                 "username": username,
                 "ws_url": WS_URL,
+                "app_url": APP_URL
             },
         )
         # Store the session id in a cookie
@@ -193,7 +198,7 @@ def main(public):
             str: Session id
         """
         if session is None and token is None:
-            print("No Session ID provided. Closing websocket.", type=mt.ERROR)
+            print("No Session ID provided. Closing websocket.", msg_type=mt.ERROR)
             raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION)
         return session or token
 
@@ -210,7 +215,7 @@ def main(public):
         if session_id not in SESSIONS:
             print(
                 f"Session ID {str(session_id)} not found in active sessions. Closing websocket.",
-                type=mt.ERROR,
+                msg_type=mt.ERROR,
             )
             raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION)
         else:
@@ -228,101 +233,59 @@ def main(public):
                     continue
 
                 print(
-                    f'Received user prompt from {session_id} @ {datetime.now().strftime("%Y-%m-%d_%H_%M_%S_%ms")}',
-                    type=mt.INFO,
+                    f'Session {session_id} prompt @ {datetime.now().strftime("%Y-%m-%dT%H:%M:%S:%f")}',
+                    msg_type=mt.INFO,
                 )
 
                 # prompt model and send tokens to frontend once they become available
                 now = time.time()
                 full_message = ""
                 n_token = 0
-                async for token in chatbot.get_response(prompt):
+                async for token in chatbot.evaluate(prompt):
                     if n_token == 0:
+                        # begin message
                         await websocket.send_text("<sos>")
-                    # send token to frontend via websocket
-                    await websocket.send_text(token)
-                    # hack, to return control to the event loop:
-                    # await asyncio.sleep(0)
-                    # save token to full message
-                    full_message += token
-                    n_token += 1
-
-                # end message
-                await websocket.send_text("<eos>")
-                # await asyncio.sleep(0)
-
-                # append chatbot reponse to the history
-                chatbot.shallow_history.append(
-                    {"role": "assistant", "content": full_message}
-                )
-                chatbot.full_history.append(
-                    {"role": "assistant", "content": full_message}
-                )
-
-                # # count responses
-                # n_responses = sum([1 for i in chatbot.shallow_history if i['role'] == 'assistant'])
-                # print([f'Number of responses: {n_responses}'], type=mt.INFO)
+                    
+                    if isinstance(token, bool):
+                        # end message
+                        await websocket.send_text("<eos>")
+                    
+                    elif isinstance(token, str):
+                        # send token to frontend via websocket
+                        await websocket.send_text(token)
+                        # save token to full message
+                        full_message += token
+                        n_token += 1
 
                 # generation time
                 delta = time.time() - now
 
                 print(
-                    f'Response for {session_id} finished @ {datetime.now().strftime("%Y-%m-%d_%H_%M_%S_%ms")}',
-                    type=mt.SUCCESS,
+                    f'finished @ {datetime.now().strftime("%Y-%m-%dT%H:%M:%S:%f")}',
+                    msg_type=mt.SUCCESS,
                 )
 
                 # timing information
                 try:
                     print(
-                        f"Generation time: {n_token} token in {round(delta, 3)} s ({round(delta/n_token, 3)} s/token)",
-                        type=mt.INFO,
+                        f"received and sent {n_token} token in {round(delta, 3)} s ({round(delta/n_token, 3)} s/token)",
+                        msg_type=mt.INFO,
                     )
                 except:
                     pass
 
-                # store history
-                # filename = model.write_chat_to_disk(return_file_name = True)
-
-                # # LIMIT TO 4 RESPONSES
-                # if n_responses >= 4:
-                #     await websocket.close()
-                #     raise WebSocketDisconnect   # TODO: This is very unclean and needs to be changed eventually. I'm abusing this to always update the sessions and send the email
-
         except WebSocketDisconnect:
-            print(f"Session {session_id} terminated. Deletion session.", type=mt.INFO)
-            filename = chatbot.write_chat_to_disk(return_file_name=True)
+            print(f"Session {session_id} terminated", msg_type=mt.INFO)
+            chatbot.write_chat_to_disk(return_file_name=False)
             del SESSIONS[session_id]
-            print(f"Remaining Sessions {SESSIONS}", type=mt.INFO)
+            print(f"Remaining Sessions {SESSIONS}", msg_type=mt.INFO)
             # send chat log via email
-            postman = Postman()
-            postman.send(filename)
-
-    @app.post("/upload", response_class=HTMLResponse)
-    async def upload(
-        request: Request,
-        file: UploadFile,
-        session_id: Annotated[str, Depends(get_session_id)],
-    ):
-        """
-        POST method to upload and prepare a PDF file
-        When ready, serves the chatbot template with the chatbot set to use the custom vector storage
-        """
-        pass
+            # postman = Postman(config_global)
+            # postman.send(filename)
 
     uvicorn.run(app, host="0.0.0.0", port=PORT)
 
 
 if __name__ == "__main__":
     # run server
-    parser = argparse.ArgumentParser(description="API Application")
-    parser.add_argument(
-        "--public",
-        action="store_true",
-        help="Run the app in public mode on port 8499 (default: False)",
-    )
-    args = parser.parse_args()
-    main(public=args.public)
-
-    # print(f'App is running at {APP_URL}', type=mt.INFO)
-    # uvicorn.run('app.api:app', host="0.0.0.0", port=PORT,
-    # reload=True)  # log_level="debug"
+    main()

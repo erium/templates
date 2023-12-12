@@ -1,8 +1,6 @@
 "use strict";
 
 // Global constants and variables
-const personalityPicker = document.getElementById("personalityPicker");
-const personalityCache = document.getElementById("personalityCache");
 const btn = document.getElementById("send");
 const username = document.getElementById("username");
 const usermail = document.getElementById("useremail");
@@ -26,17 +24,8 @@ const evtListeners = {
       usermail.style.color = "#000000";
     },
   ],
-  personalityPicker: [
-    "change",
-    function (event) {
-      personalityPicker.style.color = "#000000";
-      chosePersonality = true;
-    },
-  ],
 };
-let chosePersonality = false;
 
-getPersonalities();
 setupEventListeners(evtListeners);
 
 /**
@@ -59,36 +48,6 @@ function getIP(json) {
   document.getElementById("ip").value = json.ip;
 }
 
-function getPersonalities() {
-  /**
-   * extract personalities and populates dropdown menu
-   */
-  /* extract personalities */
-  let personalities = personalityCache.value;
-  const personalityRegEx = /'([^']*)'/g;
-  personalities = personalities.match(personalityRegEx);
-  if (personalities) {
-    personalities = personalities.map((p) => p.replace(/'/g, ""));
-    populateDropDown(personalities);
-  }
-}
-
-function populateDropDown(personalities) {
-  /* populate drop down menu */
-  personalities.forEach((p) => {
-    const opt = createOptionElement(p);
-    personalityPicker.appendChild(opt);
-  });
-}
-
-function createOptionElement(p) {
-  /** create option element */
-  const opt = document.createElement("option");
-  opt.value = p;
-  opt.innerHTML = p;
-  return opt;
-}
-
 /* validate user input */
 function checkInput() {
   var user_form = document.getElementById("userForm");
@@ -103,13 +62,20 @@ function checkInput() {
   } else {
     document.getElementById("useremailLabel").classList.remove("required");
   }
-  if (!chosePersonality) {
-    document.getElementById("personalityLabel").classList.add("required");
+  
+  const validEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+  var usermailValid = true;
+
+  if (!usermail.value.match(validEmail)) {
+      usermailValid = false;
+      document.getElementById("useremailLabel").classList.add("required");
   } else {
-    document.getElementById("personalityLabel").classList.remove("required");
+    usermailValid = true;
+    document.getElementById("useremailLabel").classList.remove("required");
   }
+
   // if the input is not empty, submit the form
-  if (username.value && usermail.value && chosePersonality) {
+  if (username.value && usermail.value && usermailValid) {
     user_form.submit();
   }
 }

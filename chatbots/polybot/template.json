@@ -11,7 +11,7 @@
     "files": [
                 {
                     "type": "board",
-                    "path": "START_POLYBOT.board",
+                    "path": "polybot.board",
                     "active": true
                 }
             ]

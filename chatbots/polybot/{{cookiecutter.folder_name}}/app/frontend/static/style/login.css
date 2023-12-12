@@ -29,6 +29,7 @@
   max-width: 300px;
   height: 40px;
   margin: 0;
+  white-space: pre-wrap;
 }
 
 .intro-narrow {

@@ -70,7 +70,6 @@ ul {
   padding: 16px 0 0 0;
   overflow-y: scroll;
 }
-
 .chat {
   display: flex;
   width: 100%;
@@ -104,13 +103,40 @@ ul {
   }
 }
 .chat li pre {
+  position: relative;
   white-space: pre-wrap;
-  background: #4a5ff0;
-  color: #ffffff;
+  background: #282c34;
   padding: 9px;
+  padding-top: 30px;
   border-radius: 9px;
 }
-.chat .msg-walter {
+.chat li pre .copy-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #000000;
+    font-family: inherit;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+}
+.chat li pre .lang-lbl {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 5px 10px;
+    color: #000000;
+    font-family: inherit;
+    line-height: 1;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+}
+.chat .msg-assistant {
   align-self: flex-start;
   background-color: #ffffff;
   color: #000000;
@@ -119,6 +145,9 @@ ul {
   line-height: 16px;
   letter-spacing: 1.5px;
   white-space: pre-line;
+}
+.msg-assistant li {
+    color: #000000;
 }
 .chat .msg-user {
   align-self: flex-end;
@@ -130,22 +159,22 @@ ul {
   letter-spacing: 1.5px;
   white-space: pre-line;
 }
-.chat .sender-walter,
+.chat .sender-assistant,
 .chat .sender-user {
   font-size: 10px;
   line-height: 22px;
   color: #5a5875;
   padding: 0;
 }
-.chat .sender-walter .name,
+.chat .sender-assistant .name,
 .chat .sender-user .name {
   font-family: IntroCond-SemiBoldAlt;
 }
-.chat .sender-walter .timestamp,
+.chat .sender-assistant .timestamp,
 .chat .sender-user .timestamp {
   font-family: IntroCond-RegularAlt;
 }
-.chat .sender-walter {
+.chat .sender-assistant {
   align-self: flex-start;
 }
 .chat .sender-user {

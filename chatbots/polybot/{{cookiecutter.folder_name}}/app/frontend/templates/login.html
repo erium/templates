@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Halerium PolyBot</title>
+    <title>{{ botname }}</title>
     <meta name="description" content="" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -29,11 +29,13 @@
                     <input type="email" class="user-input" placeholder="E-Mail" name="useremail" id="useremail"
                         required>
                 </label>
+                <!--
                 <label class="input-field" id="personalityLabel">
                     <select class="user-input" name="personalityPicker" id="personalityPicker" form="userForm" required>
                         <option value="" disabled selected>Bot-Persönlichkeit wählen</option>
                     </select>
                 </label>
+                -->
                 <input type="hidden" value="" name="ip" id="ip">
                 <input type="hidden" value="{{ p }}" name="personalityCache" id="personalityCache">
                 <input type="button" class="btn-send" value="LOGIN" id="send">

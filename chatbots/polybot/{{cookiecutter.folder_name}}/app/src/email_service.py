@@ -12,21 +12,18 @@ from .prettyprint import prettyprint as pprint, MessageType as mt
 
 class Postman():
 
-    def __init__(self) -> None:
-        configs = configparser.ConfigParser()
-        configs.read('app/config.conf')
-
+    def __init__(self, config_global: configparser.ConfigParser,) -> None:
         # debugging mode
-        self.debug = configs['app']['debug'] == 'True'
+        self.debug = config_global['app']['debug'] == 'True'
 
         self.credentials = {
-            'user': configs['email']['user'], 'pass': configs['email']['pass']}
-        self.sender = configs['email']['user']
-        self.recipients = configs['email']['recipients'].split(', ')
+            'user': config_global['email']['user'], 'pass': config_global['email']['pass']}
+        self.sender = config_global['email']['user']
+        self.recipients = config_global['email']['recipients'].split(', ')
         self.subject = 'New Chatlog from PolyBot'
         self.body = 'Hi!\nAnother user just chatted with me. I\'ve attached the conversation.\n\nCheers!\n\n'
         self.error_body = 'Hi!\nAnother user just chatted with me. Unfortunately there was an error when creating the chat log attachment, so I couldn\'t attach it.\n\nSad PolyBot noises\n\n'
-        self.chatlogs_dir = configs['paths']['chatlogs_dir']
+        self.chatlogs_dir = Path("../chat_logs")
 
     def send(self, filename: str):
         """
@@ -50,13 +47,13 @@ class Postman():
         except Exception as e:
             msg.attach(MIMEText(self.error_body +
                        f'\nHere is the error message:\n{e}', 'plain'))
-            pprint(f'Error when creating email attachment: {e}', type=mt.ERROR)
+            pprint(f'Error when creating email attachment: {e}', msg_type=mt.ERROR)
         else:
             msg.attach(MIMEText(self.body, 'plain'))
             msg.attach(attachment)
 
         if self.debug:
-            pprint('Debugging mode is on, not sending email', type=mt.WARNING)
+            pprint('Debugging mode is on, not sending email', msg_type=mt.WARNING)
             return
         else:
             try:
@@ -72,9 +69,9 @@ class Postman():
                 # end server
                 server.quit()
             except smtplib.SMTPException as e:
-                pprint([f'SMTP error occurred: {e}'], type=mt.INFO)
+                pprint([f'SMTP error occurred: {e}'], msg_type=mt.INFO)
             except Exception as e:
-                pprint([f'Error while sending email: {e}'], type=mt.INFO)
+                pprint([f'Error while sending email: {e}'], msg_type=mt.INFO)
             else:
                 pprint(
-                    f'Successfully sent chatlog {filename.split("_")[-1]} to {msg["To"]}', type=mt.SUCCESS)
+                    f'Successfully sent chatlog {filename.split("_")[-1]} to {msg["To"]}', msg_type=mt.SUCCESS)

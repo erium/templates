@@ -1,11 +1,8 @@
 asyncio
-chromadb
 fastapi
 httpx
 langchain
-openai==0.28
+python-multipart
 sseclient-py
 uvicorn
-tiktoken
-unstructured[local-inference]
 websockets

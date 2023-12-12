@@ -1,3 +1,5 @@
+from typing import List
+
 class Colors():
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -22,7 +24,7 @@ class MessageType():
     SUCCESS = "SUCCESS"
 
 
-def prettyprint(msg: str | list, type: str = MessageType.INFO, max_len: int = 80, end: str = '\n'):
+def prettyprint(msg: any, msg_type: str = MessageType.INFO, max_len: int = 80, end: str = '\n'):
     """
     Prints log statements with colored type identifiers.
 
@@ -33,28 +35,26 @@ def prettyprint(msg: str | list, type: str = MessageType.INFO, max_len: int = 80
     """
 
     # create colored type identifier
-    if type == MessageType.INFO:
-        type = Colors.INFO + type + Colors.ENDCOLOR + ':' + ' ' * (9-len(type))
-    elif type == MessageType.WARNING:
-        type = Colors.WARNING + type + \
-            Colors.ENDCOLOR + ':' + ' ' * (9-len(type))
-    elif type == MessageType.ERROR:
-        type = Colors.ERROR + type + \
-            Colors.ENDCOLOR + ':' + ' ' * (9-len(type))
-    elif type == MessageType.SUCCESS:
-        type = Colors.SUCCESS + type + \
-            Colors.ENDCOLOR + ':' + ' ' * (9-len(type))
+    if msg_type == MessageType.INFO:
+        msg_type = Colors.INFO + msg_type + Colors.ENDCOLOR + ':' + ' ' * (9-len(msg_type))
+    elif msg_type == MessageType.WARNING:
+        msg_type = Colors.WARNING + msg_type + \
+            Colors.ENDCOLOR + ':' + ' ' * (9-len(msg_type))
+    elif msg_type == MessageType.ERROR:
+        msg_type = Colors.ERROR + msg_type + \
+            Colors.ENDCOLOR + ':' + ' ' * (9-len(msg_type))
+    elif msg_type == MessageType.SUCCESS:
+        msg_type = Colors.SUCCESS + msg_type + \
+            Colors.ENDCOLOR + ':' + ' ' * (9-len(msg_type))
     else:
-        type = Colors.INFO + type + Colors.ENDCOLOR + ':' + ' ' * (9-len(type))
+        msg_type = Colors.INFO + msg_type + Colors.ENDCOLOR + ':' + ' ' * (9-len(msg_type))
 
-    if isinstance(msg, list):
-        msg = '\n'.join(msg)
+    # convert msg to str
+    if not isinstance(msg, str):
+        msg = str(msg)
 
-    # split message into lines if '\n' is present
-    if '\n' in msg:
-        msg = msg.split('\n')
-    else:
-        msg = [msg]
+    # embed into list
+    msg = [msg]
 
     # split messages if longer then max_len
     for m, message in enumerate(msg):
@@ -81,15 +81,21 @@ def prettyprint(msg: str | list, type: str = MessageType.INFO, max_len: int = 80
 
     for message in msg:
         # combine with message
-        message = type + message
+        message = msg_type + message
         print(message, end=end)
 
 
 if __name__ == '__main__':
-    prettyprint(msg='This is a test', type=MessageType.INFO)
-    prettyprint(msg='This is a test', type=MessageType.WARNING)
-    prettyprint(msg='This is a test', type=MessageType.ERROR)
-    prettyprint(msg='This is a test', type=MessageType.SUCCESS)
-    prettyprint(msg='This is a test\nwith multiple lines\nthis should be three messages',
-                type=MessageType.ERROR)
+    # test colors
+    prettyprint(msg='This is a test', msg_type=MessageType.INFO)
+    prettyprint(msg='This is a test', msg_type=MessageType.WARNING)
+    prettyprint(msg='This is a test', msg_type=MessageType.ERROR)
+    prettyprint(msg='This is a test', msg_type=MessageType.SUCCESS)
+    # test multiple lines
+    prettyprint(msg='This is a test\nwith multiple lines\nthis should be three messages', msg_type=MessageType.ERROR)
+    # test message splitting
     prettyprint(msg='Einmal lag in einer weit entfernten Galaxie ein Planet namens Zog. Auf Zog lebte ein kleiner, frecher Außerirdischer namens Fizz. Fizz war bekannt für seine Streiche und liebte es, seine Freunde zum Lachen zu bringen. Eines Tages beschloss Fizz, einen besonders großen Streich zu spielen. Er plante, die Kontrolle über das Raumschiff des Bürgermeisters zu übernehmen und es mit lila Tupfen zu bemalen. Er wusste, dass die Reaktion des Bürgermeisters unbezahlbar sein würde.')
+    # test non-string objects
+    prettyprint(dict(test="test", test2="test", test3="test", test4="test", test5="test", test6="test", test7="test", test8="test"))
+    prettyprint([1, 2, 3, 4, 5], msg_type=MessageType.ERROR)
+    prettyprint(prettyprint, msg_type=MessageType.SUCCESS)
