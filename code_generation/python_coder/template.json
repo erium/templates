@@ -1,0 +1,12 @@
+{
+    "name": "Interactive Python Coder",
+    "isOverview": false,
+    "description": "Generate, execute and debug Python code with a bot.",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}"
+    },
+    "userArguments": {},
+    "files": []
+}

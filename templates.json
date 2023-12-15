@@ -253,6 +253,20 @@
                     "files": []
                 },
                 {
+                    "name": "Interactive Python Coder",
+                    "isOverview": false,
+                    "description": "Generate, execute and debug Python code with a bot.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "code_generation/python_coder",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
                     "name": "Code and Unit Tests Generator",
                     "isOverview": false,
                     "description": "Generate foundational code structures and corresponding unit tests based on user-defined specifications.",

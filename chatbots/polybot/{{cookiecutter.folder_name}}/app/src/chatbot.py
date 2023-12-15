@@ -6,9 +6,7 @@ import halerium_utilities as hu
 import httpx
 import json
 from pathlib import Path
-import requests
 from .prettyprint import prettyprint as pprint, MessageType as mt
-import sseclient
 import ssl
 import uuid
 
@@ -144,7 +142,7 @@ class Chatbot:
         Returns:
             str: Response.
         """
-        url = f"{self.env.base_url}/api/tenants/{self.env.tenant}/projects/{self.env.workspace}/runners/{self.env.runner_id}/prompt"
+        url = f"{self.env.base_url}/api/tenants/{self.env.tenant}/projects/{self.env.workspace}/runners/{self.env.runner_id}/agents"
 
         headers = {"halerium-runner-token": self.env.runner_token}
 

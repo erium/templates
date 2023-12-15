@@ -3,6 +3,5 @@ fastapi
 httpx
 langchain
 python-multipart
-sseclient-py
 uvicorn
 websockets
