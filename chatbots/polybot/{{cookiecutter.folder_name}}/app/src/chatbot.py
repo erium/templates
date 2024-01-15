@@ -52,7 +52,7 @@ class Chatbot:
 
         # load vector storage
         self.vectorstore_ids = self.config_user.get("vectorstore_card_ids") or []
-        
+
         # set up system prompt
         add_username = ""
         if self.bot_knows_user:
@@ -68,12 +68,13 @@ class Chatbot:
 
         # setup history for logging and chat
         self.is_initial_greeting = True
-        self.board = hu.board.board.read_board("../polybot.board")
-        self.current_prompt_card = self.config_user.get("initial_prompt_card")
-        self.current_prompt_card_x = self.current_prompt_card.get("position")["x"]
-        self.current_prompt_card_y = self.current_prompt_card.get("position")["y"]
-        self.current_prompt_card_w = self.current_prompt_card.get("size")["width"]
-        self.current_prompt_card_h = self.current_prompt_card.get("size")["height"]
+        self.board = hu.board.Board.from_json("../polybot.board")
+        self.current_prompt_card = hu.board.Board.create_card(
+            **self.config_user.get("initial_prompt_card"))
+        self.current_prompt_card_x = self.current_prompt_card.position.x
+        self.current_prompt_card_y = self.current_prompt_card.position.y
+        self.current_prompt_card_w = self.current_prompt_card.size.width
+        self.current_prompt_card_h = self.current_prompt_card.size.height
 
         self.full_history = [
             {
@@ -86,13 +87,13 @@ class Chatbot:
         ]
 
         if self.initial_prompt:
-            self.shallow_history = [{'role': 'system', 'content': self.system_prompt}, 
+            self.shallow_history = [{'role': 'system', 'content': self.system_prompt},
                                     {'role': 'user', 'content': self.initial_prompt}]
 
             self.full_history.append({'role': 'user', 'content': self.initial_prompt})
 
         elif self.initial_response and not self.initial_prompt:
-            self.shallow_history = [{'role': 'system', 'content': self.system_prompt}, 
+            self.shallow_history = [{'role': 'system', 'content': self.system_prompt},
                                     {'role': 'assistant', 'content': self.initial_response}]
             self.full_history.append({'role': 'assistant', 'content': self.initial_response})
 
@@ -115,7 +116,7 @@ class Chatbot:
         board_name = self.chatboards_dir / board_name
 
         try:
-            hu.board.board.write_board(self.board, board_name)
+            self.board.to_json(board_name)
         except Exception as e:
             print(f"Failed writing chat history to board {board_name}\nError: {e}")
         else:
@@ -128,7 +129,7 @@ class Chatbot:
             print(f"Failed writing chat history to {log_name}\nError: {e}")
         else:
             print(f"Wrote chat history to {log_name}")
-        
+
         if return_file_name:
             return f"{self.session_start}_{self.session_id}"
 
@@ -150,75 +151,51 @@ class Chatbot:
         if not self.is_initial_greeting:
             self.current_prompt_card_x = self.current_prompt_card_x + self.current_prompt_card_w + 20
 
-            new_prompt_card = {
-                "id": str(uuid.uuid4()),
-                "title": "",
-                "type_specific": {
-                    "message": "",
-                    "assistant_type": "",
-                    "system_setup": "",
-                    "prompt_input": q,
-                    "prompt_output": "",
-                    "vector_store_file": "",
-                    "vector_store_file_type": "",
-                    "state": "initial",
-                    "split_size": [16.6, 83.4],
-                    "auto_size": True
-                },
-                "edge_connections": [],
-                "type": "prompt-note",
-                "position": {"x": self.current_prompt_card_x, "y": self.current_prompt_card_y},
-                "size": {
+            new_prompt_card = self.board.create_card(
+                type="bot",
+                size={
                     "width": self.current_prompt_card_w,
                     "height": self.current_prompt_card_h
                 },
-                "color": "note-color-3",
-                "attachments": {}
-            }
+                position={"x": self.current_prompt_card_x, "y": self.current_prompt_card_y},
+                type_specific={
+                    "prompt_input": q,
+                    "prompt_output": "",
+                }
+            )
 
-            # add prompt card to board with user prompt
-            hu.board.board.add_card_to_board(self.board, new_prompt_card)
+            self.board.add_card(new_prompt_card)
 
             # register connections
-            id_curr = self.current_prompt_card.get("id")
-            id_new = new_prompt_card.get("id")
-            prompt_edge_id = str(uuid.uuid4())
-            for node in self.board.get("nodes"):
-                if node.get("id") == id_new:
-                    node.get("edge_connections").append({"id": prompt_edge_id, "connector": "prompt-input"})
-                elif node.get("id") == id_curr:
-                    node.get("edge_connections").append({"id": prompt_edge_id, "connector": "prompt-output"})
-            self.board.get("edges").append({
-                "id": prompt_edge_id,
-                "type": "solid_line",
-                "node_connections": [
-                    id_curr, id_new
-                ],
-                "type_specific": {"annotation": "", "preventOutputCopy": False}
-            })
+            id_curr = self.current_prompt_card.id
+            id_new = new_prompt_card.id
+
+            self.board.add_connection(
+                self.board.create_connection(
+                    type="prompt_line",
+                    connections={
+                        "source": {"id": id_curr, "connector": "prompt-output"},
+                        "target": {"id": id_new, "connector": "prompt-input"},
+                    })
+            )
 
             payload = {
-            "board": self.board,
-            "id": id_new,
-            "tenant": self.env.tenant,
-            "workspace": self.env.workspace
+                "board": self.board.to_dict(),
+                "id": id_new,
             }
 
             self.current_prompt_card = new_prompt_card
-        
+
         else:
             # modify system prompt if bot_knows_user
             if self.bot_knows_user:
-                for node in self.board.get("nodes"):
-                    if node.get("id") == self.config_user.get("setup_card")["id"]:
-                        node.get("type_specific")["system_setup"] = self.system_prompt
+                card = self.board.get_card_by_id(self.config_user.get("setup_card")["id"])
+                card.type_specific.setup_args["system_setup"] = self.system_prompt
 
             self.is_initial_greeting = False
             payload = {
-            "board": self.board,
-            "id": self.current_prompt_card.get("id"),
-            "tenant": self.env.tenant,
-            "workspace": self.env.workspace
+                "board": self.board.to_dict(),
+                "id": self.current_prompt_card.id,
             }
 
         # prompt model
@@ -232,14 +209,14 @@ class Chatbot:
             # use the halerium prompt server for response generation
             async with httpx.AsyncClient(verify=ssl_context, timeout=None) as client:
                 async with client.stream(
-                    method="POST",
-                    url=url,
-                    json=payload,
-                    headers=self.env.build_prompt_server_headers(),
+                        method="POST",
+                        url=url,
+                        json=payload,
+                        headers=self.env.build_prompt_server_headers(),
                 ) as response:
                     async for chunk in response.aiter_lines():
                         if "data: " in chunk:
-                            content = json.loads(chunk[len("data: ") :])
+                            content = json.loads(chunk[len("data: "):])
                             n_chunk += 1
                             chunk = content.get("chunk")
                             completed = content.get("completed")
@@ -256,10 +233,7 @@ class Chatbot:
             self.full_history.append(
                 {"role": "assistant", "content": full_message}
             )
-            for node in self.board.get("nodes"):
-                if node.get("id") == self.current_prompt_card.get("id"):
-                    node.get('type_specific')['prompt_output'] = full_message
-                    break
+            self.current_prompt_card.type_specific.prompt_output = full_message
 
         except httpx.TimeoutException as e:
             pprint(str(e), msg_type=mt.ERROR)

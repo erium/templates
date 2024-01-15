@@ -91,7 +91,8 @@ class FunctionData:
                         elif arg_type == 'list':
                             arg_type = 'array'
 
-                        f_args[f_names[i]] = f_args[f_names[i]] | {arg_name: {'type': arg_type, 'description': arg_desc}} if f_args.get(
+                        f_args[f_names[i]] = f_args[f_names[i]] | {
+                            arg_name: {'type': arg_type, 'description': arg_desc}} if f_args.get(
                             f_names[i]) else {arg_name: {'type': arg_type, 'description': arg_desc}}
 
         except Exception as e:
@@ -118,7 +119,7 @@ class FunctionCards:
         self.port = port
         self.path = path
 
-    def _generate_note_cards(self) -> list:
+    def _generate_function_cards(self) -> list:
         """
         Generates function cards for the Halerium "Coding with Agents" template.
 
@@ -148,185 +149,98 @@ class FunctionCards:
                 content['function']['parameters']['required'] = list(
                     fdata['args'].keys())
 
-            card = hu.board.board.create_card(
-                title=f"Function: {fname}",
-                content=json.dumps(content, indent=4),
+            card = hu.board.Board.create_card(
+                type="note",
                 position={"x": 10, "y": 10 + i * 44},
-                size={"width": 300, "height": 250},
-                color="note-color-3",
+                size={"width": 300, "height": 34},
+                type_specific=dict(
+                    title=f"Function: {fname}",
+                    message=json.dumps(content, indent=4),
+                    color="note-color-3",
+                    auto_size=False,
+                )
             )
 
             i += 1
-
-            # add other keys to card["type_specific"]
-            card["type_specific"]["assistant_type"] = ""
-            card["type_specific"]["system_setup"] = ""
-            card["type_specific"]["prompt_input"] = ""
-            card["type_specific"]["prompt_output"] = ""
-            card["type_specific"]["vector_store_file"] = ""
-            card["type_specific"]["vector_store_file_type"] = ""
-            card["type_specific"]["state"] = "initial"
-            card["type_specific"]["split_size"] = [16.6, 83.4]
-            card["type_specific"]["auto_size"] = False
-
-            # add other keys to card
-            card["edge_connections"] = []
-            card["type"] = "note"
-            card["attachments"] = {}
-            card["collapsed"] = True
-            card["collapsed_size"] = {"width": 300, "height": 34}
 
             cards.append(card)
 
         return cards
 
-    def _generate_bot_card(self, n_cards: int, bot_type: str = "chat-gpt-40", system_setup: str = "Du bist ein hilfsbereiter Assistent") -> dict:
+    def _generate_setup_card(self, n_cards: int, bot_type: str = "chat-gpt-40",
+                             system_setup: str = "Du bist ein hilfsbereiter Assistent") -> dict:
         """
         Generates a bot card for the Halerium "Coding with Agents" template.
 
         Args:
-            n_cards (int): Number of previously generated note cards.
             bot_type (str, optional): Bot type. Can be chat-gpt-35 or chat-gpt-40. Defaults to "chat-gpt-40".
             system_setup (str, optional): System message. Defaults to "Du bist ein hilfsbereiter Assistent".
 
         Returns:
-            str: _description_
+            node: The setup card
         """
-        self.bot_card_y = 10 + n_cards * 44
+        self.setup_card_y = 10 + n_cards * 44
 
-        bot_card = {
-            "id": str(uuid.uuid4()),
-            "title": "",
-            "type_specific": {
-                "message": "",
-                "assistant_type": bot_type,
-                "system_setup": system_setup,
-                "prompt_input": "Start a Python Kernel.",
-                "prompt_output": "",
-                "vector_store_file": "",
-                "vector_store_file_type": "",
-                "state": "initial",
-                "split_size": [16.6, 83.4],
-                "auto_size": True
-            },
-            "edge_connections": [],
-            "type": "assistant-setup-note",
-            "position": {"x": 320, "y": self.bot_card_y},
-            "size": {"width": 280, "height": 210},
-            "color": "note-color-3",
-            "attachments": {}
-        }
+        setup_card = hu.board.Board.create_card(
+            type="setup",
+            position={"x": 320, "y": self.setup_card_y},
+            size={"width": 280, "height": 210},
+            type_specific=dict(
+                bot_type=bot_type,
+                setup_args={"system_setup": system_setup},
+            )
+        )
+
+        return setup_card
+
+    def _generate_initial_bot_card(self):
+
+        bot_card = hu.board.Board.create_card(
+            type="bot",
+            position={"x": 630, "y": self.setup_card_y},
+            size={"width": 520, "height": 320},
+            type_specific=dict(
+                prompt_input="Start a Python Kernel.",
+            )
+        )
 
         return bot_card
 
-    def _generate_initial_chat_card(self):
-
-        chat_card = {
-            "id": str(uuid.uuid4()),
-            "title": "",
-            "type_specific": {
-                "message": "",
-                "assistant_type": "",
-                "system_setup": "",
-                "prompt_input": "Start a Python Kernel.",
-                "prompt_output": "",
-                "vector_store_file": "",
-                "vector_store_file_type": "",
-                "state": "initial",
-                "split_size": [16.6, 83.4],
-                "auto_size": True
-            },
-            "edge_connections": [],
-            "type": "prompt-note",
-            "position": {"x": 630, "y": self.bot_card_y},
-            "size": {
-                "width": 520,
-                "height": 320
-            },
-            "color": "note-color-3",
-            "attachments": {}
-        }
-
-        return chat_card
-
-    def _generate_unconnected_board(self, cards: list) -> dict:
-        """
-        Generates a board for the Halerium "Coding with Agents" template.
-
-        Args:
-            cards (list): List of cards.
-
-        Returns:
-            dict: The board.
-        """
-
-        board = hu.board.board.create_board()
-
-        for card in cards:
-            hu.board.board.add_card_to_board(
-                board=board,
-                card=card
-            )
-
-        return board
-
-    def _generate_connections(self, board: dict) -> dict:
+    def _make_connections(self) -> None:
         """
         Modifies the board to add connections between the note cards and the bot card.
-
-        Args:
-            board (dict): The board without connections.
-
-        Returns:
-            dict: The board with connections.
         """
 
-        # register connection between bot card and note cards
-        bot_card_connections = {}
-        for i, card in enumerate(board["nodes"]):
-            if card['type'] == 'note':
-                cuuid = str(uuid.uuid4())
-                bot_card_connections[i] = {
-                    'cuuid': cuuid, 'from': card['id']}
-                card['edge_connections'].append(
-                    {"id": cuuid, "connector": "right"})
+        board = self.board
 
-            if card['type'] == 'prompt-note':
-                cuuid = str(uuid.uuid4())
-                bot_card_connections[i] = {
-                    'cuuid': cuuid, 'to': card['id']}
-                card['edge_connections'].append(
-                    {"id": cuuid, "connector": "prompt-input"})
+        # gather ids
+        function_cards = self.function_cards
+        setup_card = self.setup_card
+        bot_card = self.bot_card
 
-        # register connection with bot card
-        bot_card_id = ''
-        for i, card in enumerate(board["nodes"]):
-            if card['type'] == 'assistant-setup-note':
-                bot_card_id = card['id']
-                for bcc in bot_card_connections.values():
-                    # if incoming connection to bot card
-                    if bcc.get('from'):
-                        card['edge_connections'].append(
-                            {"id": bcc['cuuid'], "connector": "context-input"})
-                    # if outgoing connection from bot card
-                    elif bcc.get('to'):
-                        card['edge_connections'].append(
-                            {"id": bcc['cuuid'], "connector": "prompt-output"})
+        # make connections between function cards and setup card
+        for card in function_cards:
+            conn = board.create_connection(
+                type="solid_arrow",
+                connections={
+                    "source": {"id": card.id, "connector": "note-right"},
+                    "target": {"id": setup_card.id, "connector": "context-input"}
+                }
+            )
+            board.add_connection(conn)
 
-        # register connection with board
-        for bcc in bot_card_connections.values():
-            # incoming connections to bot card
-            if bcc.get('from'):
-                board['edges'].append(
-                    {"id": bcc['cuuid'], "type": "solid_arrow", "node_connections": [bcc['from'], bot_card_id], "type_specific": {"annotation": ""}})
-            # outgoing connections from bot card
-            elif bcc.get('to'):
-                board['edges'].append(
-                    {"id": bcc['cuuid'], "type": "solid_line", "node_connections": [bot_card_id, bcc['to']], "type_specific": {"annotation": "", "preventOutputCopy": False}})
+        # make connection between setup and bot
+        board.add_connection(
+            board.create_connection(
+                type="prompt_line",
+                connections={
+                    "source": {"id": setup_card.id, "connector": "prompt-output"},
+                    "target": {"id": bot_card.id, "connector": "prompt-input"}
+                }
+            )
+        )
 
-        return board
-
-    def generate_board(self, content: str, export: bool = False, filename: str = 'board') -> dict:
+    def generate_board(self, content: str, export: bool = False, filename: str = 'board'):
         """
         Generates a board for the Halerium "Coding with Agents" template,
         with note cards for each function and a connected bot card.
@@ -344,15 +258,16 @@ class FunctionCards:
 
         # generate cards, and unconnected board
         self.functions = content
-        self.cards: list = self._generate_note_cards()
-        self.bot_card: dict = self._generate_bot_card(len(self.cards))
-        self.chat_card: dict = self._generate_initial_chat_card()
-        self.cards.append(self.bot_card)
-        self.cards.append(self.chat_card)
-        self.board: dict = self._generate_unconnected_board(self.cards)
+        self.function_cards: list = self._generate_function_cards()
+        self.setup_card: dict = self._generate_setup_card(len(self.function_cards))
+        self.bot_card: dict = self._generate_initial_bot_card()
+
+        self.board = hu.board.Board()
+        for card in self.function_cards + [self.setup_card, self.bot_card]:
+            self.board.add_card(card)
 
         # connect the cards
-        self.connected_board: dict = self._generate_connections(self.board)
+        self._make_connections()
 
         if export:
             timestamp = datetime.now().strftime("%Y%m%d_%H-%M-%S")
@@ -361,14 +276,12 @@ class FunctionCards:
             if not Path(self.path).exists():
                 Path(self.path).mkdir(parents=True, exist_ok=True)
 
-            with open(path_to_board, 'w') as f:
-                json.dump(self.connected_board, f,
-                          indent=4, ensure_ascii=False)
+            self.board.to_json(path_to_board)
 
             print(f'Board exported as {timestamp}_{filename}.board')
 
         else:
-            return self.connected_board
+            return self.board
 
 
 if __name__ == "__main__":

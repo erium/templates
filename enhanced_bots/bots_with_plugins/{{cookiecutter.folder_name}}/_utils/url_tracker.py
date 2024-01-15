@@ -1,52 +1,36 @@
 import json
+import halerium_utilities as hu
 import os
 from pathlib import Path
 
 
 class UrlTracker:
 
-    def __init__(self, runner_id: str = os.getenv('HALERIUM_ID'), port: int = 8498, path: str = '', board: dict = {}):
+    def __init__(self, runner_id: str = os.getenv('HALERIUM_ID'), port: int = 8498, path: str = ''):
         self.runner_id = runner_id
         self.port = port
         self.path = path
-        self.board = board
 
     def _store_card_ids_url_map(self) -> dict:
         """
-        Stores the card IDs and their URLs in a dictionary.
-
-        Args:
-            board (dict): The board.
-
-        Returns:
-            dict: A dictionary containing the card IDs and their URLs.
+        Stores the card IDs and their URLs in a json file.
         """
 
         card_ids_url_map = {}
-        if self.board:
+        boards = Path(self.path).glob('*.board')
+
+        for b in boards:
             try:
-                for card in self.board['nodes']:
-                    if card['type'] == 'note':
-                        card_ids_url_map[card['id']] = json.loads(card['type_specific']
-                                                                  ['message']).get('endpoint')['url']
-            except json.JSONDecodeError:
-                print(f'Coud not decode board. Make sure it is a valid JSON.')
+                board = hu.board.Board.from_json(b)
 
-        elif self.path:
-            try:
-                boards = Path(self.path).glob('*.board')
-
-                for b in boards:
-                    with open(b, 'r') as f:
-                        b_json = json.load(f)
-
-                    for card in b_json['nodes']:
-                        if card['type'] == 'note' and str(card['title']).startswith('Function: '):
-                            card_ids_url_map[card['id']] = json.loads(card['type_specific']
-                                                                      ['message']).get('endpoint')['url']
-            except json.JSONDecodeError:
+                for card in board.cards:
+                    if card.type == 'note' and str(card.type_specific.title).startswith('Function: '):
+                        card_ids_url_map[card.id] = json.loads(
+                            card.type_specific.message).get('endpoint')['url']
+            except Exception as exc:
                 print(
-                    f'Could not decode board {b}. Make sure it is a valid JSON.')
+                    f'Coud not decode board. Make sure it is a valid board and the function cards contain valid JSON.')
+                print(exc)
 
         with open('.card_ids_url_map.json', 'w') as f:
             json.dump(card_ids_url_map, f, indent=4, ensure_ascii=False)
@@ -78,21 +62,19 @@ class UrlTracker:
             boards = Path(self.path).glob('*.board')
 
             for b in boards:
-                with open(b, 'r') as f:
-                    board = json.load(f)
+                # load board
+                board = hu.board.Board.from_json(b)
 
                 # update board
-                for idx, card in enumerate(board['nodes']):
-                    if card['id'] in new_card_ids_url_map.keys():
-                        message = json.loads(card['type_specific']['message'])
-                        message['endpoint']['url'] = new_card_ids_url_map[card['id']]
-                        card['type_specific']['message'] = json.dumps(message)
-                        board['nodes'][idx] = card
+                for card in board.cards:
+                    if card.id in new_card_ids_url_map.keys():
+                        message = json.loads(card.type_specific.message)
+                        message['endpoint']['url'] = new_card_ids_url_map[card.id]
+                        card.type_specific.message = json.dumps(message)
 
                 # export board
-                with open(b, 'w') as f:
-                    json.dump(board, f, indent=4, ensure_ascii=False)
-                
+                board.to_json(b)
+
                 print(f'Updated {b.name}')
 
         else:

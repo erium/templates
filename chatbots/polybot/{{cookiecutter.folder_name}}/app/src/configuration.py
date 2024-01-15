@@ -7,6 +7,7 @@ import re
 import requests
 from typing import List
 
+
 class ConfigLogger:
     def __init__(self):
         self.log: dict = {'warnings': {}, 'errors': {}}
@@ -19,19 +20,20 @@ class ConfigLogger:
             self.log.get(type_)[key] = value
         else:
             return "Key already exists."
-        
+
     def get_log(self):
         return self.log
 
     def reset(self):
         self.log: dict = {'warnings': {}, 'errors': {}}
 
+
 class Configuration:
 
     def __init__(self):
         self.polybot_board_path = Path("../polybot.board")
-        with open(self.polybot_board_path, "r") as f:
-            self.board = json.load(f)
+        self.board = hu.board.Board.from_json(self.polybot_board_path)
+        self.navigator = hu.board.BoardNavigator(self.board)
 
         self.logger = ConfigLogger()
 
@@ -44,40 +46,42 @@ class Configuration:
             dict: A dictionary with parameter names as keys and values as values.
         """
 
-        # get necessary cards
-        note_cards = self._get_cards_of_type("note")
-        setup_cards = self._get_cards_of_type("assistant-setup-note")
-        prompt_cards = self._get_cards_of_type("prompt-note")
-        vector_cards = self._get_cards_of_type("vectorstore-note")
+        navigator = self.navigator
 
+        # get necessary cards
         cards = {
-            "note_cards": note_cards,
-            "setup_cards": setup_cards, 
-            "prompt_cards": prompt_cards,
-            "vector_cards": vector_cards
+            "note": [],
+            "setup": [],
+            "bot": [],
+            "vector-store-file": []
         }
+        for card_id in navigator.cards:
+            card_type = navigator.get_card_type(card_id)
+            if card_type in cards:
+                cards[card_type].append(card_id)
 
         config = {}
 
         # LLM setup cards (explicitely NO jupyter kernel setup cards)
         n_model_setup_cards = 0
-        for card in cards.get("setup_cards"):
-            if card.get("type_specific")["assistant_type"] != "jupyter-kernel" and n_model_setup_cards == 0:
-                config["setup_card"] = card
-                model_version = card['type_specific']['assistant_type']
-                system_message = card['type_specific']['system_setup']
-                config['model_version'] = model_version
+        for card_id in cards.get("setup"):
+            bot_type = navigator.get_bot_type(card_id)
+            if bot_type != "jupyter-kernel" and n_model_setup_cards == 0:
+                config["setup_card"] = navigator.cards[card_id].dict()
+                system_message = navigator.get_setup_args(card_id).get("system_setup", "")
+                config['model_version'] = bot_type
                 config['system_message'] = system_message
                 n_model_setup_cards += 1
 
-            elif card.get("type_specific")["assistant_type"] != "jupyter-kernel" and n_model_setup_cards > 0:
-                self.logger.add('setup_cards', 'Multiple Bot Setup cards found. You can only set one. Taking the last Bot Setup card set.')
+            elif bot_type != "jupyter-kernel" and n_model_setup_cards > 0:
+                self.logger.add('setup_cards',
+                                'Multiple Bot Setup cards found. You can only set one. Taking the last Bot Setup card set.')
 
         # note cards
-        for card in cards.get("note_cards"):
-            title = card["title"]
+        for card_id in cards.get("note"):
+            title = navigator.get_note_title(card_id)
             if title.lower() == "configuration":
-                content = card["type_specific"]["message"]
+                content = navigator.get_note_message(card_id)
                 messages = content.split("\n")
 
                 for message in messages:
@@ -85,58 +89,42 @@ class Configuration:
                     if len(key_value) == 2 and key_value[1]:
                         config[key_value[0]] = key_value[1].strip()
                     elif len(key_value) == 2 and not key_value[1]:
-                        self.logger.add('note_card_missing_value', f"\"{message}\". Maybe you forgot to set the value? Ignoring argument.")
+                        self.logger.add('note_card_missing_value',
+                                        f"\"{message}\". Maybe you forgot to set the value? Ignoring argument.")
                     elif not len(key_value) == 2:
-                        self.logger.add('note_card_argument_format', f"\"{message}\". Make sure to use the format: ARGUMENT_NAME: ARGUMENT_VALUE. Ignoring argument.")
-        
+                        self.logger.add('note_card_argument_format',
+                                        f"\"{message}\". Make sure to use the format: ARGUMENT_NAME: ARGUMENT_VALUE. Ignoring argument.")
 
         # find last prompt_card for chat entry
         prompt_chain = self._get_chain(config["setup_card"]["id"])
-        for card in cards.get("prompt_cards"):
-            if card.get("id") == prompt_chain[-1]:
-                config['initial_prompt_card'] = card
-                config['initial_greeting_prompt'] = card['type_specific']['prompt_input']
-                config['initial_greeting_response'] = card['type_specific']['prompt_output']
+        card_id = prompt_chain[-1]
+        card = self.board.get_card_by_id(card_id)
+        config['initial_prompt_card'] = card.dict()
+        prompt_input = navigator.get_prompt_input(card_id)
+        prompt_output = navigator.get_prompt_output(card_id)
+        config['initial_greeting_prompt'] = prompt_input
+        config['initial_greeting_response'] = prompt_output
 
-                # check if input and output are set. this is not allowed.
-                if card['type_specific']['prompt_input'] != "" and card['type_specific']['prompt_output'] != "":
-                    self.logger.add('prompt_cards_initial_greeting', "Prompt input and output set. You can only set one. Ignoring output.")
-                    config['initial_greeting_prompt'] = card['type_specific']['prompt_input']
-                    config['initial_greeting_response'] = ""
+        # check if input and output are set. this is not allowed.
+        if prompt_input != "" and prompt_output != "":
+            self.logger.add('prompt_cards_initial_greeting',
+                            "Prompt input and output set. You can only set one. Ignoring output.")
+            config['initial_greeting_prompt'] = prompt_input
+            config['initial_greeting_response'] = ""
 
         # vectorstore cards
         config['vectorstore_card_ids'] = []
-        for i, card in enumerate(cards.get("vector_cards")):
-            if self._get_type_of_connected_card(card['id']):
-                config['vectorstore_card_ids'].append(card['id'])
+        for card_id in cards.get("vector-store-file"):
+            if navigator.connections_lookup[card_id]["context-output"]["source"]:
+                config['vectorstore_card_ids'].append(card_id)
             else:
                 self.logger.add('vectorstore_card', 'Found unconnected vectorstore card. Ignoring.')
-            
 
         # add warnings and errors to board as cards
         self._add_logs_to_board(self.logger.get_log())
 
         return config
 
-    def _get_cards_of_type(self, card_type: str = "") -> List[dict]:
-        """
-        Args:
-            card_type (str): Type of cards to be returned (e.g. "note", "assistant_setup_note", ...)
-
-        Returns:
-            list: a list of Halerium Board cards of a specific type.
-        """
-        cards = self.board.get("nodes")
-
-        note_cards = []
-        if cards:
-            if card_type:
-                note_cards = [card for card in cards if card.get("type") == card_type]
-            else:
-                return cards
-                
-        return note_cards
-    
     def _get_chain(self, card_id: str, visited: set = None, chain: list = []) -> List[dict]:
         """
         Args:
@@ -147,10 +135,10 @@ class Configuration:
         if not visited:
             visited = set()
             chain = []
-            
+
         if card_id in visited:
             return
-        
+
         # mark current node as visited
         visited.add(card_id)
 
@@ -165,7 +153,6 @@ class Configuration:
         # return the chain
         return chain
 
-       
     def _get_next_card(self, card_id: str):
         """
         Returns the id of the next prompt card in a chain.
@@ -173,40 +160,17 @@ class Configuration:
         because it will always take the first connection found.
         """
 
-        # find connection ID of current card
-        for node in self.board.get("nodes"):
-            connection_id = ""
-            if node.get("id") == card_id:
-                for connection in node.get("edge_connections"):
-                    if connection.get("connector") == "prompt-output":
-                        connection_id = connection.get("id")
-                        break
-                break
-        
-        # look for connected card in connection id
-        for edge in self.board.get("edges"):
-            if edge.get("id") == connection_id:
-                for connected_card_id in edge.get("node_connections"):
-                    if not connected_card_id == card_id:
-                        return connected_card_id
+        navigator = self.navigator
 
-    def _get_type_of_connected_card(self, card_id: str):
-        """
-        Get the type of the connected card
-        """
-        node_ids = []
-        for edge in self.board['edges']:
-            if card_id in edge['node_connections']:
-                node_ids = edge['node_connections']
-                break
-        
-        if len(node_ids) == 0:
+        connection_ids = navigator.connections_lookup[card_id]["prompt-output"]["source"]
+
+        if len(connection_ids) == 0:
             return None
 
-        for card in self.board['nodes']:
-            if card['id'] in node_ids and card['id'] != card_id:
-                return card['type_specific'].get('assistant_type')
+        connection = navigator.connections[connection_ids[0]]
 
+        next_id = connection.connections.target.id
+        return next_id
 
     def _add_logs_to_board(self, log: dict):
         """
@@ -222,30 +186,36 @@ class Configuration:
         for k, v in log.get('warnings').items():
             warnings_string += f"**{k}**: {v}\n"
 
-        w_card = hu.board.board.create_card(
-            title="",
-            content=warnings_string,
+        w_card = self.board.create_card(
+            type="note",
             position={"x": -660, "y": 170},
             size={"width": 860, "height": 400},
-            color="note-color-7"
+            type_specific=dict(
+                message=warnings_string,
+                color="note-color-7"
+            )
         )
 
         errors_string = "# Errors\n"
         for k, v in log.get('errors').items():
             errors_string += f"**{k}**: {v}\n"
 
-        e_card = hu.board.board.create_card(
-            title="",
-            content=errors_string,
+        e_card = self.board.create_card(
+            type="note",
             position={"x": -660, "y": 580},
             size={"width": 860, "height": 400},
-            color="note-color-6"
+            type_specific=dict(
+                content=errors_string,
+                color="note-color-6"
+            )
         )
         if warnings_string != "# Warnings\n":
             pprint("There are problems with your configuration. Please check the card.", msg_type=mt.WARNING)
-            hu.board.board.add_card_to_board(board=self.polybot_board_path, card=w_card)
+            self.board.add_card(w_card)
+            self.board.to_json(self.polybot_board_path)
         if errors_string != "# Errors\n":
-            hu.board.board.add_card_to_board(board=self.polybot_board_path, card=e_card)
+            self.board.add_card(e_card)
+            self.board.to_json(self.polybot_board_path)
 
     def _del_old_log_cards(self):
         """

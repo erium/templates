@@ -1,1 +1,397 @@
-{"nodes":[{"id":"427995ae-891d-48f5-aabe-eb2d3c2d31cc","title":"Chatgpt 4 (Focused)","type_specific":{"message":"","assistant_type":"chat-gpt-40","system_setup":"You are a senior software engineer that only answers in {Language Setting}\n\nIf you are missing any critical information, ask the user for missing information","prompt_input":"","prompt_output":"","state":"initial","auto_size":false},"edge_connections":[{"id":"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f","connector":"prompt-output"},{"id":"7a1e325f-a050-4980-b5e6-25eb5d4c7621","connector":"context-input"},{"id":"d1995098-1f2c-46b9-909b-4be13307e591","connector":"context-input"},{"id":"2196a58c-75be-4876-aaf3-538033419e16","connector":"context-input"}],"type":"assistant-setup-note","position":{"x":160,"y":210},"size":{"width":470,"height":180},"color":"note-color-3","attachments":{}},{"id":"6e8af35d-4b31-4cf2-90a7-147807b4bed2","title":"","type_specific":{"message":"","assistant_type":"","system_setup":"","prompt_input":"Kommentiere den Code","prompt_output":"```javascript\n/**\n * Diese Funktion gibt die gerenderte Größe zurück.\n * Wenn das Element nicht bearbeitbar ist, wird die Höhe des Elements berechnet und zurückgegeben, abhängig vom Typ des Elements.\n * Wenn das Element bearbeitbar ist, wird die Höhe des Editors zurückgegeben.\n *\n * @returns {number} Die Höhe des gerenderten Elements oder die Höhe des Editors\n */\npublic getRenderedSize(): number {\n  if (!this.editable) {\n    if (this.type === 'markdown' && this.ngxMarkdown) {\n      // Berechnet und gibt die Höhe des Markdown-Elements zurück\n      const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\n      return height;\n    } else if (this.type === 'text') {\n      // Sucht den Textcontainer im Element\n      const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\n      if (textContainer) {\n        // Berechnet und gibt die Höhe des Textcontainers zurück, falls vorhanden\n        const {height} = textContainer.getBoundingClientRect();\n        return height ? height : this.getEditorHeight();\n      } else {\n        // Gibt die Höhe des Editors zurück, wenn kein Textcontainer vorhanden ist\n        return this.getEditorHeight();\n      }\n    } else {\n      // Gibt die Höhe des Editors zurück, wenn der Typ weder 'markdown' noch 'text' ist\n      return this.getEditorHeight();\n    }\n  } else {\n    // Gibt die Höhe des Editors zurück, wenn das Element bearbeitbar ist\n    return this.getEditorHeight()\n  }\n}\n```","state":"success","split_size":[67.77946302348343,32.22053697651658],"auto_size":true,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f","connector":"prompt-input"},{"id":"964edc54-e836-4f88-991a-e84fed2b5c19","connector":"prompt-output"},{"id":"8c41d7ac-29be-4f1b-b842-139a005708dd","connector":"prompt-context-output"},{"id":"fbd8b9c5-c404-4141-b562-1ba9155d61a8","connector":"context-input"}],"type":"prompt-note","position":{"x":840,"y":210},"size":{"width":700,"height":510},"color":"note-color-3","attachments":{}},{"id":"74974f10-3f00-4439-ab26-f2a4667d6546","title":"Chatgpt 4 (Focused)","type_specific":{"message":"","assistant_type":"chat-gpt-40","system_setup":"Du erhälst Halerium Board Templates im json format. Hilf dem User, die Templates zu verwenden.\n\nDas Template befindet sich bereits in Halerium.\n\nDu bist in einer Chatkarte auf diesem Template.\n\n### Generelle Informationen\nHalerium Boards beinhalten \"Karten\" (json: \"nodes\"), zwischen denen es Verbindungen (json: \"edges\") gibt. Die Richtung einer Verbindung gibt den Informationsfluss an.\n\nBeispiel:\nKarte A und Karte B sind miteinander in Richtung A->B verbunden. Karte B hat also Zugriff auf den Inhalt von Karte A.\n\nEs gibt vier verschiedene Kartentypen:\n1. \"note\": Eine Notizkarte. Diese kann entweder Kontext bereitstellen (als Karte A fungieren), oder als Output verwendet werden (als Karte B fungieren)\n2. \"assistant-setup-note\": Eine \"Bot-Setup\" Karte, in der ein Bot ausgewählt (\"assistent_type\") und personalisiert (\"system_setup\") werden kann\n3. \"prompt-note\": Eine \"Chatkarte\", über die der User mit dem Bot kommunizieren kann und ihm Anweisungen geben kann. Es gibt mehrere Buttons:\n- Prompt senden: führt nur diese Chatkarte aus\n- \"Fast Forward\": führt diese und alle folgenden Chatkarten aus\n- Prompt erneut senden: führt diese Chatkarte erneut aus (nur sichtbar wenn die Karte bereits mindestens einmal ausgeführt wurde)\n4. \"vectorstore-note\": Diese Karte repräsentiert eine Datei, die per Rechtsklick -> \"Add to board\" bereitgestellt wurde. Sie kann mit einer Chatkarte verbunden weren und stellt dieser so den Inhalt der Datei zur Verfügung.\n5. Eine Kette aus einer Setup Karte und mehrerer Chat Karten wird als \"Prompt-Chain\" bezeichnet\n\n### Spezielle Informationen\n1. Dieses Template ist für das Kommentieren und das Dokumentieren von Code gedacht.\n2. Es können die Ausgabesprache, die Kommentier-Richtlinien und die Dokumentations-Richtlinien angepasst werden\n3. Code kann entweder in eine Notizkarte kopiert werden, oder als vectorstore-note auf das Board gebracht werden.\n4. Nach Ausführen der Prompt-Chain (per Klick auf den \"Fast-Forward\" Button in der ersten Chatkarte) wird der Code automatisch kommentiert und dokumentiert.\n\n\n### Weitere Anweisungen\n- Antworte immer im Kontext der speziellen Informationen.\n- Antworte immer in der Sprache des Users.\n\n","prompt_input":"","prompt_output":"","state":"initial","auto_size":false,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510","connector":"prompt-output"}],"type":"assistant-setup-note","position":{"x":610,"y":-850},"size":{"width":280,"height":180},"color":"note-color-3","attachments":{}},{"id":"acc59379-f8d3-40fd-bcc3-4aea7ff856db","title":"","type_specific":{"message":"","assistant_type":"","system_setup":"","prompt_input":"Wie verwende ich dieses Template?","prompt_output":"Um dieses Template zu verwenden, folgen Sie bitte diesen Schritten:\n\n1. Fügen Sie Ihren Code entweder in eine Notizkarte ein oder laden Sie ihn als Datei in eine Vectorstore-Karte hoch. Im gegebenen Beispiel ist der Code in einer Notizkarte mit dem Titel \"Code\" eingefügt.\n\n2. Stellen Sie sicher, dass die Spracheinstellungen korrekt sind. In diesem Beispiel ist die Spracheinstellung auf Deutsch gesetzt, was bedeutet, dass der Assistent auf Deutsch antworten wird.\n\n3. Passen Sie die Kommentier- und Dokumentationsrichtlinien an Ihre Bedürfnisse an. Diese finden Sie in den Notizkarten \"Code Commenting Guidelines\" und \"Documentation Guidelines\".\n\n4. Starten Sie die Ausführung der Prompt-Chain, indem Sie auf den \"Fast-Forward\"-Button in der ersten Chatkarte klicken. Der Assistent wird dann den Code kommentieren und dokumentieren.\n\n5. Die kommentierte Version des Codes und die Dokumentation werden jeweils in einer separaten Notizkarte angezeigt.\n\nBitte beachten Sie, dass dieses Template für das Kommentieren und Dokumentieren von Code konzipiert ist. Die Ausgabesprache, die Kommentier-Richtlinien und die Dokumentations-Richtlinien können angepasst werden.","state":"success","split_size":[10.571303199189348,89.42869680081066],"auto_size":false,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510","connector":"prompt-input"},{"id":"2854b470-56f7-4518-aebc-3fe40eb7bca3","connector":"context-input"}],"type":"prompt-note","position":{"x":910,"y":-850},"size":{"width":560,"height":550},"color":"note-color-3","attachments":{}},{"id":"f72d930c-9c79-40c1-8a9f-40312ce65a15","title":"","type_specific":{"message":"","assistant_type":"","system_setup":"","prompt_input":"Schreibe die Dokumentation","prompt_output":"# Dokumentation für die Funktion getRenderedSize\n\n## Beschreibung\nDie Funktion `getRenderedSize` gibt die gerenderte Größe eines Elements zurück. Sie berechnet die Höhe des Elements, abhängig davon, ob das Element bearbeitbar ist und welchen Typ es hat.\n\n## Installation\n[Bitte ausfüllen]\n\n## Beispiel\n```javascript\nconst size = element.getRenderedSize();\nconsole.log(size);\n```\n\n## API Dokumentation\n\n### Parameter\nDie Funktion `getRenderedSize` nimmt keine Parameter an.\n\n### Rückgabe\nDie Funktion gibt die Höhe des gerenderten Elements oder die Höhe des Editors als Zahl zurück.\n\n## Weitere Informationen\n\n### Lizenzinformationen\n[Bitte ausfüllen]\n\n### Kontakt\nFür weitere Fragen oder Anregungen können Sie uns unter [Bitte E-Mail-Adresse einfügen] erreichen.\n\n### Versionsverlauf\n- Version 1.0: Erste Implementierung der Funktion `getRenderedSize`.\n\n[Bitte fügen Sie hier alle wichtigen Änderungen in den verschiedenen Versionen ein.]","state":"success","split_size":[17.01990052598744,82.98009947401256],"auto_size":true,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"964edc54-e836-4f88-991a-e84fed2b5c19","connector":"prompt-input"},{"id":"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984","connector":"prompt-context-output"}],"type":"prompt-note","position":{"x":1660,"y":210},"size":{"width":700,"height":510.00001017252606},"color":"note-color-3","attachments":{}},{"id":"9178b7fb-7a4d-46fd-b94c-a491dacb98b2","title":"Language Setting: Deutsch","type_specific":{"message":"","assistant_type":"","system_setup":"","prompt_input":"","prompt_output":"","state":"initial","split_size":[],"auto_size":false,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"7a1e325f-a050-4980-b5e6-25eb5d4c7621","connector":"right"}],"type":"note","position":{"x":0,"y":-200},"size":{"width":360,"height":34},"color":"note-color-8","attachments":{},"collapsed":true,"collapsed_size":{"width":360,"height":34}},{"id":"572940b3-42a5-42a5-8c51-d9ca0521329a","title":"How to use this template","type_specific":{"message":"{\"nodes\":[{\"id\":\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\",\"title\":\"Chatgpt 4 (Focused)\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"chat-gpt-40\",\"system_setup\":\"You are a senior software engineer that only answers in {Language Setting}\\n\\nIf you are missing any critical information, ask the user for missing information\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"state\":\"initial\",\"auto_size\":false},\"edge_connections\":[{\"id\":\"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f\",\"connector\":\"prompt-output\"},{\"id\":\"7a1e325f-a050-4980-b5e6-25eb5d4c7621\",\"connector\":\"context-input\"},{\"id\":\"d1995098-1f2c-46b9-909b-4be13307e591\",\"connector\":\"context-input\"},{\"id\":\"2196a58c-75be-4876-aaf3-538033419e16\",\"connector\":\"context-input\"}],\"type\":\"assistant-setup-note\",\"position\":{\"x\":160,\"y\":210},\"size\":{\"width\":470,\"height\":180},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"8574a334-c8fc-49a0-8b09-1c39fbbd6b5a\",\"title\":\"Code\",\"type_specific\":{\"message\":\"  ```typescript\\n  public getRenderedSize(): number {\\n    if (!this.editable) {\\n      if (this.type === 'markdown' && this.ngxMarkdown) {\\n        const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\\n        return height;\\n      } else if (this.type === 'text') {\\n        const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\\n        if (textContainer) {\\n          const {height} = textContainer.getBoundingClientRect();\\n          return height ? height : this.getEditorHeight();\\n        } else {\\n          return this.getEditorHeight();\\n        }\\n      } else {\\n        return this.getEditorHeight();\\n      }\\n    } else {\\n      return this.getEditorHeight()\\n    }\\n  }\\n  ```\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[],\"type\":\"note\",\"position\":{\"x\":1270,\"y\":60},\"size\":{\"width\":280,\"height\":120},\"color\":\"note-color-3\",\"attachments\":{},\"collapsed\":false,\"collapsed_size\":{\"width\":280,\"height\":34}},{\"id\":\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\",\"title\":\"\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"Kommentiere den Code\",\"prompt_output\":\"```javascript\\n/**\\n * Diese Funktion gibt die gerenderte Größe zurück.\\n * Wenn das Element nicht bearbeitbar ist, wird die Höhe des Elements berechnet und zurückgegeben, abhängig vom Typ des Elements.\\n * Wenn das Element bearbeitbar ist, wird die Höhe des Editors zurückgegeben.\\n *\\n * @returns {number} Die Höhe des gerenderten Elements oder die Höhe des Editors\\n */\\npublic getRenderedSize(): number {\\n  if (!this.editable) {\\n    if (this.type === 'markdown' && this.ngxMarkdown) {\\n      // Berechnet und gibt die Höhe des Markdown-Elements zurück\\n      const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\\n      return height;\\n    } else if (this.type === 'text') {\\n      // Sucht den Textcontainer im Element\\n      const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\\n      if (textContainer) {\\n        // Berechnet und gibt die Höhe des Textcontainers zurück, falls vorhanden\\n        const {height} = textContainer.getBoundingClientRect();\\n        return height ? height : this.getEditorHeight();\\n      } else {\\n        // Gibt die Höhe des Editors zurück, wenn kein Textcontainer vorhanden ist\\n        return this.getEditorHeight();\\n      }\\n    } else {\\n      // Gibt die Höhe des Editors zurück, wenn der Typ weder 'markdown' noch 'text' ist\\n      return this.getEditorHeight();\\n    }\\n  } else {\\n    // Gibt die Höhe des Editors zurück, wenn das Element bearbeitbar ist\\n    return this.getEditorHeight()\\n  }\\n}\\n```\",\"state\":\"success\",\"split_size\":[67.77946302348343,32.22053697651658],\"auto_size\":true,\"vector_store_file\":\"\",\"vector_store_file_type\":\"\"},\"edge_connections\":[{\"id\":\"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f\",\"connector\":\"prompt-input\"},{\"id\":\"3caa4f68-cd8c-4fdf-a8fb-12f5f932e451\",\"connector\":\"context-input\"},{\"id\":\"964edc54-e836-4f88-991a-e84fed2b5c19\",\"connector\":\"prompt-output\"},{\"id\":\"8c41d7ac-29be-4f1b-b842-139a005708dd\",\"connector\":\"prompt-context-output\"}],\"type\":\"prompt-note\",\"position\":{\"x\":840,\"y\":210},\"size\":{\"width\":700,\"height\":510},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"adb7abeb-12cb-41df-9fc1-a0fc5208aa65\",\"title\":\"/Workflow Ideas/workflows/toy data/code.txt\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"/Workflow Ideas/workflows/toy data/code.txt\",\"vector_store_file_type\":\"txt\",\"state\":\"success\",\"split_size\":[],\"auto_size\":true},\"edge_connections\":[{\"id\":\"3caa4f68-cd8c-4fdf-a8fb-12f5f932e451\",\"connector\":\"right\"}],\"type\":\"vectorstore-note\",\"position\":{\"x\":840,\"y\":60},\"size\":{\"width\":280,\"height\":120},\"color\":\"note-color-5\",\"attachments\":{}},{\"id\":\"74974f10-3f00-4439-ab26-f2a4667d6546\",\"title\":\"Chatgpt 4 (Focused)\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"chat-gpt-40\",\"system_setup\":\"Du erhälst Halerium Board Templates im json format. Hilf dem User, die Templates zu verwenden.\\n\\nDas Template befindet sich bereits in Halerium.\\n\\nDu bist in einer Chatkarte auf diesem Template.\\n\\nHalerium Boards beinhalten \\\"Karten\\\" (json: \\\"nodes\\\"), zwischen denen es Verbindungen (json: \\\"edges\\\") gibt. Die Richtung einer Verbindung gibt den Informationsfluss an.\\n\\nBeispiel:\\nKarte A und Karte B sind miteinander in Richtung A->B verbunden. Karte B hat also Zugriff auf den Inhalt von Karte A.\\n\\nEs gibt vier verschiedene Kartentypen:\\n1. \\\"note\\\": Eine Notizkarte. Diese kann entweder Kontext bereitstellen (als Karte A fungieren), oder als Output verwendet werden (als Karte B fungieren)\\n2. \\\"assistant-setup-note\\\": Eine \\\"Bot-Setup\\\" Karte, in der ein Bot ausgewählt (\\\"assistent_type\\\") und personalisiert (\\\"system_setup\\\") werden kann\\n3. \\\"prompt-note\\\": Eine \\\"Chatkarte\\\", über die der User mit dem Bot kommunizieren kann und ihm Anweisungen geben kann.\\n4. \\\"vectorstore-note\\\": Diese Karte repräsentiert eine Datei, die per Rechtsklick -> \\\"Add to board\\\" bereitgestellt wurde. Sie kann mit einer Chatkarte verbunden weren und stellt dieser so den Inhalt der Datei zur Verfügung.\\n\\nAntworte immer in der Sprache des Users.\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"auto_size\":false},\"edge_connections\":[{\"id\":\"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510\",\"connector\":\"prompt-output\"}],\"type\":\"assistant-setup-note\",\"position\":{\"x\":610,\"y\":-850},\"size\":{\"width\":280,\"height\":180},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"acc59379-f8d3-40fd-bcc3-4aea7ff856db\",\"title\":\"\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"Wie verwende ich dieses Template?\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"success\",\"split_size\":[10.571303199189348,89.42869680081066],\"auto_size\":false},\"edge_connections\":[{\"id\":\"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510\",\"connector\":\"prompt-input\"},{\"id\":\"2854b470-56f7-4518-aebc-3fe40eb7bca3\",\"connector\":\"context-input\"}],\"type\":\"prompt-note\",\"position\":{\"x\":910,\"y\":-850},\"size\":{\"width\":560,\"height\":550},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"f72d930c-9c79-40c1-8a9f-40312ce65a15\",\"title\":\"\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"Schreibe die Dokumentation\",\"prompt_output\":\"# Dokumentation für die Funktion getRenderedSize\\n\\n## Beschreibung\\nDie Funktion `getRenderedSize` gibt die gerenderte Größe eines Elements zurück. Sie berechnet die Höhe des Elements, abhängig davon, ob das Element bearbeitbar ist und welchen Typ es hat.\\n\\n## Installation\\n[Bitte ausfüllen]\\n\\n## Beispiel\\n```javascript\\nconst size = element.getRenderedSize();\\nconsole.log(size);\\n```\\n\\n## API Dokumentation\\n\\n### Parameter\\nDie Funktion `getRenderedSize` nimmt keine Parameter an.\\n\\n### Rückgabe\\nDie Funktion gibt die Höhe des gerenderten Elements oder die Höhe des Editors als Zahl zurück.\\n\\n## Weitere Informationen\\n\\n### Lizenzinformationen\\n[Bitte ausfüllen]\\n\\n### Kontakt\\nFür weitere Fragen oder Anregungen können Sie uns unter [Bitte E-Mail-Adresse einfügen] erreichen.\\n\\n### Versionsverlauf\\n- Version 1.0: Erste Implementierung der Funktion `getRenderedSize`.\\n\\n[Bitte fügen Sie hier alle wichtigen Änderungen in den verschiedenen Versionen ein.]\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"success\",\"split_size\":[17.01990052598744,82.98009947401256],\"auto_size\":true},\"edge_connections\":[{\"id\":\"964edc54-e836-4f88-991a-e84fed2b5c19\",\"connector\":\"prompt-input\"},{\"id\":\"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984\",\"connector\":\"prompt-context-output\"}],\"type\":\"prompt-note\",\"position\":{\"x\":1660,\"y\":210},\"size\":{\"width\":700,\"height\":510.00001017252606},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"9178b7fb-7a4d-46fd-b94c-a491dacb98b2\",\"title\":\"Language Setting: Deutsch\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[{\"id\":\"7a1e325f-a050-4980-b5e6-25eb5d4c7621\",\"connector\":\"right\"}],\"type\":\"note\",\"position\":{\"x\":0,\"y\":-200},\"size\":{\"width\":360,\"height\":34},\"color\":\"note-color-8\",\"attachments\":{},\"collapsed\":true,\"collapsed_size\":{\"width\":360,\"height\":34}},{\"id\":\"572940b3-42a5-42a5-8c51-d9ca0521329a\",\"title\":\"How to use this template\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[{\"id\":\"2854b470-56f7-4518-aebc-3fe40eb7bca3\",\"connector\":\"right\"}],\"type\":\"note\",\"position\":{\"x\":610,\"y\":-900},\"size\":{\"width\":280,\"height\":34},\"color\":\"note-color-4\",\"attachments\":{},\"collapsed\":true,\"collapsed_size\":{\"width\":280,\"height\":34}},{\"id\":\"109efb1f-b2c8-4ea3-8124-d6a6fa345970\",\"title\":\"Documentation Guidelines\",\"type_specific\":{\"message\":\"**When asked for code documentation, you will:**\\n- Write and return the code documentation in the style of a ReadMe file. It has to include at least:\\n    - Description of the function\\n    - Installation\\n    - Example\\n    - API documentation:\\n        - The function's parameters and arguments\\n        - The function's return\\n    - Further information, like:\\n        - Include licensing information\\n        - Link to your e-mail address at the end\\n        - List all the versions of the files along with the major edits you did in each version\\n- Your response has to be in {Language Setting}\\n\\nImportant: DO NOT ASSUME ANY INFORMATION. Ask the user about it or put \\\"[Please fill in]\\\" instead!\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[{\"id\":\"2196a58c-75be-4876-aaf3-538033419e16\",\"connector\":\"left\"}],\"type\":\"note\",\"position\":{\"x\":490,\"y\":-140},\"size\":{\"width\":280,\"height\":334},\"color\":\"note-color-8\",\"attachments\":{},\"collapsed\":false,\"collapsed_size\":{\"width\":280,\"height\":34}},{\"id\":\"3ebd7c47-5b08-4333-ab91-057b48ab0bb9\",\"title\":\"Code Commenting Guidelines\",\"type_specific\":{\"message\":\"**When asked for code comments, you will:**\\n- Read and understand the code\\n- Insert a docstring\\n- Only comment code that is hard to understand or complex\\n- Do !*NOT*! write a comment for every line\\n- Only return the code, nothing else.\\n- Your response has to be in {Language Setting}\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[{\"id\":\"d1995098-1f2c-46b9-909b-4be13307e591\",\"connector\":\"right\"}],\"type\":\"note\",\"position\":{\"x\":0,\"y\":-150},\"size\":{\"width\":280,\"height\":334},\"color\":\"note-color-8\",\"attachments\":{},\"collapsed\":false,\"collapsed_size\":{\"width\":280,\"height\":34}},{\"id\":\"61740880-ddbd-4998-9408-39487279a4aa\",\"title\":\"Dokumentation\",\"type_specific\":{\"message\":\"# Dokumentation für die Funktion getRenderedSize\\n\\n## Beschreibung\\nDie Funktion `getRenderedSize` gibt die gerenderte Größe eines Elements zurück. Sie berechnet die Höhe des Elements, abhängig davon, ob das Element bearbeitbar ist und welchen Typ es hat.\\n\\n## Installation\\n[Bitte ausfüllen]\\n\\n## Beispiel\\n```javascript\\nconst size = element.getRenderedSize();\\nconsole.log(size);\\n```\\n\\n## API Dokumentation\\n\\n### Parameter\\nDie Funktion `getRenderedSize` nimmt keine Parameter an.\\n\\n### Rückgabe\\nDie Funktion gibt die Höhe des gerenderten Elements oder die Höhe des Editors als Zahl zurück.\\n\\n## Weitere Informationen\\n\\n### Lizenzinformationen\\n[Bitte ausfüllen]\\n\\n### Kontakt\\nFür weitere Fragen oder Anregungen können Sie uns unter [Bitte E-Mail-Adresse einfügen] erreichen.\\n\\n### Versionsverlauf\\n- Version 1.0: Erste Implementierung der Funktion `getRenderedSize`.\\n\\n[Bitte fügen Sie hier alle wichtigen Änderungen in den verschiedenen Versionen ein.]\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\"},\"edge_connections\":[{\"id\":\"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984\",\"connector\":\"left\"}],\"type\":\"note\",\"position\":{\"x\":2040,\"y\":740},\"size\":{\"width\":700,\"height\":700},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"6d5d7746-1952-4656-95d2-6ebcdb76f509\",\"title\":\"Kommentierter Code\",\"type_specific\":{\"message\":\"```javascript\\n/**\\n * Diese Funktion gibt die gerenderte Größe zurück.\\n * Wenn das Element nicht bearbeitbar ist, wird die Höhe des Elements berechnet und zurückgegeben, abhängig vom Typ des Elements.\\n * Wenn das Element bearbeitbar ist, wird die Höhe des Editors zurückgegeben.\\n *\\n * @returns {number} Die Höhe des gerenderten Elements oder die Höhe des Editors\\n */\\npublic getRenderedSize(): number {\\n  if (!this.editable) {\\n    if (this.type === 'markdown' && this.ngxMarkdown) {\\n      // Berechnet und gibt die Höhe des Markdown-Elements zurück\\n      const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\\n      return height;\\n    } else if (this.type === 'text') {\\n      // Sucht den Textcontainer im Element\\n      const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\\n      if (textContainer) {\\n        // Berechnet und gibt die Höhe des Textcontainers zurück, falls vorhanden\\n        const {height} = textContainer.getBoundingClientRect();\\n        return height ? height : this.getEditorHeight();\\n      } else {\\n        // Gibt die Höhe des Editors zurück, wenn kein Textcontainer vorhanden ist\\n        return this.getEditorHeight();\\n      }\\n    } else {\\n      // Gibt die Höhe des Editors zurück, wenn der Typ weder 'markdown' noch 'text' ist\\n      return this.getEditorHeight();\\n    }\\n  } else {\\n    // Gibt die Höhe des Editors zurück, wenn das Element bearbeitbar ist\\n    return this.getEditorHeight()\\n  }\\n}\\n```\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\"},\"edge_connections\":[{\"id\":\"8c41d7ac-29be-4f1b-b842-139a005708dd\",\"connector\":\"left\"}],\"type\":\"note\",\"position\":{\"x\":1220,\"y\":740},\"size\":{\"width\":640,\"height\":700},\"color\":\"note-color-3\",\"attachments\":{}}],\"edges\":[{\"id\":\"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f\",\"type\":\"solid_line\",\"node_connections\":[\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\",\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\"],\"type_specific\":{\"annotation\":\"\",\"preventOutputCopy\":false}},{\"id\":\"3caa4f68-cd8c-4fdf-a8fb-12f5f932e451\",\"type\":\"solid_arrow\",\"node_connections\":[\"adb7abeb-12cb-41df-9fc1-a0fc5208aa65\",\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510\",\"type\":\"solid_line\",\"node_connections\":[\"74974f10-3f00-4439-ab26-f2a4667d6546\",\"acc59379-f8d3-40fd-bcc3-4aea7ff856db\"],\"type_specific\":{\"annotation\":\"\",\"preventOutputCopy\":false}},{\"id\":\"7a1e325f-a050-4980-b5e6-25eb5d4c7621\",\"type\":\"solid_arrow\",\"node_connections\":[\"9178b7fb-7a4d-46fd-b94c-a491dacb98b2\",\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"2854b470-56f7-4518-aebc-3fe40eb7bca3\",\"type\":\"solid_arrow\",\"node_connections\":[\"572940b3-42a5-42a5-8c51-d9ca0521329a\",\"acc59379-f8d3-40fd-bcc3-4aea7ff856db\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"964edc54-e836-4f88-991a-e84fed2b5c19\",\"type\":\"solid_line\",\"node_connections\":[\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\",\"f72d930c-9c79-40c1-8a9f-40312ce65a15\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"d1995098-1f2c-46b9-909b-4be13307e591\",\"type\":\"solid_arrow\",\"node_connections\":[\"3ebd7c47-5b08-4333-ab91-057b48ab0bb9\",\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"2196a58c-75be-4876-aaf3-538033419e16\",\"type\":\"solid_arrow\",\"node_connections\":[\"109efb1f-b2c8-4ea3-8124-d6a6fa345970\",\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984\",\"type\":\"solid_arrow\",\"node_connections\":[\"f72d930c-9c79-40c1-8a9f-40312ce65a15\",\"61740880-ddbd-4998-9408-39487279a4aa\"],\"type_specific\":{\"annotation\":\"\",\"preventOutputCopy\":false}},{\"id\":\"8c41d7ac-29be-4f1b-b842-139a005708dd\",\"type\":\"solid_arrow\",\"node_connections\":[\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\",\"6d5d7746-1952-4656-95d2-6ebcdb76f509\"],\"type_specific\":{\"annotation\":\"\",\"preventOutputCopy\":false}}]}","assistant_type":"","system_setup":"","prompt_input":"","prompt_output":"","state":"initial","split_size":[],"auto_size":false,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"2854b470-56f7-4518-aebc-3fe40eb7bca3","connector":"right"}],"type":"note","position":{"x":610,"y":-900},"size":{"width":280,"height":34},"color":"note-color-4","attachments":{},"collapsed":true,"collapsed_size":{"width":280,"height":34}},{"id":"109efb1f-b2c8-4ea3-8124-d6a6fa345970","title":"Documentation Guidelines","type_specific":{"message":"**When asked for code documentation, you will:**\n- Write and return the code documentation in the style of a ReadMe file. It has to include at least:\n    - Description of the function\n    - Installation\n    - Example\n    - API documentation:\n        - The function's parameters and arguments\n        - The function's return\n    - Further information, like:\n        - Include licensing information\n        - Link to your e-mail address at the end\n        - List all the versions of the files along with the major edits you did in each version\n- Your response has to be in {Language Setting}\n\nImportant: DO NOT ASSUME ANY INFORMATION. Ask the user about it or put \"[Please fill in]\" instead!","assistant_type":"","system_setup":"","prompt_input":"","prompt_output":"","state":"initial","split_size":[],"auto_size":false,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"2196a58c-75be-4876-aaf3-538033419e16","connector":"left"}],"type":"note","position":{"x":510,"y":-140},"size":{"width":280,"height":334},"color":"note-color-8","attachments":{},"collapsed":false,"collapsed_size":{"width":280,"height":34}},{"id":"3ebd7c47-5b08-4333-ab91-057b48ab0bb9","title":"Code Commenting Guidelines","type_specific":{"message":"**When asked for code comments, you will:**\n- Read and understand the code\n- Insert a docstring\n- Only comment code that is hard to understand or complex\n- Do !*NOT*! write a comment for every line\n- Only return the code, nothing else.\n- Your response has to be in {Language Setting}","assistant_type":"","system_setup":"","prompt_input":"","prompt_output":"","state":"initial","split_size":[],"auto_size":false,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"d1995098-1f2c-46b9-909b-4be13307e591","connector":"right"}],"type":"note","position":{"x":0,"y":-150},"size":{"width":280,"height":334},"color":"note-color-8","attachments":{},"collapsed":false,"collapsed_size":{"width":280,"height":34}},{"id":"61740880-ddbd-4998-9408-39487279a4aa","title":"Dokumentation","type_specific":{"message":"# Dokumentation für die Funktion getRenderedSize\n\n## Beschreibung\nDie Funktion `getRenderedSize` gibt die gerenderte Größe eines Elements zurück. Sie berechnet die Höhe des Elements, abhängig davon, ob das Element bearbeitbar ist und welchen Typ es hat.\n\n## Installation\n[Bitte ausfüllen]\n\n## Beispiel\n```javascript\nconst size = element.getRenderedSize();\nconsole.log(size);\n```\n\n## API Dokumentation\n\n### Parameter\nDie Funktion `getRenderedSize` nimmt keine Parameter an.\n\n### Rückgabe\nDie Funktion gibt die Höhe des gerenderten Elements oder die Höhe des Editors als Zahl zurück.\n\n## Weitere Informationen\n\n### Lizenzinformationen\n[Bitte ausfüllen]\n\n### Kontakt\nFür weitere Fragen oder Anregungen können Sie uns unter [Bitte E-Mail-Adresse einfügen] erreichen.\n\n### Versionsverlauf\n- Version 1.0: Erste Implementierung der Funktion `getRenderedSize`.\n\n[Bitte fügen Sie hier alle wichtigen Änderungen in den verschiedenen Versionen ein.]","assistant_type":"","system_setup":"","prompt_input":"","prompt_output":"","state":"initial","vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984","connector":"left"}],"type":"note","position":{"x":2040,"y":740},"size":{"width":700,"height":700},"color":"note-color-3","attachments":{}},{"id":"6d5d7746-1952-4656-95d2-6ebcdb76f509","title":"Kommentierter Code","type_specific":{"message":"```javascript\n/**\n * Diese Funktion gibt die gerenderte Größe zurück.\n * Wenn das Element nicht bearbeitbar ist, wird die Höhe des Elements berechnet und zurückgegeben, abhängig vom Typ des Elements.\n * Wenn das Element bearbeitbar ist, wird die Höhe des Editors zurückgegeben.\n *\n * @returns {number} Die Höhe des gerenderten Elements oder die Höhe des Editors\n */\npublic getRenderedSize(): number {\n  if (!this.editable) {\n    if (this.type === 'markdown' && this.ngxMarkdown) {\n      // Berechnet und gibt die Höhe des Markdown-Elements zurück\n      const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\n      return height;\n    } else if (this.type === 'text') {\n      // Sucht den Textcontainer im Element\n      const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\n      if (textContainer) {\n        // Berechnet und gibt die Höhe des Textcontainers zurück, falls vorhanden\n        const {height} = textContainer.getBoundingClientRect();\n        return height ? height : this.getEditorHeight();\n      } else {\n        // Gibt die Höhe des Editors zurück, wenn kein Textcontainer vorhanden ist\n        return this.getEditorHeight();\n      }\n    } else {\n      // Gibt die Höhe des Editors zurück, wenn der Typ weder 'markdown' noch 'text' ist\n      return this.getEditorHeight();\n    }\n  } else {\n    // Gibt die Höhe des Editors zurück, wenn das Element bearbeitbar ist\n    return this.getEditorHeight()\n  }\n}\n```","assistant_type":"","system_setup":"","prompt_input":"","prompt_output":"","state":"initial","vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"8c41d7ac-29be-4f1b-b842-139a005708dd","connector":"left"}],"type":"note","position":{"x":1220,"y":740},"size":{"width":640,"height":700},"color":"note-color-3","attachments":{}},{"id":"e9843c5e-5c4a-43cc-9481-f9beb08d9c86","title":"Code","type_specific":{"message":"  ```typescript\n  public getRenderedSize(): number {\n    if (!this.editable) {\n      if (this.type === 'markdown' && this.ngxMarkdown) {\n        const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\n        return height;\n      } else if (this.type === 'text') {\n        const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\n        if (textContainer) {\n          const {height} = textContainer.getBoundingClientRect();\n          return height ? height : this.getEditorHeight();\n        } else {\n          return this.getEditorHeight();\n        }\n      } else {\n        return this.getEditorHeight();\n      }\n    } else {\n      return this.getEditorHeight()\n    }\n  }\n  ```","assistant_type":"","system_setup":"","prompt_input":"","prompt_output":"","state":"initial","split_size":[],"auto_size":false,"vector_store_file":"","vector_store_file_type":""},"edge_connections":[{"id":"fbd8b9c5-c404-4141-b562-1ba9155d61a8","connector":"left"}],"type":"note","position":{"x":1250,"y":-150},"size":{"width":560,"height":340},"color":"note-color-3","attachments":{}}],"edges":[{"id":"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f","type":"solid_line","node_connections":["427995ae-891d-48f5-aabe-eb2d3c2d31cc","6e8af35d-4b31-4cf2-90a7-147807b4bed2"],"type_specific":{"annotation":"","preventOutputCopy":false}},{"id":"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510","type":"solid_line","node_connections":["74974f10-3f00-4439-ab26-f2a4667d6546","acc59379-f8d3-40fd-bcc3-4aea7ff856db"],"type_specific":{"annotation":"","preventOutputCopy":false}},{"id":"7a1e325f-a050-4980-b5e6-25eb5d4c7621","type":"solid_arrow","node_connections":["9178b7fb-7a4d-46fd-b94c-a491dacb98b2","427995ae-891d-48f5-aabe-eb2d3c2d31cc"],"type_specific":{"annotation":""}},{"id":"2854b470-56f7-4518-aebc-3fe40eb7bca3","type":"solid_arrow","node_connections":["572940b3-42a5-42a5-8c51-d9ca0521329a","acc59379-f8d3-40fd-bcc3-4aea7ff856db"],"type_specific":{"annotation":""}},{"id":"964edc54-e836-4f88-991a-e84fed2b5c19","type":"solid_line","node_connections":["6e8af35d-4b31-4cf2-90a7-147807b4bed2","f72d930c-9c79-40c1-8a9f-40312ce65a15"],"type_specific":{"annotation":""}},{"id":"d1995098-1f2c-46b9-909b-4be13307e591","type":"solid_arrow","node_connections":["3ebd7c47-5b08-4333-ab91-057b48ab0bb9","427995ae-891d-48f5-aabe-eb2d3c2d31cc"],"type_specific":{"annotation":""}},{"id":"2196a58c-75be-4876-aaf3-538033419e16","type":"solid_arrow","node_connections":["109efb1f-b2c8-4ea3-8124-d6a6fa345970","427995ae-891d-48f5-aabe-eb2d3c2d31cc"],"type_specific":{"annotation":""}},{"id":"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984","type":"solid_arrow","node_connections":["f72d930c-9c79-40c1-8a9f-40312ce65a15","61740880-ddbd-4998-9408-39487279a4aa"],"type_specific":{"annotation":"","preventOutputCopy":false}},{"id":"8c41d7ac-29be-4f1b-b842-139a005708dd","type":"solid_arrow","node_connections":["6e8af35d-4b31-4cf2-90a7-147807b4bed2","6d5d7746-1952-4656-95d2-6ebcdb76f509"],"type_specific":{"annotation":"","preventOutputCopy":false}},{"id":"fbd8b9c5-c404-4141-b562-1ba9155d61a8","type":"solid_arrow","node_connections":["e9843c5e-5c4a-43cc-9481-f9beb08d9c86","6e8af35d-4b31-4cf2-90a7-147807b4bed2"],"type_specific":{"annotation":""}}]}
+{
+"version": "1.0",
+"nodes": [
+{
+"id": "427995ae-891d-48f5-aabe-eb2d3c2d31cc",
+"type": "setup",
+"position": {
+"x": 160,
+"y": 210
+},
+"size": {
+"width": 470,
+"height": 180
+},
+"type_specific": {
+"bot_type": "chat-gpt-40",
+"setup_args": {
+"system_setup": "You are a senior software engineer that only answers in {Language Setting}\n\nIf you are missing any critical information, ask the user for missing information"
+},
+"auto_size": false
+}
+},
+{
+"id": "6e8af35d-4b31-4cf2-90a7-147807b4bed2",
+"type": "bot",
+"position": {
+"x": 840,
+"y": 210
+},
+"size": {
+"width": 700,
+"height": 510
+},
+"type_specific": {
+"prompt_input": "Kommentiere den Code",
+"prompt_output": "```javascript\n/**\n * Diese Funktion gibt die gerenderte Gr\u00f6\u00dfe zur\u00fcck.\n * Wenn das Element nicht bearbeitbar ist, wird die H\u00f6he des Elements berechnet und zur\u00fcckgegeben, abh\u00e4ngig vom Typ des Elements.\n * Wenn das Element bearbeitbar ist, wird die H\u00f6he des Editors zur\u00fcckgegeben.\n *\n * @returns {number} Die H\u00f6he des gerenderten Elements oder die H\u00f6he des Editors\n */\npublic getRenderedSize(): number {\n  if (!this.editable) {\n    if (this.type === 'markdown' && this.ngxMarkdown) {\n      // Berechnet und gibt die H\u00f6he des Markdown-Elements zur\u00fcck\n      const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\n      return height;\n    } else if (this.type === 'text') {\n      // Sucht den Textcontainer im Element\n      const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\n      if (textContainer) {\n        // Berechnet und gibt die H\u00f6he des Textcontainers zur\u00fcck, falls vorhanden\n        const {height} = textContainer.getBoundingClientRect();\n        return height ? height : this.getEditorHeight();\n      } else {\n        // Gibt die H\u00f6he des Editors zur\u00fcck, wenn kein Textcontainer vorhanden ist\n        return this.getEditorHeight();\n      }\n    } else {\n      // Gibt die H\u00f6he des Editors zur\u00fcck, wenn der Typ weder 'markdown' noch 'text' ist\n      return this.getEditorHeight();\n    }\n  } else {\n    // Gibt die H\u00f6he des Editors zur\u00fcck, wenn das Element bearbeitbar ist\n    return this.getEditorHeight()\n  }\n}\n```",
+"auto_size": true,
+"split_size": [
+67.77946302348343,
+32.22053697651658
+],
+"state": "success",
+"attachments": {}
+}
+},
+{
+"id": "74974f10-3f00-4439-ab26-f2a4667d6546",
+"type": "setup",
+"position": {
+"x": 610,
+"y": -850
+},
+"size": {
+"width": 280,
+"height": 180
+},
+"type_specific": {
+"bot_type": "chat-gpt-40",
+"setup_args": {
+"system_setup": "Du erh\u00e4lst Halerium Board Templates im json format. Hilf dem User, die Templates zu verwenden.\n\nDas Template befindet sich bereits in Halerium.\n\nDu bist in einer Chatkarte auf diesem Template.\n\n### Generelle Informationen\nHalerium Boards beinhalten \"Karten\" (json: \"nodes\"), zwischen denen es Verbindungen (json: \"edges\") gibt. Die Richtung einer Verbindung gibt den Informationsfluss an.\n\nBeispiel:\nKarte A und Karte B sind miteinander in Richtung A->B verbunden. Karte B hat also Zugriff auf den Inhalt von Karte A.\n\nEs gibt vier verschiedene Kartentypen:\n1. \"note\": Eine Notizkarte. Diese kann entweder Kontext bereitstellen (als Karte A fungieren), oder als Output verwendet werden (als Karte B fungieren)\n2. \"assistant-setup-note\": Eine \"Bot-Setup\" Karte, in der ein Bot ausgew\u00e4hlt (\"assistent_type\") und personalisiert (\"system_setup\") werden kann\n3. \"prompt-note\": Eine \"Chatkarte\", \u00fcber die der User mit dem Bot kommunizieren kann und ihm Anweisungen geben kann. Es gibt mehrere Buttons:\n- Prompt senden: f\u00fchrt nur diese Chatkarte aus\n- \"Fast Forward\": f\u00fchrt diese und alle folgenden Chatkarten aus\n- Prompt erneut senden: f\u00fchrt diese Chatkarte erneut aus (nur sichtbar wenn die Karte bereits mindestens einmal ausgef\u00fchrt wurde)\n4. \"vectorstore-note\": Diese Karte repr\u00e4sentiert eine Datei, die per Rechtsklick -> \"Add to board\" bereitgestellt wurde. Sie kann mit einer Chatkarte verbunden weren und stellt dieser so den Inhalt der Datei zur Verf\u00fcgung.\n5. Eine Kette aus einer Setup Karte und mehrerer Chat Karten wird als \"Prompt-Chain\" bezeichnet\n\n### Spezielle Informationen\n1. Dieses Template ist f\u00fcr das Kommentieren und das Dokumentieren von Code gedacht.\n2. Es k\u00f6nnen die Ausgabesprache, die Kommentier-Richtlinien und die Dokumentations-Richtlinien angepasst werden\n3. Code kann entweder in eine Notizkarte kopiert werden, oder als vectorstore-note auf das Board gebracht werden.\n4. Nach Ausf\u00fchren der Prompt-Chain (per Klick auf den \"Fast-Forward\" Button in der ersten Chatkarte) wird der Code automatisch kommentiert und dokumentiert.\n\n\n### Weitere Anweisungen\n- Antworte immer im Kontext der speziellen Informationen.\n- Antworte immer in der Sprache des Users.\n\n"
+},
+"auto_size": false
+}
+},
+{
+"id": "acc59379-f8d3-40fd-bcc3-4aea7ff856db",
+"type": "bot",
+"position": {
+"x": 910,
+"y": -850
+},
+"size": {
+"width": 560,
+"height": 550
+},
+"type_specific": {
+"prompt_input": "Wie verwende ich dieses Template?",
+"prompt_output": "Um dieses Template zu verwenden, folgen Sie bitte diesen Schritten:\n\n1. F\u00fcgen Sie Ihren Code entweder in eine Notizkarte ein oder laden Sie ihn als Datei in eine Vectorstore-Karte hoch. Im gegebenen Beispiel ist der Code in einer Notizkarte mit dem Titel \"Code\" eingef\u00fcgt.\n\n2. Stellen Sie sicher, dass die Spracheinstellungen korrekt sind. In diesem Beispiel ist die Spracheinstellung auf Deutsch gesetzt, was bedeutet, dass der Assistent auf Deutsch antworten wird.\n\n3. Passen Sie die Kommentier- und Dokumentationsrichtlinien an Ihre Bed\u00fcrfnisse an. Diese finden Sie in den Notizkarten \"Code Commenting Guidelines\" und \"Documentation Guidelines\".\n\n4. Starten Sie die Ausf\u00fchrung der Prompt-Chain, indem Sie auf den \"Fast-Forward\"-Button in der ersten Chatkarte klicken. Der Assistent wird dann den Code kommentieren und dokumentieren.\n\n5. Die kommentierte Version des Codes und die Dokumentation werden jeweils in einer separaten Notizkarte angezeigt.\n\nBitte beachten Sie, dass dieses Template f\u00fcr das Kommentieren und Dokumentieren von Code konzipiert ist. Die Ausgabesprache, die Kommentier-Richtlinien und die Dokumentations-Richtlinien k\u00f6nnen angepasst werden.",
+"auto_size": false,
+"split_size": [
+10.57130319918935,
+89.42869680081066
+],
+"state": "success",
+"attachments": {}
+}
+},
+{
+"id": "f72d930c-9c79-40c1-8a9f-40312ce65a15",
+"type": "bot",
+"position": {
+"x": 1660,
+"y": 210
+},
+"size": {
+"width": 700,
+"height": 510
+},
+"type_specific": {
+"prompt_input": "Schreibe die Dokumentation",
+"prompt_output": "# Dokumentation f\u00fcr die Funktion getRenderedSize\n\n## Beschreibung\nDie Funktion `getRenderedSize` gibt die gerenderte Gr\u00f6\u00dfe eines Elements zur\u00fcck. Sie berechnet die H\u00f6he des Elements, abh\u00e4ngig davon, ob das Element bearbeitbar ist und welchen Typ es hat.\n\n## Installation\n[Bitte ausf\u00fcllen]\n\n## Beispiel\n```javascript\nconst size = element.getRenderedSize();\nconsole.log(size);\n```\n\n## API Dokumentation\n\n### Parameter\nDie Funktion `getRenderedSize` nimmt keine Parameter an.\n\n### R\u00fcckgabe\nDie Funktion gibt die H\u00f6he des gerenderten Elements oder die H\u00f6he des Editors als Zahl zur\u00fcck.\n\n## Weitere Informationen\n\n### Lizenzinformationen\n[Bitte ausf\u00fcllen]\n\n### Kontakt\nF\u00fcr weitere Fragen oder Anregungen k\u00f6nnen Sie uns unter [Bitte E-Mail-Adresse einf\u00fcgen] erreichen.\n\n### Versionsverlauf\n- Version 1.0: Erste Implementierung der Funktion `getRenderedSize`.\n\n[Bitte f\u00fcgen Sie hier alle wichtigen \u00c4nderungen in den verschiedenen Versionen ein.]",
+"auto_size": true,
+"split_size": [
+17.01990052598744,
+82.98009947401256
+],
+"state": "success",
+"attachments": {}
+}
+},
+{
+"id": "9178b7fb-7a4d-46fd-b94c-a491dacb98b2",
+"type": "note",
+"position": {
+"x": 0,
+"y": -200
+},
+"size": {
+"width": 360,
+"height": 34
+},
+"type_specific": {
+"title": "Language Setting: Deutsch",
+"message": "",
+"color": "note-color-8",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "572940b3-42a5-42a5-8c51-d9ca0521329a",
+"type": "note",
+"position": {
+"x": 610,
+"y": -900
+},
+"size": {
+"width": 280,
+"height": 34
+},
+"type_specific": {
+"title": "How to use this template",
+"message": "{\"nodes\":[{\"id\":\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\",\"title\":\"Chatgpt 4 (Focused)\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"chat-gpt-40\",\"system_setup\":\"You are a senior software engineer that only answers in {Language Setting}\\n\\nIf you are missing any critical information, ask the user for missing information\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"state\":\"initial\",\"auto_size\":false},\"edge_connections\":[{\"id\":\"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f\",\"connector\":\"prompt-output\"},{\"id\":\"7a1e325f-a050-4980-b5e6-25eb5d4c7621\",\"connector\":\"context-input\"},{\"id\":\"d1995098-1f2c-46b9-909b-4be13307e591\",\"connector\":\"context-input\"},{\"id\":\"2196a58c-75be-4876-aaf3-538033419e16\",\"connector\":\"context-input\"}],\"type\":\"assistant-setup-note\",\"position\":{\"x\":160,\"y\":210},\"size\":{\"width\":470,\"height\":180},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"8574a334-c8fc-49a0-8b09-1c39fbbd6b5a\",\"title\":\"Code\",\"type_specific\":{\"message\":\"  ```typescript\\n  public getRenderedSize(): number {\\n    if (!this.editable) {\\n      if (this.type === 'markdown' && this.ngxMarkdown) {\\n        const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\\n        return height;\\n      } else if (this.type === 'text') {\\n        const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\\n        if (textContainer) {\\n          const {height} = textContainer.getBoundingClientRect();\\n          return height ? height : this.getEditorHeight();\\n        } else {\\n          return this.getEditorHeight();\\n        }\\n      } else {\\n        return this.getEditorHeight();\\n      }\\n    } else {\\n      return this.getEditorHeight()\\n    }\\n  }\\n  ```\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[],\"type\":\"note\",\"position\":{\"x\":1270,\"y\":60},\"size\":{\"width\":280,\"height\":120},\"color\":\"note-color-3\",\"attachments\":{},\"collapsed\":false,\"collapsed_size\":{\"width\":280,\"height\":34}},{\"id\":\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\",\"title\":\"\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"Kommentiere den Code\",\"prompt_output\":\"```javascript\\n/**\\n * Diese Funktion gibt die gerenderte Gr\u00f6\u00dfe zur\u00fcck.\\n * Wenn das Element nicht bearbeitbar ist, wird die H\u00f6he des Elements berechnet und zur\u00fcckgegeben, abh\u00e4ngig vom Typ des Elements.\\n * Wenn das Element bearbeitbar ist, wird die H\u00f6he des Editors zur\u00fcckgegeben.\\n *\\n * @returns {number} Die H\u00f6he des gerenderten Elements oder die H\u00f6he des Editors\\n */\\npublic getRenderedSize(): number {\\n  if (!this.editable) {\\n    if (this.type === 'markdown' && this.ngxMarkdown) {\\n      // Berechnet und gibt die H\u00f6he des Markdown-Elements zur\u00fcck\\n      const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\\n      return height;\\n    } else if (this.type === 'text') {\\n      // Sucht den Textcontainer im Element\\n      const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\\n      if (textContainer) {\\n        // Berechnet und gibt die H\u00f6he des Textcontainers zur\u00fcck, falls vorhanden\\n        const {height} = textContainer.getBoundingClientRect();\\n        return height ? height : this.getEditorHeight();\\n      } else {\\n        // Gibt die H\u00f6he des Editors zur\u00fcck, wenn kein Textcontainer vorhanden ist\\n        return this.getEditorHeight();\\n      }\\n    } else {\\n      // Gibt die H\u00f6he des Editors zur\u00fcck, wenn der Typ weder 'markdown' noch 'text' ist\\n      return this.getEditorHeight();\\n    }\\n  } else {\\n    // Gibt die H\u00f6he des Editors zur\u00fcck, wenn das Element bearbeitbar ist\\n    return this.getEditorHeight()\\n  }\\n}\\n```\",\"state\":\"success\",\"split_size\":[67.77946302348343,32.22053697651658],\"auto_size\":true,\"vector_store_file\":\"\",\"vector_store_file_type\":\"\"},\"edge_connections\":[{\"id\":\"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f\",\"connector\":\"prompt-input\"},{\"id\":\"3caa4f68-cd8c-4fdf-a8fb-12f5f932e451\",\"connector\":\"context-input\"},{\"id\":\"964edc54-e836-4f88-991a-e84fed2b5c19\",\"connector\":\"prompt-output\"},{\"id\":\"8c41d7ac-29be-4f1b-b842-139a005708dd\",\"connector\":\"prompt-context-output\"}],\"type\":\"prompt-note\",\"position\":{\"x\":840,\"y\":210},\"size\":{\"width\":700,\"height\":510},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"adb7abeb-12cb-41df-9fc1-a0fc5208aa65\",\"title\":\"/Workflow Ideas/workflows/toy data/code.txt\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"/Workflow Ideas/workflows/toy data/code.txt\",\"vector_store_file_type\":\"txt\",\"state\":\"success\",\"split_size\":[],\"auto_size\":true},\"edge_connections\":[{\"id\":\"3caa4f68-cd8c-4fdf-a8fb-12f5f932e451\",\"connector\":\"right\"}],\"type\":\"vectorstore-note\",\"position\":{\"x\":840,\"y\":60},\"size\":{\"width\":280,\"height\":120},\"color\":\"note-color-5\",\"attachments\":{}},{\"id\":\"74974f10-3f00-4439-ab26-f2a4667d6546\",\"title\":\"Chatgpt 4 (Focused)\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"chat-gpt-40\",\"system_setup\":\"Du erh\u00e4lst Halerium Board Templates im json format. Hilf dem User, die Templates zu verwenden.\\n\\nDas Template befindet sich bereits in Halerium.\\n\\nDu bist in einer Chatkarte auf diesem Template.\\n\\nHalerium Boards beinhalten \\\"Karten\\\" (json: \\\"nodes\\\"), zwischen denen es Verbindungen (json: \\\"edges\\\") gibt. Die Richtung einer Verbindung gibt den Informationsfluss an.\\n\\nBeispiel:\\nKarte A und Karte B sind miteinander in Richtung A->B verbunden. Karte B hat also Zugriff auf den Inhalt von Karte A.\\n\\nEs gibt vier verschiedene Kartentypen:\\n1. \\\"note\\\": Eine Notizkarte. Diese kann entweder Kontext bereitstellen (als Karte A fungieren), oder als Output verwendet werden (als Karte B fungieren)\\n2. \\\"assistant-setup-note\\\": Eine \\\"Bot-Setup\\\" Karte, in der ein Bot ausgew\u00e4hlt (\\\"assistent_type\\\") und personalisiert (\\\"system_setup\\\") werden kann\\n3. \\\"prompt-note\\\": Eine \\\"Chatkarte\\\", \u00fcber die der User mit dem Bot kommunizieren kann und ihm Anweisungen geben kann.\\n4. \\\"vectorstore-note\\\": Diese Karte repr\u00e4sentiert eine Datei, die per Rechtsklick -> \\\"Add to board\\\" bereitgestellt wurde. Sie kann mit einer Chatkarte verbunden weren und stellt dieser so den Inhalt der Datei zur Verf\u00fcgung.\\n\\nAntworte immer in der Sprache des Users.\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"auto_size\":false},\"edge_connections\":[{\"id\":\"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510\",\"connector\":\"prompt-output\"}],\"type\":\"assistant-setup-note\",\"position\":{\"x\":610,\"y\":-850},\"size\":{\"width\":280,\"height\":180},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"acc59379-f8d3-40fd-bcc3-4aea7ff856db\",\"title\":\"\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"Wie verwende ich dieses Template?\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"success\",\"split_size\":[10.571303199189348,89.42869680081066],\"auto_size\":false},\"edge_connections\":[{\"id\":\"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510\",\"connector\":\"prompt-input\"},{\"id\":\"2854b470-56f7-4518-aebc-3fe40eb7bca3\",\"connector\":\"context-input\"}],\"type\":\"prompt-note\",\"position\":{\"x\":910,\"y\":-850},\"size\":{\"width\":560,\"height\":550},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"f72d930c-9c79-40c1-8a9f-40312ce65a15\",\"title\":\"\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"Schreibe die Dokumentation\",\"prompt_output\":\"# Dokumentation f\u00fcr die Funktion getRenderedSize\\n\\n## Beschreibung\\nDie Funktion `getRenderedSize` gibt die gerenderte Gr\u00f6\u00dfe eines Elements zur\u00fcck. Sie berechnet die H\u00f6he des Elements, abh\u00e4ngig davon, ob das Element bearbeitbar ist und welchen Typ es hat.\\n\\n## Installation\\n[Bitte ausf\u00fcllen]\\n\\n## Beispiel\\n```javascript\\nconst size = element.getRenderedSize();\\nconsole.log(size);\\n```\\n\\n## API Dokumentation\\n\\n### Parameter\\nDie Funktion `getRenderedSize` nimmt keine Parameter an.\\n\\n### R\u00fcckgabe\\nDie Funktion gibt die H\u00f6he des gerenderten Elements oder die H\u00f6he des Editors als Zahl zur\u00fcck.\\n\\n## Weitere Informationen\\n\\n### Lizenzinformationen\\n[Bitte ausf\u00fcllen]\\n\\n### Kontakt\\nF\u00fcr weitere Fragen oder Anregungen k\u00f6nnen Sie uns unter [Bitte E-Mail-Adresse einf\u00fcgen] erreichen.\\n\\n### Versionsverlauf\\n- Version 1.0: Erste Implementierung der Funktion `getRenderedSize`.\\n\\n[Bitte f\u00fcgen Sie hier alle wichtigen \u00c4nderungen in den verschiedenen Versionen ein.]\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"success\",\"split_size\":[17.01990052598744,82.98009947401256],\"auto_size\":true},\"edge_connections\":[{\"id\":\"964edc54-e836-4f88-991a-e84fed2b5c19\",\"connector\":\"prompt-input\"},{\"id\":\"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984\",\"connector\":\"prompt-context-output\"}],\"type\":\"prompt-note\",\"position\":{\"x\":1660,\"y\":210},\"size\":{\"width\":700,\"height\":510.00001017252606},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"9178b7fb-7a4d-46fd-b94c-a491dacb98b2\",\"title\":\"Language Setting: Deutsch\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[{\"id\":\"7a1e325f-a050-4980-b5e6-25eb5d4c7621\",\"connector\":\"right\"}],\"type\":\"note\",\"position\":{\"x\":0,\"y\":-200},\"size\":{\"width\":360,\"height\":34},\"color\":\"note-color-8\",\"attachments\":{},\"collapsed\":true,\"collapsed_size\":{\"width\":360,\"height\":34}},{\"id\":\"572940b3-42a5-42a5-8c51-d9ca0521329a\",\"title\":\"How to use this template\",\"type_specific\":{\"message\":\"\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[{\"id\":\"2854b470-56f7-4518-aebc-3fe40eb7bca3\",\"connector\":\"right\"}],\"type\":\"note\",\"position\":{\"x\":610,\"y\":-900},\"size\":{\"width\":280,\"height\":34},\"color\":\"note-color-4\",\"attachments\":{},\"collapsed\":true,\"collapsed_size\":{\"width\":280,\"height\":34}},{\"id\":\"109efb1f-b2c8-4ea3-8124-d6a6fa345970\",\"title\":\"Documentation Guidelines\",\"type_specific\":{\"message\":\"**When asked for code documentation, you will:**\\n- Write and return the code documentation in the style of a ReadMe file. It has to include at least:\\n    - Description of the function\\n    - Installation\\n    - Example\\n    - API documentation:\\n        - The function's parameters and arguments\\n        - The function's return\\n    - Further information, like:\\n        - Include licensing information\\n        - Link to your e-mail address at the end\\n        - List all the versions of the files along with the major edits you did in each version\\n- Your response has to be in {Language Setting}\\n\\nImportant: DO NOT ASSUME ANY INFORMATION. Ask the user about it or put \\\"[Please fill in]\\\" instead!\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[{\"id\":\"2196a58c-75be-4876-aaf3-538033419e16\",\"connector\":\"left\"}],\"type\":\"note\",\"position\":{\"x\":490,\"y\":-140},\"size\":{\"width\":280,\"height\":334},\"color\":\"note-color-8\",\"attachments\":{},\"collapsed\":false,\"collapsed_size\":{\"width\":280,\"height\":34}},{\"id\":\"3ebd7c47-5b08-4333-ab91-057b48ab0bb9\",\"title\":\"Code Commenting Guidelines\",\"type_specific\":{\"message\":\"**When asked for code comments, you will:**\\n- Read and understand the code\\n- Insert a docstring\\n- Only comment code that is hard to understand or complex\\n- Do !*NOT*! write a comment for every line\\n- Only return the code, nothing else.\\n- Your response has to be in {Language Setting}\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\",\"split_size\":[],\"auto_size\":false},\"edge_connections\":[{\"id\":\"d1995098-1f2c-46b9-909b-4be13307e591\",\"connector\":\"right\"}],\"type\":\"note\",\"position\":{\"x\":0,\"y\":-150},\"size\":{\"width\":280,\"height\":334},\"color\":\"note-color-8\",\"attachments\":{},\"collapsed\":false,\"collapsed_size\":{\"width\":280,\"height\":34}},{\"id\":\"61740880-ddbd-4998-9408-39487279a4aa\",\"title\":\"Dokumentation\",\"type_specific\":{\"message\":\"# Dokumentation f\u00fcr die Funktion getRenderedSize\\n\\n## Beschreibung\\nDie Funktion `getRenderedSize` gibt die gerenderte Gr\u00f6\u00dfe eines Elements zur\u00fcck. Sie berechnet die H\u00f6he des Elements, abh\u00e4ngig davon, ob das Element bearbeitbar ist und welchen Typ es hat.\\n\\n## Installation\\n[Bitte ausf\u00fcllen]\\n\\n## Beispiel\\n```javascript\\nconst size = element.getRenderedSize();\\nconsole.log(size);\\n```\\n\\n## API Dokumentation\\n\\n### Parameter\\nDie Funktion `getRenderedSize` nimmt keine Parameter an.\\n\\n### R\u00fcckgabe\\nDie Funktion gibt die H\u00f6he des gerenderten Elements oder die H\u00f6he des Editors als Zahl zur\u00fcck.\\n\\n## Weitere Informationen\\n\\n### Lizenzinformationen\\n[Bitte ausf\u00fcllen]\\n\\n### Kontakt\\nF\u00fcr weitere Fragen oder Anregungen k\u00f6nnen Sie uns unter [Bitte E-Mail-Adresse einf\u00fcgen] erreichen.\\n\\n### Versionsverlauf\\n- Version 1.0: Erste Implementierung der Funktion `getRenderedSize`.\\n\\n[Bitte f\u00fcgen Sie hier alle wichtigen \u00c4nderungen in den verschiedenen Versionen ein.]\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\"},\"edge_connections\":[{\"id\":\"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984\",\"connector\":\"left\"}],\"type\":\"note\",\"position\":{\"x\":2040,\"y\":740},\"size\":{\"width\":700,\"height\":700},\"color\":\"note-color-3\",\"attachments\":{}},{\"id\":\"6d5d7746-1952-4656-95d2-6ebcdb76f509\",\"title\":\"Kommentierter Code\",\"type_specific\":{\"message\":\"```javascript\\n/**\\n * Diese Funktion gibt die gerenderte Gr\u00f6\u00dfe zur\u00fcck.\\n * Wenn das Element nicht bearbeitbar ist, wird die H\u00f6he des Elements berechnet und zur\u00fcckgegeben, abh\u00e4ngig vom Typ des Elements.\\n * Wenn das Element bearbeitbar ist, wird die H\u00f6he des Editors zur\u00fcckgegeben.\\n *\\n * @returns {number} Die H\u00f6he des gerenderten Elements oder die H\u00f6he des Editors\\n */\\npublic getRenderedSize(): number {\\n  if (!this.editable) {\\n    if (this.type === 'markdown' && this.ngxMarkdown) {\\n      // Berechnet und gibt die H\u00f6he des Markdown-Elements zur\u00fcck\\n      const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\\n      return height;\\n    } else if (this.type === 'text') {\\n      // Sucht den Textcontainer im Element\\n      const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\\n      if (textContainer) {\\n        // Berechnet und gibt die H\u00f6he des Textcontainers zur\u00fcck, falls vorhanden\\n        const {height} = textContainer.getBoundingClientRect();\\n        return height ? height : this.getEditorHeight();\\n      } else {\\n        // Gibt die H\u00f6he des Editors zur\u00fcck, wenn kein Textcontainer vorhanden ist\\n        return this.getEditorHeight();\\n      }\\n    } else {\\n      // Gibt die H\u00f6he des Editors zur\u00fcck, wenn der Typ weder 'markdown' noch 'text' ist\\n      return this.getEditorHeight();\\n    }\\n  } else {\\n    // Gibt die H\u00f6he des Editors zur\u00fcck, wenn das Element bearbeitbar ist\\n    return this.getEditorHeight()\\n  }\\n}\\n```\",\"assistant_type\":\"\",\"system_setup\":\"\",\"prompt_input\":\"\",\"prompt_output\":\"\",\"vector_store_file\":\"\",\"vector_store_file_type\":\"\",\"state\":\"initial\"},\"edge_connections\":[{\"id\":\"8c41d7ac-29be-4f1b-b842-139a005708dd\",\"connector\":\"left\"}],\"type\":\"note\",\"position\":{\"x\":1220,\"y\":740},\"size\":{\"width\":640,\"height\":700},\"color\":\"note-color-3\",\"attachments\":{}}],\"edges\":[{\"id\":\"ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f\",\"type\":\"solid_line\",\"node_connections\":[\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\",\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\"],\"type_specific\":{\"annotation\":\"\",\"preventOutputCopy\":false}},{\"id\":\"3caa4f68-cd8c-4fdf-a8fb-12f5f932e451\",\"type\":\"solid_arrow\",\"node_connections\":[\"adb7abeb-12cb-41df-9fc1-a0fc5208aa65\",\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510\",\"type\":\"solid_line\",\"node_connections\":[\"74974f10-3f00-4439-ab26-f2a4667d6546\",\"acc59379-f8d3-40fd-bcc3-4aea7ff856db\"],\"type_specific\":{\"annotation\":\"\",\"preventOutputCopy\":false}},{\"id\":\"7a1e325f-a050-4980-b5e6-25eb5d4c7621\",\"type\":\"solid_arrow\",\"node_connections\":[\"9178b7fb-7a4d-46fd-b94c-a491dacb98b2\",\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"2854b470-56f7-4518-aebc-3fe40eb7bca3\",\"type\":\"solid_arrow\",\"node_connections\":[\"572940b3-42a5-42a5-8c51-d9ca0521329a\",\"acc59379-f8d3-40fd-bcc3-4aea7ff856db\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"964edc54-e836-4f88-991a-e84fed2b5c19\",\"type\":\"solid_line\",\"node_connections\":[\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\",\"f72d930c-9c79-40c1-8a9f-40312ce65a15\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"d1995098-1f2c-46b9-909b-4be13307e591\",\"type\":\"solid_arrow\",\"node_connections\":[\"3ebd7c47-5b08-4333-ab91-057b48ab0bb9\",\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"2196a58c-75be-4876-aaf3-538033419e16\",\"type\":\"solid_arrow\",\"node_connections\":[\"109efb1f-b2c8-4ea3-8124-d6a6fa345970\",\"427995ae-891d-48f5-aabe-eb2d3c2d31cc\"],\"type_specific\":{\"annotation\":\"\"}},{\"id\":\"965f7cf8-f7fe-45ff-8a63-95ea4a6ae984\",\"type\":\"solid_arrow\",\"node_connections\":[\"f72d930c-9c79-40c1-8a9f-40312ce65a15\",\"61740880-ddbd-4998-9408-39487279a4aa\"],\"type_specific\":{\"annotation\":\"\",\"preventOutputCopy\":false}},{\"id\":\"8c41d7ac-29be-4f1b-b842-139a005708dd\",\"type\":\"solid_arrow\",\"node_connections\":[\"6e8af35d-4b31-4cf2-90a7-147807b4bed2\",\"6d5d7746-1952-4656-95d2-6ebcdb76f509\"],\"type_specific\":{\"annotation\":\"\",\"preventOutputCopy\":false}}]}",
+"color": "note-color-4",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "109efb1f-b2c8-4ea3-8124-d6a6fa345970",
+"type": "note",
+"position": {
+"x": 510,
+"y": -140
+},
+"size": {
+"width": 280,
+"height": 334
+},
+"type_specific": {
+"title": "Documentation Guidelines",
+"message": "**When asked for code documentation, you will:**\n- Write and return the code documentation in the style of a ReadMe file. It has to include at least:\n    - Description of the function\n    - Installation\n    - Example\n    - API documentation:\n        - The function's parameters and arguments\n        - The function's return\n    - Further information, like:\n        - Include licensing information\n        - Link to your e-mail address at the end\n        - List all the versions of the files along with the major edits you did in each version\n- Your response has to be in {Language Setting}\n\nImportant: DO NOT ASSUME ANY INFORMATION. Ask the user about it or put \"[Please fill in]\" instead!",
+"color": "note-color-8",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "3ebd7c47-5b08-4333-ab91-057b48ab0bb9",
+"type": "note",
+"position": {
+"x": 0,
+"y": -150
+},
+"size": {
+"width": 280,
+"height": 334
+},
+"type_specific": {
+"title": "Code Commenting Guidelines",
+"message": "**When asked for code comments, you will:**\n- Read and understand the code\n- Insert a docstring\n- Only comment code that is hard to understand or complex\n- Do !*NOT*! write a comment for every line\n- Only return the code, nothing else.\n- Your response has to be in {Language Setting}",
+"color": "note-color-8",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "61740880-ddbd-4998-9408-39487279a4aa",
+"type": "note",
+"position": {
+"x": 2040,
+"y": 740
+},
+"size": {
+"width": 700,
+"height": 700
+},
+"type_specific": {
+"title": "Dokumentation",
+"message": "# Dokumentation f\u00fcr die Funktion getRenderedSize\n\n## Beschreibung\nDie Funktion `getRenderedSize` gibt die gerenderte Gr\u00f6\u00dfe eines Elements zur\u00fcck. Sie berechnet die H\u00f6he des Elements, abh\u00e4ngig davon, ob das Element bearbeitbar ist und welchen Typ es hat.\n\n## Installation\n[Bitte ausf\u00fcllen]\n\n## Beispiel\n```javascript\nconst size = element.getRenderedSize();\nconsole.log(size);\n```\n\n## API Dokumentation\n\n### Parameter\nDie Funktion `getRenderedSize` nimmt keine Parameter an.\n\n### R\u00fcckgabe\nDie Funktion gibt die H\u00f6he des gerenderten Elements oder die H\u00f6he des Editors als Zahl zur\u00fcck.\n\n## Weitere Informationen\n\n### Lizenzinformationen\n[Bitte ausf\u00fcllen]\n\n### Kontakt\nF\u00fcr weitere Fragen oder Anregungen k\u00f6nnen Sie uns unter [Bitte E-Mail-Adresse einf\u00fcgen] erreichen.\n\n### Versionsverlauf\n- Version 1.0: Erste Implementierung der Funktion `getRenderedSize`.\n\n[Bitte f\u00fcgen Sie hier alle wichtigen \u00c4nderungen in den verschiedenen Versionen ein.]",
+"color": "note-color-3",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "6d5d7746-1952-4656-95d2-6ebcdb76f509",
+"type": "note",
+"position": {
+"x": 1220,
+"y": 740
+},
+"size": {
+"width": 640,
+"height": 700
+},
+"type_specific": {
+"title": "Kommentierter Code",
+"message": "```javascript\n/**\n * Diese Funktion gibt die gerenderte Gr\u00f6\u00dfe zur\u00fcck.\n * Wenn das Element nicht bearbeitbar ist, wird die H\u00f6he des Elements berechnet und zur\u00fcckgegeben, abh\u00e4ngig vom Typ des Elements.\n * Wenn das Element bearbeitbar ist, wird die H\u00f6he des Editors zur\u00fcckgegeben.\n *\n * @returns {number} Die H\u00f6he des gerenderten Elements oder die H\u00f6he des Editors\n */\npublic getRenderedSize(): number {\n  if (!this.editable) {\n    if (this.type === 'markdown' && this.ngxMarkdown) {\n      // Berechnet und gibt die H\u00f6he des Markdown-Elements zur\u00fcck\n      const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\n      return height;\n    } else if (this.type === 'text') {\n      // Sucht den Textcontainer im Element\n      const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\n      if (textContainer) {\n        // Berechnet und gibt die H\u00f6he des Textcontainers zur\u00fcck, falls vorhanden\n        const {height} = textContainer.getBoundingClientRect();\n        return height ? height : this.getEditorHeight();\n      } else {\n        // Gibt die H\u00f6he des Editors zur\u00fcck, wenn kein Textcontainer vorhanden ist\n        return this.getEditorHeight();\n      }\n    } else {\n      // Gibt die H\u00f6he des Editors zur\u00fcck, wenn der Typ weder 'markdown' noch 'text' ist\n      return this.getEditorHeight();\n    }\n  } else {\n    // Gibt die H\u00f6he des Editors zur\u00fcck, wenn das Element bearbeitbar ist\n    return this.getEditorHeight()\n  }\n}\n```",
+"color": "note-color-3",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "e9843c5e-5c4a-43cc-9481-f9beb08d9c86",
+"type": "note",
+"position": {
+"x": 1250,
+"y": -150
+},
+"size": {
+"width": 560,
+"height": 340
+},
+"type_specific": {
+"title": "Code",
+"message": "  ```typescript\n  public getRenderedSize(): number {\n    if (!this.editable) {\n      if (this.type === 'markdown' && this.ngxMarkdown) {\n        const {height}: any = this.ngxMarkdown.element.nativeElement.getBoundingClientRect();\n        return height;\n      } else if (this.type === 'text') {\n        const textContainer = this.elRef?.nativeElement.querySelector('.text-container');\n        if (textContainer) {\n          const {height} = textContainer.getBoundingClientRect();\n          return height ? height : this.getEditorHeight();\n        } else {\n          return this.getEditorHeight();\n        }\n      } else {\n        return this.getEditorHeight();\n      }\n    } else {\n      return this.getEditorHeight()\n    }\n  }\n  ```",
+"color": "note-color-3",
+"auto_size": false,
+"attachments": {}
+}
+}
+],
+"edges": [
+{
+"id": "ea6608b6-4e00-4bb4-bd0a-5d618a2afd3f",
+"type": "prompt_line",
+"connections": {
+"source": {
+"id": "427995ae-891d-48f5-aabe-eb2d3c2d31cc",
+"connector": "prompt-output"
+},
+"target": {
+"id": "6e8af35d-4b31-4cf2-90a7-147807b4bed2",
+"connector": "prompt-input"
+}
+},
+"type_specific": {}
+},
+{
+"id": "c3b8b5b9-a97b-4abb-9b9e-bd6ea57b4510",
+"type": "prompt_line",
+"connections": {
+"source": {
+"id": "74974f10-3f00-4439-ab26-f2a4667d6546",
+"connector": "prompt-output"
+},
+"target": {
+"id": "acc59379-f8d3-40fd-bcc3-4aea7ff856db",
+"connector": "prompt-input"
+}
+},
+"type_specific": {}
+},
+{
+"id": "7a1e325f-a050-4980-b5e6-25eb5d4c7621",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "9178b7fb-7a4d-46fd-b94c-a491dacb98b2",
+"connector": "note-right"
+},
+"target": {
+"id": "427995ae-891d-48f5-aabe-eb2d3c2d31cc",
+"connector": "context-input"
+}
+},
+"type_specific": {}
+},
+{
+"id": "2854b470-56f7-4518-aebc-3fe40eb7bca3",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "572940b3-42a5-42a5-8c51-d9ca0521329a",
+"connector": "note-right"
+},
+"target": {
+"id": "acc59379-f8d3-40fd-bcc3-4aea7ff856db",
+"connector": "context-input"
+}
+},
+"type_specific": {}
+},
+{
+"id": "964edc54-e836-4f88-991a-e84fed2b5c19",
+"type": "prompt_line",
+"connections": {
+"source": {
+"id": "6e8af35d-4b31-4cf2-90a7-147807b4bed2",
+"connector": "prompt-output"
+},
+"target": {
+"id": "f72d930c-9c79-40c1-8a9f-40312ce65a15",
+"connector": "prompt-input"
+}
+},
+"type_specific": {}
+},
+{
+"id": "d1995098-1f2c-46b9-909b-4be13307e591",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "3ebd7c47-5b08-4333-ab91-057b48ab0bb9",
+"connector": "note-right"
+},
+"target": {
+"id": "427995ae-891d-48f5-aabe-eb2d3c2d31cc",
+"connector": "context-input"
+}
+},
+"type_specific": {}
+},
+{
+"id": "2196a58c-75be-4876-aaf3-538033419e16",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "109efb1f-b2c8-4ea3-8124-d6a6fa345970",
+"connector": "note-left"
+},
+"target": {
+"id": "427995ae-891d-48f5-aabe-eb2d3c2d31cc",
+"connector": "context-input"
+}
+},
+"type_specific": {}
+},
+{
+"id": "965f7cf8-f7fe-45ff-8a63-95ea4a6ae984",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "f72d930c-9c79-40c1-8a9f-40312ce65a15",
+"connector": "context-output"
+},
+"target": {
+"id": "61740880-ddbd-4998-9408-39487279a4aa",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "8c41d7ac-29be-4f1b-b842-139a005708dd",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "6e8af35d-4b31-4cf2-90a7-147807b4bed2",
+"connector": "context-output"
+},
+"target": {
+"id": "6d5d7746-1952-4656-95d2-6ebcdb76f509",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "fbd8b9c5-c404-4141-b562-1ba9155d61a8",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "e9843c5e-5c4a-43cc-9481-f9beb08d9c86",
+"connector": "note-left"
+},
+"target": {
+"id": "6e8af35d-4b31-4cf2-90a7-147807b4bed2",
+"connector": "context-input"
+}
+},
+"type_specific": {}
+}
+]
+}

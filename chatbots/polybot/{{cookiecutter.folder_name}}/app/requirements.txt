@@ -1,7 +1,6 @@
-asyncio
-fastapi
-httpx
-langchain
-python-multipart
-uvicorn
-websockets
+asyncio==3.4.3
+fastapi==0.108.0
+httpx==0.26.0
+python-multipart==0.0.6
+uvicorn==0.25.0
+websockets==12.0
