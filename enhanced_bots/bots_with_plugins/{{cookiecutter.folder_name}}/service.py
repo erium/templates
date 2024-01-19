@@ -57,7 +57,7 @@ def stop_kernel():
 def execute_kernel_command():
     """
     Executes a command in a running IPython kernel.
-    Always include a return statement in your code!
+    You get the text output of the code. So best include a print or display command in the end.
     Do not use this to execute bash commands or install python packages or install packages with apt!
 
     Args:
