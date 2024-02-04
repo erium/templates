@@ -1,12 +1,25 @@
+$bgcolor_body: #e3e6fd;
+$halerium-core-blue: #4a5ff0;
+
 @font-face {
-  font-family: "IntroCond-RegularAlt";
+  font-family: 'IntroCond-RegularAlt';
   src: url(../font/ic_regular_alt.otf);
 }
+
 @font-face {
-  font-family: "IntroCond-SemiBoldAlt";
+  font-family: 'IntroCond-SemiBoldAlt';
   src: url(../font/ic_semibold_alt.otf);
 }
+
 /* ### responsive design mixin ### */
+@mixin breakpoint($point) {
+  @if $point ==mobileonly {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+}
+
 :root {
   font-size: 14px;
 }
@@ -25,12 +38,12 @@ body {
   position: relative;
   font-family: IntroCond-RegularAlt;
   margin: 0;
-  background-color: #e3e6fd;
+  background-color: $bgcolor_body;
 }
 
 a {
   text-decoration: none;
-  color: #4a5ff0;
+  color: $halerium-core-blue
 }
 
 .flex {
@@ -48,9 +61,10 @@ a {
 
 .row {
   flex-direction: row;
-}
-@media (max-width: 600px) {
-  .row .row {
-    flex-direction: column;
+
+  @include breakpoint(mobileonly) {
+    .row {
+      flex-direction: column;
+    }
   }
-}/*# sourceMappingURL=main.css.map */
+}

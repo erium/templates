@@ -1,15 +1,32 @@
+$bgcolor_body: #e3e6fd;
+$halerium-core-black: #000000;
+$halerium-core-white: #ffffff;
+$halerium-core-blue: #4a5ff0;
+$halerium-light-4: #a8b2f7;
+
 /* ### responsive design mixin ### */
+@mixin breakpoint($point) {
+  @if $point ==mobileonly {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+}
+
 @font-face {
-  font-family: "IntroCond-RegularAlt";
+  font-family: 'IntroCond-RegularAlt';
   src: url(../font/ic_regular_alt.otf);
 }
+
 @font-face {
-  font-family: "IntroCond-SemiBoldAlt";
+  font-family: 'IntroCond-SemiBoldAlt';
   src: url(../font/ic_semibold_alt.otf);
 }
+
 .container {
   justify-content: space-between;
 }
+
 
 .logo {
   width: 230px;
@@ -24,7 +41,6 @@
   line-height: 20px;
   text-align: center;
   letter-spacing: 1.75px;
-  width: -moz-fit-content;
   width: fit-content;
   max-width: 300px;
   height: 40px;
@@ -39,24 +55,24 @@
   .intro-wide {
     display: none;
   }
+
   .intro-narrow {
     display: inline-block;
     text-align: justify;
   }
 }
+
 .intro-text {
   font-size: 14px;
   line-height: 20px;
   text-align: center;
   letter-spacing: 1.75px;
   max-width: 540px;
-  height: -moz-fit-content;
   height: fit-content;
   margin: 32px 32px 48px 32px;
   word-wrap: normal;
-}
-@media (max-width: 600px) {
-  .intro-text {
+
+  @include breakpoint(mobileonly) {
     margin: 8px 8px 12px 8px;
   }
 }
@@ -67,14 +83,13 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   margin: 0;
   padding: 0;
   font-size: 14px;
   line-height: 22px;
   letter-spacing: 1.75px;
-  color: #a8b2f7;
+  color: $halerium-light-4;
   text-align: center;
 }
 
@@ -87,7 +102,6 @@
   line-height: 22px;
   letter-spacing: 1.75px;
   text-align: center;
-  width: -moz-fit-content;
   width: fit-content;
   height: 22px;
   margin: 0 -16px;
@@ -99,7 +113,7 @@ select {
   display: block;
   font-family: IntroCond-SemiBoldAlt;
   font-size: 14px;
-  color: #a8b2f7;
+  color: $halerium-light-4;
   letter-spacing: 1.75px;
   line-height: 22px;
   width: 300px;
@@ -108,28 +122,20 @@ select {
   padding: 10px 16px;
   border-radius: 9px;
   border: none;
-  background-color: #ffffff;
-}
-
-input::-moz-placeholder, select::-moz-placeholder {
-  font-size: 14px;
-  font-family: IntroCond-SemiBoldAlt;
-  color: #a8b2f7;
-  letter-spacing: 1.75px;
-  line-height: 22px;
+  background-color: $halerium-core-white;
 }
 
 input::placeholder,
 select::placeholder {
   font-size: 14px;
   font-family: IntroCond-SemiBoldAlt;
-  color: #a8b2f7;
+  color: $halerium-light-4;
   letter-spacing: 1.75px;
   line-height: 22px;
 }
 
 input:focus {
-  color: #000000;
+  color: $halerium-core-black;
 }
 
 .btn-send {
@@ -140,16 +146,16 @@ input:focus {
   width: 300px;
   height: 48px;
   margin: 0;
-  padding: 3.5px 0 0 0;
+  padding: calc(14px/4) 0 0 0;
   border-radius: 9px;
   border: none;
-  color: #ffffff;
+  color: $halerium-core-white;
   font-family: IntroCond-SemiBoldAlt;
-  background-color: #4a5ff0;
+  background-color: $halerium-core-blue;
 }
 
 .btn-send:active {
-  color: #ffffff;
+  color: $halerium-core-white;
 }
 
 .footer {
@@ -158,50 +164,47 @@ input:focus {
   bottom: 0;
   margin: 0;
   padding: 0;
-  height: -moz-fit-content;
   height: fit-content;
   width: 100%;
   max-width: 100%;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 1.5px;
-}
-.footer p {
-  margin: 0;
-  padding: 32px;
-}
-@media (max-width: 600px) {
-  .footer p {
-    padding: 4px 32px;
+
+  p {
+    margin: 0;
+    padding: 32px;
+
+    @include breakpoint(mobileonly) {
+      padding: 4px 32px;
+    }
+  }
+
+  .left {
+    color: $halerium-core-black;
+    text-align: left;
+    width: 480px;
+
+    @include breakpoint(mobileonly) {
+      width: 100%;
+      text-align: justify;
+    }
+  }
+
+  .right {
+    align-self: flex-end;
+    text-align: right;
+    height: fit-content;
+    width: fit-content;
+
+    a {
+      text-decoration: None;
+      color: $halerium-core-blue;
+    }
+
+    @include breakpoint(mobileonly) {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
-.footer .left {
-  color: #000000;
-  text-align: left;
-  width: 480px;
-}
-@media (max-width: 600px) {
-  .footer .left {
-    width: 100%;
-    text-align: justify;
-  }
-}
-.footer .right {
-  align-self: flex-end;
-  text-align: right;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.footer .right a {
-  -webkit-text-decoration: None;
-          text-decoration: None;
-  color: #4a5ff0;
-}
-@media (max-width: 600px) {
-  .footer .right {
-    width: 100%;
-    text-align: center;
-  }
-}/*# sourceMappingURL=login.css.map */

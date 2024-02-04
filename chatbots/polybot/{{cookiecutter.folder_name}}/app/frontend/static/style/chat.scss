@@ -1,0 +1,492 @@
+$halerium-core-black: #000000;
+$halerium-core-white: #ffffff;
+$halerium-core-blue: #4a5ff0;
+$halerium-light-1: #f0f2fe;
+$halerium-light-4: #a8b2f7;
+$halerium-dark-4: #5a5875;
+
+/* ### responsive design mixin ### */
+@mixin breakpoint($point) {
+  @if $point ==desktop {
+    @media (min-width: 1201px) {
+      @content;
+    }
+  }
+
+  @else if $point ==laptop {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+
+  @else if $point ==mobile {
+    @media (max-width: 578px) {
+      @content;
+    }
+  }
+}
+
+/* hide scroll bar */
+
+/* webkit based browsers */
+.chat::-webkit-scrollbar,
+.container::-webkit-scrollbar,
+.app::-webkit-scrollbar,
+ul::-webkit-scrollbar {
+  display: none;
+}
+
+/* good old IE */
+.chat,
+.container,
+.app,
+ul {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@font-face {
+  font-family: 'IntroCond-RegularAlt';
+  src: url(../font/ic_regular_alt.otf);
+}
+
+@font-face {
+  font-family: 'IntroCond-SemiBoldAlt';
+  src: url(../font/ic_semibold_alt.otf);
+}
+
+.container {
+  justify-content: flex-start;
+  width: 48vw;
+  height: inherit;
+  margin: 0;
+  padding: 0;
+
+  @include breakpoint(laptop) {
+    width: 577px;
+  }
+
+  @include breakpoint(mobile) {
+    width: 100vw;
+    padding: 8px;
+  }
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+}
+
+.logo {
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 151px;
+  height: 33px;
+  background-image: url(../img/logo_chat.svg);
+  background-size: cover;
+  margin: 28px 0 27px 0;
+
+  @include breakpoint(mobile) {
+    width: 110px;
+    height: 24px;
+    margin: 7px 0 10px 0;
+  }
+}
+
+.logout {
+  margin: 0 10px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: $halerium-light-1;
+  border-radius: 16px;
+  padding: 16px 0 0 0;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+}
+
+.chat-messages-container {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  border-radius: 9px;
+  overflow-y: scroll;
+
+  ul {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0 20px;
+
+    @include breakpoint(mobile) {
+      padding: 0 10px;
+    }
+  }
+
+  li {
+    overflow-wrap: anywhere;
+    color: #000000;
+    padding: 16px;
+    border-radius: 9px;
+    max-width: 75%;
+
+    @include breakpoint(mobile) {
+      max-width: 95%;
+    }
+
+    pre {
+      position: relative;
+      white-space: pre-wrap;
+      background-color: rgb(40, 44, 52);
+      padding: 42px 9px 9px 9px;
+      border-radius: 9px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .msg-assistant {
+    align-self: flex-start;
+    background-color: $halerium-core-white;
+    color: $halerium-core-black;
+    margin: 0 0 16px 0;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    white-space: pre-line; // makes sure \n is interpreted as linebreak
+
+    pre .copy-btn,
+    pre .lang-lbl {
+      position: absolute;
+      top: 9px;
+      height: fit-content;
+      width: fit-content;
+      padding: 9px;
+      background-color: $halerium-core-blue;
+      color: $halerium-core-white;
+      font-family: IntroCond-RegularAlt;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      border-radius: 9px;
+      border: none;
+    }
+
+    pre .copy-btn {
+      position: absolute;
+      right: 9px;
+      cursor: pointer;
+    }
+
+    pre .lang-lbl {
+      position: absolute;
+      left: 9px;
+    }
+  }
+
+  .msg-user {
+    align-self: flex-end;
+    background-color: $halerium-core-blue;
+    color: $halerium-core-white;
+    margin: 0 0 16px 0;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    white-space: pre-line; // makes sure \n is interpreted as linebreak
+  }
+
+  .sender-assistant,
+  .sender-user {
+    font-size: 10px;
+    line-height: 22px;
+    color: $halerium-dark-4;
+    padding: 0;
+
+    .name {
+      font-family: IntroCond-SemiBoldAlt;
+    }
+
+    .timestamp {
+      font-family: IntroCond-RegularAlt;
+    }
+  }
+
+  .sender-assistant {
+    align-self: flex-start;
+  }
+
+  .sender-user {
+    align-self: flex-end;
+  }
+}
+
+.user-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  bottom: 0;
+  width: calc(100% - (20px * 2)); // chat width - 2 * 20 margin
+  max-height: 25vh;
+  margin: 8px 20px 20px 20px;
+  border-radius: 9px;
+  background-color: $halerium-core-white;
+
+  @include breakpoint(mobile) {
+    width: 100%;
+    margin: 8px 0 0 0;
+  }
+
+  .user-input-overlay {
+    position: absolute;
+    display: none;
+    z-index: 99;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: calc(48vw - (20px * 2)); // chat width - 2 * 20 margin
+    height: inherit;
+    padding: 21px calc(16px + 48px + 48px + 16px) 21px 16px; // right padding: 16px plus 2x button width + space between buttons
+    color: $halerium-core-white;
+    background-color: $halerium-light-4;
+    font-family: IntroCond-RegularAlt;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 1.5px;
+    border-radius: 9px;
+    resize: none;
+    overflow: auto;
+
+    @include breakpoint(laptop) {
+      width: calc(577px - (20px * 2)); // chat width - 2 * 20 margin
+      padding: 21px calc(16px + 48px + 48px + 16px) 21px 16px; // right padding: 16px plus 2x button width + space between buttons
+    }
+
+    @include breakpoint(mobile) {
+      width: calc(100vw - (8px * 2)); // chat width - 2 * 8 padding
+      padding: 21px calc(8px + 24px + 24px + 8px) 21px 8px; // right padding: 8px plus 2x button width + space between buttons
+    }
+  }
+
+  .user-input {
+    flex: 1;
+    background-color: $halerium-core-white;
+    z-index: 1;
+    font-family: IntroCond-RegularAlt;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 1.5px;
+    min-height: 64px;
+    max-height: 25vh;
+    width: 100%;
+    padding: 21px 16px; // right padding: 16px plus 2x button width + space between buttons
+    border-radius: 9px;
+    overflow: auto;
+    border: none;
+    resize: none;
+
+    @include breakpoint(mobile) {
+      padding: 21px 8px; // right padding: 8px plus 2x button width + space between buttons
+    }
+  }
+
+  .user-input::placeholder {
+    font-family: IntroCond-SemiBoldAlt;
+    font-size: 14px;
+    color: $halerium-light-4;
+    letter-spacing: 1.75px;
+    line-height: 22px;
+  }
+
+  .user-input:focus {
+    color: $halerium-core-black;
+    outline: none;
+  }
+
+  .buttons {
+    display: flex;
+    z-index: 100;
+    justify-content: flex-end;
+    align-items: space-between;
+    padding: 8px;
+
+    @include breakpoint(mobile) {
+      flex-direction: column;
+      padding: 6px;
+
+    }
+  }
+
+  .send {
+    position: inherit;
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+    margin-right: 8px;
+    background-image: url(../img/icon-send.svg);
+    background-size: cover;
+    background-color: $halerium-core-blue;
+    border-radius: 9px;
+    border: none;
+
+    @include breakpoint(mobile) {
+      margin-right: 0;
+      margin-bottom: 4px;
+      height: 28px;
+      width: 28px;
+    }
+  }
+
+  .send:disabled {
+    background-color: $halerium-light-4;
+  }
+
+  .record {
+    position: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+    // background-image: url(../img/icon-record.svg);
+    background-size: cover;
+    background-color: $halerium-core-blue;
+    border-radius: 9px;
+    border: none;
+
+    img {
+      width: 32px;
+      height: 32px;
+    }
+
+    @include breakpoint(mobile) {
+      margin-bottom: -4px;
+      height: 28px;
+      width: 28px;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .record:disabled {
+    background-color: $halerium-light-4;
+  }
+}
+
+.active-recording {
+  background: linear-gradient(314deg, #46f704, #1eabe1);
+  background-size: 400% 400%;
+
+  -webkit-animation: recording-anim 2s ease infinite;
+  -moz-animation: recording-anim 2s ease infinite;
+  animation: recording-anim 2s ease infinite;
+}
+
+.loading-dots {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 5px;
+  background-color: $halerium-core-blue;
+  color: $halerium-core-blue;
+  animation: loading-dots 1s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+
+.loading-dots::before,
+.loading-dots::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.loading-dots::before {
+  left: -10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 5px;
+  background-color: $halerium-core-blue;
+  color: $halerium-core-blue;
+  animation: loading-dots 1s infinite alternate;
+  animation-delay: 0s;
+}
+
+.loading-dots::after {
+  left: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 5px;
+  background-color: $halerium-core-blue;
+  color: $halerium-core-blue;
+  animation: loading-dots 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes loading-dots {
+  0% {
+    background-color: $halerium-core-blue;
+  }
+
+  50%,
+  100% {
+    background-color: rgba(152, 128, 255, 0.2);
+  }
+}
+
+@-webkit-keyframes recording-anim {
+  0% {
+    background-position: 4% 0%
+  }
+
+  50% {
+    background-position: 97% 100%
+  }
+
+  100% {
+    background-position: 4% 0%
+  }
+}
+
+@-moz-keyframes recording-anim {
+  0% {
+    background-position: 4% 0%
+  }
+
+  50% {
+    background-position: 97% 100%
+  }
+
+  100% {
+    background-position: 4% 0%
+  }
+}
+
+@keyframes recording-anim {
+  0% {
+    background-position: 4% 0%
+  }
+
+  50% {
+    background-position: 97% 100%
+  }
+
+  100% {
+    background-position: 4% 0%
+  }
+}

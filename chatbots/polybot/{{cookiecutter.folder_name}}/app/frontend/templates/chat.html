@@ -2,47 +2,55 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>{{ botname }}</title>
-  <meta name="description" content="" />
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-  <link rel="shortcut icon" href="{{ url_for('static', path='/img/hal.png')}}" />
-  <link href="{{ url_for('static', path='/style/main.css') }}" rel="stylesheet" />
-  <link href="{{ url_for('static', path='/style/chat.css') }}" rel="stylesheet" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{ botname }}</title>
+    <meta name="description" content="" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <link rel="shortcut icon" href="{{ url_for('static', path='/img/hal.png')}}" />
+    <link href="{{ url_for('static', path='/style/main.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', path='/style/chat.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 
 <body>
-  <div class="flex col">
-    <div class="flex col container">
-      <div class="logo"></div>
-      <div class="app" id="app">
-        <div class="chat" id="chat">
-          <ul id="messages">
-            <li class="sender-assistant"><span class="name">{{ botname }}</span> <span class="timestamp" id="fmt"></span></li>
-            <li class="msg-assistant">{{ greeting }}</li>
-          </ul>
+    <div class="flex col">
+        <div class="flex col container">
+            <div class="top">
+                <div class="logo"></div>
+                <div class="logout">
+                    <p id="go-to-login"><a href="{{ app_url }}" target="_self">Restart</a></p>
+                </div>
+            </div>
+            <div class="app" id="app">
+                <div class="chat-messages-container" id="chat">
+                    <ul id="messages">
+                    </ul>
+                </div>
+                <div class="user-input-container" id="user-input-container">
+                    <textarea class="user-input" id="user-input" rows="1" placeholder="Nachricht senden"></textarea>
+                    <div class="user-input-overlay" id="user-input-overlay"></div>
+                    <div class="buttons">
+                        <button id="send" class="send"></button>
+                        <button id="record" class="record">
+                            <img src="{{ url_for('static', path='img/icon-record.png')}}">
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="user-interaction-container" id="user-interaction-container">
-          <div class="user-input-container" id="user-input-container">
-            <textarea class="user-input" id="user-input" rows="1" placeholder="Nachricht senden"></textarea>
-          </div>
-          <button id="send" class="send"></button>
-          <input type="hidden" id="username" value="{{ username }}" />
-          <input type="hidden" id="wsurl" value="{{ ws_url }}" />
-          <input type="hidden" id="appurl" value="{{ app_url }}" />
-          <input type="hidden" id="botname" value="{{ botname }}" />
-        </div>
-      </div>
-      <span style="text-align: center;">
-        <p id="go-to-login"><a href="{{ app_url }}" target="_self">Logout</a></p>
-      </span>
     </div>
-  </div>
+    <input type="hidden" id="username" value="{{ username }}" />
+    <input type="hidden" id="wsTextUrl" value="{{ ws_text_url }}" />
+    <input type="hidden" id="wsAudioUrl" value="{{ ws_audio_url }}" />
+    <input type="hidden" id="appurl" value="{{ app_url }}" />
+    <input type="hidden" id="botname" value="{{ botname }}" />
+    <input type="hidden" id="initialPrompt" value="{{ initial_prompt }}" />
+    <input type="hidden" id="initialResponse" value="{{ initial_response }}" />
+    <input type="hidden" id="byeMessage" value="{{ bye_message }}" />
 </body>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script type="module" src="{{ url_for('static', path='js/chat.js') }}"></script>

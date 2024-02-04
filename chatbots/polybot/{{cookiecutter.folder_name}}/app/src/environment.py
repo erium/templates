@@ -1,41 +1,42 @@
+from configparser import ConfigParser
+from enum import Enum
+import logging
 import os
-from .prettyprint import prettyprint as print, MessageType as mt
+from pathlib import Path
+
+
+class EnvSection(Enum):
+    ENVIRONMENT = "environment"
 
 
 class Environment:
-    def __init__(self, args: dict = {}) -> None:
-        """
-        Initializes an instance of the Environment class.
-        """
+    logger = logging.getLogger(__name__)
 
-        # If the environment is local, use the local environment variables.
-        self.is_local = self._is_local()
+    @staticmethod
+    def get_env_params():
+        if Environment._is_local():
+            cp = ConfigParser()
+            cp.read(Path(__file__).resolve().parent / Path("../env.conf"))
+            if EnvSection.ENVIRONMENT.value in cp.sections():
+                args = {k: v for k, v in cp.items(section=EnvSection.ENVIRONMENT.value)}
+                return args
+            else:
+                Environment.logger.error(
+                    "No environment parameters found: Parameters have to be defined in env.conf for local use!"
+                )
+                return {}
 
-        print(
-            f"Environment is {'local' if self.is_local else 'Halerium'}", msg_type=mt.INFO
-        )
-
-        if not self.is_local:
-            self.base_url = self.get_base_url()
-            self.tenant = self.get_tenant()
-            self.workspace = self.get_workspace()
-            self.runner_id = self.get_runner_id()
-            self.runner_token = self.get_runner_token()
-
-        elif self.is_local and args:
-            self.base_url = args.get("base_url")
-            self.tenant = args.get("tenant")
-            self.workspace = args.get("workspace")
-            self.runner_id = args.get("runner_id")
-            self.runner_token = args.get("runner_token")
         else:
-            print(
-                "Local environment requires arguments. Please provide a dict containing\n- base_url\n- tenant\n- workspace\n- runner_id\n- runner_token",
-                msg_type=mt.ERROR,
+            return dict(
+                base_url=Environment.get_base_url(),
+                tenant=Environment.get_tenant(),
+                workspace=Environment.get_workspace(),
+                runner_id=Environment.get_runner_id(),
+                runner_token=Environment.get_runner_token(),
             )
-            raise Exception("Missing arguments for local environment.")
 
-    def _is_local(self) -> bool:
+    @staticmethod
+    def _is_local() -> bool:
         """
         Returns True if the environment is local.
 
@@ -44,19 +45,21 @@ class Environment:
         """
         return os.getenv("HALERIUM_BASE_URL") is None
 
-    def get_base_url(self) -> str:
+    @staticmethod
+    def get_base_url() -> str:
         """
         Returns the base URL for the environment.
 
         Returns:
         str: The base URL for the environment.
         """
-        if self.is_local:
+        if Environment._is_local():
             return "127.0.0.1"
         else:
             return os.getenv("HALERIUM_BASE_URL")
 
-    def get_tenant(self) -> str:
+    @staticmethod
+    def get_tenant() -> str:
         """
         Returns the tenant key for the environment.
 
@@ -65,7 +68,8 @@ class Environment:
         """
         return os.getenv("HALERIUM_TENANT_KEY")
 
-    def get_workspace(self) -> str:
+    @staticmethod
+    def get_workspace() -> str:
         """
         Returns the project ID for the environment.
 
@@ -74,7 +78,8 @@ class Environment:
         """
         return os.getenv("HALERIUM_PROJECT_ID")
 
-    def get_runner_id(self) -> str:
+    @staticmethod
+    def get_runner_id() -> str:
         """
         Returns the runner ID for the environment.
 
@@ -83,7 +88,8 @@ class Environment:
         """
         return os.getenv("HALERIUM_ID")
 
-    def get_runner_token(self) -> str:
+    @staticmethod
+    def get_runner_token() -> str:
         """
         Returns the runner token for the environment.
 
@@ -92,18 +98,40 @@ class Environment:
         """
         return os.getenv("HALERIUM_TOKEN")
 
-    def get_prompt_server_url(self) -> str:
+    @staticmethod
+    def get_models_endpoint_url() -> str:
         """
-        Returns the prompt server URL for the environment.
+        Returns the URL for the prompt server models endpoint.
 
         Returns:
-        str: The prompt server URL for the environment.
+        str: The prompt server URL for the models endpoint.
         """
-        return f"{self.base_url}/api/tenants/{self.tenant}/projects/{self.workspace}/runners/{self.runner_id}/models"
+        env_params = Environment.get_env_params()
+        base_url = env_params["base_url"]
+        tenant = env_params["tenant"]
+        workspace = env_params["workspace"]
+        runner_id = env_params["runner_id"]
+        return f"{base_url}/api/tenants/{tenant}/projects/{workspace}/runners/{runner_id}/models"
 
-    def build_prompt_server_payload(self, messages: list, model_id: str) -> dict:
+    @staticmethod
+    def get_agents_endpoint_url() -> str:
         """
-        Builds a payload for the prompt server.
+        Returns the URL for the prompt server agents endpoint.
+
+        Returns:
+            str: The prompt server URL for the agents endpoint.
+        """
+        env_params = Environment.get_env_params()
+        base_url = env_params["base_url"]
+        tenant = env_params["tenant"]
+        workspace = env_params["workspace"]
+        runner_id = env_params["runner_id"]
+        return f"{base_url}/api/tenants/{tenant}/projects/{workspace}/runners/{runner_id}/agents"
+
+    @staticmethod
+    def build_models_endpoint_payload(messages: list, model_id: str) -> dict:
+        """
+        Builds a payload for the prompt server's models endpoint.
 
         Args:
         messages (list): A list of messages to include in the payload.
@@ -112,14 +140,43 @@ class Environment:
         Returns:
         dict: The payload for the prompt server.
         """
+        env_params = Environment.get_env_params()
+        tenant = env_params["tenant"]
+        workspace = env_params["workspace"]
+        if model_id == "whisper":
+            return {
+                "model_id": model_id,
+                "body": {"audio": messages},
+                "tenant": tenant,
+                "workspace": workspace,
+            }
+
         return {
             "model_id": model_id,
             "body": {"messages": messages},
-            "tenant": self.tenant,
-            "workspace": self.workspace,
+            "tenant": tenant,
+            "workspace": workspace,
         }
 
-    def build_embedding_payload(self, text_chunks: str, model_id: str) -> dict:
+    @staticmethod
+    def build_agents_endpoint_payload(board: dict, card_id: str) -> dict:
+        """
+        Builds a payload for the prompt server's agents endpoint.
+
+        Args:
+        messages (list): A list of messages to include in the payload.
+        agent_id (str): The ID of the agent to use for the payload.
+
+        Returns:
+        dict: The payload for the prompt server.
+        """
+        return {
+            "board": board,
+            "id": card_id,
+        }
+
+    @staticmethod
+    def build_embedding_payload(text_chunks: str, model_id: str) -> dict:
         """
         Builds a payload for the prompt server.
 
@@ -130,27 +187,42 @@ class Environment:
         Returns:
         dict: The payload for the prompt server.
         """
+        env_params = Environment.get_env_params()
+        tenant = env_params["tenant"]
+        workspace = env_params["workspace"]
         return {
             "model_id": model_id,
             "body": {"text_chunks": text_chunks},
-            "tenant": self.tenant,
-            "workspace": self.workspace,
+            "tenant": tenant,
+            "workspace": workspace,
         }
 
-    def build_prompt_server_headers(self) -> dict:
+    @staticmethod
+    def build_prompt_server_headers() -> dict:
         """
-        Builds headers for the prompt server.
+        Builds headers for the prompt server (works for models and agents endpoint).
 
         Returns:
         dict: The headers for the prompt server.
         """
-        return {
-            "halerium-runner-token": self.runner_token,
-            "X-Accel-Buffering": "no"
-            }
+        env_params = Environment.get_env_params()
+        runner_token = env_params["runner_token"]
+        return {"halerium-runner-token": runner_token, "X-Accel-Buffering": "no"}
 
+    @staticmethod
+    def get_app_root_path(port: int | str) -> str:
+        """
+        Returns the root path for the app.
 
-    def get_app_url(self, port: int | str = None) -> str:
+        Returns:
+        str: The root path for the app.
+        """
+        env_params = Environment.get_env_params()
+        runner_id = env_params["runner_id"]
+        return f"/apps/{runner_id}/{str(port)}/" if not Environment._is_local() else ""
+
+    @staticmethod
+    def get_app_url(port: int | str = None) -> str:
         """
         Returns the app URL for the environment.
 
@@ -160,12 +232,16 @@ class Environment:
         Returns:
         str: The app URL for the environment.
         """
-        if not self.is_local:
-            return f'{self.base_url}/apps/{self.runner_id}{"/" + str(port) if port else "/"}'
+        env_params = Environment.get_env_params()
+        base_url = env_params["base_url"]
+        runner_id = env_params["runner_id"]
+        if not Environment._is_local():
+            return f'{base_url}/apps/{runner_id}{"/" + str(port) if port else "/"}'
         else:
             return f'127.0.0.1{":" + str(port) if port else ":8501"}'
 
-    def get_websocket_url(self, port: int | str = None) -> str:
+    @staticmethod
+    def get_websocket_url(port: int | str = None) -> str:
         """
         Returns the websocket URL for the environment.
 
@@ -175,15 +251,10 @@ class Environment:
         Returns:
         str: The websocket URL for the environment.
         """
-        if not self.is_local:
-            return f'ws{self.base_url.replace("https", "")}/apps/{self.runner_id}{"/" + str(port) + "/" if port else "/"}'
+        env_params = Environment.get_env_params()
+        base_url = env_params["base_url"]
+        runner_id = env_params["runner_id"]
+        if not Environment._is_local():
+            return f'ws{base_url.replace("https", "")}/apps/{runner_id}{"/" + str(port) + "/" if port else "/"}'
         else:
             return f'ws://127.0.0.1{":" + str(port) + "/" if port else ":8501/"}'
-
-
-if __name__ == "__main__":
-    env = Environment(True)
-
-    print(env.base_url)
-    print(env.get_app_url(8501))
-    print(env.get_websocket_url(8501))
