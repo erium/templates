@@ -13,7 +13,7 @@
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
                         "workspace_name": "DataStrategy",
-                        "source_directory": "workspace_templates/strategy_workspace",
+                        "source_directory": "templates/workspace_templates/strategy_workspace",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -29,7 +29,7 @@
                         "timestamp": "{{timestamp}}",
                         "folder_name": "__new_workspace__",
                         "workspace_name": "New Workspace",
-                        "source_directory": "workspace_templates/project_template",
+                        "source_directory": "templates/workspace_templates/project_template",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -49,7 +49,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "workflow_templates/new_workshop",
+                        "source_directory": "templates/workflow_templates/new_workshop",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -64,7 +64,7 @@
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
                         "prototype_name": "new prototype",
-                        "source_directory": "workflow_templates/new_prototype",
+                        "source_directory": "templates/workflow_templates/new_prototype",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -84,7 +84,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "chatbots/polybot",
+                        "source_directory": "templates/chatbots/polybot",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -110,7 +110,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "image_generation/stable_diffusion",
+                        "source_directory": "templates/image_generation/stable_diffusion",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -130,7 +130,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "generic/document_chatbot",
+                        "source_directory": "templates/generic/document_chatbot",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -144,7 +144,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "generic/meeting_report_generator",
+                        "source_directory": "templates/generic/meeting_report_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -158,7 +158,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "generic/bot_vs_bot",
+                        "source_directory": "templates/generic/bot_vs_bot",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -172,7 +172,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "generic/blogpost_with_image",
+                        "source_directory": "templates/generic/blogpost_with_image",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -186,7 +186,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "generic/bot_generator",
+                        "source_directory": "templates/generic/bot_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -206,7 +206,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "enhanced_bots/bots_with_plugins",
+                        "source_directory": "templates/enhanced_bots/bots_with_plugins",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -232,7 +232,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "code_generation/code_refactoring_and_review",
+                        "source_directory": "templates/code_generation/code_refactoring_and_review",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -246,7 +246,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "code_generation/code_comments_and_documentation_generator",
+                        "source_directory": "templates/code_generation/code_comments_and_documentation_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -260,7 +260,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "code_generation/python_coder",
+                        "source_directory": "templates/code_generation/python_coder",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -274,7 +274,7 @@
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "code_generation/code_and_unit_tests_generator",
+                        "source_directory": "templates/code_generation/code_and_unit_tests_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},

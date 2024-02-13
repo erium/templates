@@ -1,0 +1,78 @@
+{
+    "categories": [
+        {
+            "name": "Sales",
+            "description": "Snippets to streamline the sales process.",
+            "snippets": [
+                {
+                    "name": "Sales Meeting Analyzer",
+                    "description": "Extracts actionable summaries from sales meeting minutes or transcripts for quick reference and follow-up questions.",
+                    "path": "snippets/04_sales/sales_meeting_analyzer/snippet.board"
+                }
+            ]
+        },
+        {
+            "name": "Essentials",
+            "description": "Fundamental tools for creating workflows and understanding board structures.",
+            "snippets": [
+                {
+                    "name": "Bot with context",
+                    "description": "Basic building block for workflows.",
+                    "path": "snippets/01_essentials/bot_with_context/snippet.board"
+                },
+                {
+                    "name": "Board Interpreter",
+                    "description": "Provides explanations of boards and their functionality.",
+                    "path": "snippets/01_essentials/board_interpreter/snippet.board"
+                },
+                {
+                    "name": "Bot Personality Generator",
+                    "description": "Defines task specific roles and behaviours for Bots.",
+                    "path": "snippets/01_essentials/bot_personality_generator/snippet.board"
+                }
+            ]
+        },
+        {
+            "name": "Communication & Administration",
+            "description": "Snippets to streamline and enhance communication and writing.",
+            "snippets": [
+                {
+                    "name": "Content Reviewer",
+                    "description": "Delivers constructive feedback on texts to enhance quality and speed up iteration.",
+                    "path": "snippets/02_communication_and_administration/feedback_giver/snippet.board"
+                },
+                {
+                    "name": "Advanced Email Writer",
+                    "description": "Extracts a specific writing style from past communications and composes emails based on that style guide.",
+                    "path": "snippets/02_communication_and_administration/advanced_email_writer/snippet.board"
+                },
+                {
+                    "name": "Fast Email Writer",
+                    "description": "Composes emails with a consistend tone and style based on an email chain and predefined style parameters.",
+                    "path": "snippets/02_communication_and_administration/fast_email_writer/snippet.board"
+                },
+                {
+                    "name": "Meeting Minutes Analyzer",
+                    "description": "Condenses key points from meetings into actionable summaries and allows follow up questions.",
+                    "path": "snippets/02_communication_and_administration/meeting_minutes_analyzer/snippet.board"
+                }
+            ]
+        },
+        {
+            "name": "Coding & Data",
+            "description": "Tools for developers and scientists to automate coding and analyze data and data structures.",
+            "snippets": [
+                {
+                    "name": "Syntax Learner and Document Generator",
+                    "description": "Extracts syntax rules from a set of documents and creates documents using those rules.",
+                    "path": "snippets/05_coding_and_data/syntax_learner_and_document_generator/snippet.board"
+                },
+                {
+                    "name": "Python Developer",
+                    "description": "A coding assistant for the Python programming language.",
+                    "path": "snippets/05_coding_and_data/python_developer/snippet.board"
+                }
+            ]
+        }
+    ]
+}
