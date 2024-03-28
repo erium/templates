@@ -1,78 +1,6 @@
 {
     "categories": [
         {
-            "name": "Workspaces",
-            "description": "Templates for Halerium workspaces",
-            "templates": [
-                {
-                    "name": "Strategy Workspace",
-                    "isOverview": false,
-                    "description": "All files and folders of the data strategy workspace",
-                    "automaticArguments": {
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "workspace_name": "DataStrategy",
-                        "source_directory": "templates/workspace_templates/strategy_workspace",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": []
-                },
-                {
-                    "name": "Project Workspace",
-                    "isOverview": false,
-                    "description": "All files and folders for a data project workspace",
-                    "automaticArguments": {
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "folder_name": "__new_workspace__",
-                        "workspace_name": "New Workspace",
-                        "source_directory": "templates/workspace_templates/project_template",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": []
-                }
-            ]
-        },
-        {
-            "name": "Workflow",
-            "description": "Templates facilitating the Halerium workflow",
-            "templates": [
-                {
-                    "name": "Data Strategy Workshop",
-                    "isOverview": false,
-                    "description": "Board for a new data strategy workshop",
-                    "automaticArguments": {
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/workflow_templates/new_workshop",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": []
-                },
-                {
-                    "name": "Data Prototype",
-                    "isOverview": false,
-                    "description": "Folder structure for a new data analysis prototype.",
-                    "automaticArguments": {
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "prototype_name": "new prototype",
-                        "source_directory": "templates/workflow_templates/new_prototype",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": []
-                }
-            ]
-        },
-        {
             "name": "Chatbots",
             "description": "Custom chatbots for questionnaires etc.",
             "templates": [
@@ -99,94 +27,60 @@
             ]
         },
         {
-            "name": "Image Generation Prompts",
-            "description": "Boards with Prompt-Trees for image generation.",
+            "name": "Code Generation Prompts",
+            "description": "Boards with Prompt-Trees for code generation tasks.",
             "templates": [
                 {
-                    "name": "Stable Diffusion Generator",
+                    "name": "Code and Unit Tests Generator",
                     "isOverview": false,
-                    "description": "Create prompts for Stable Diffusion",
+                    "description": "Generate foundational code structures and corresponding unit tests based on user-defined specifications.",
                     "automaticArguments": {
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/image_generation/stable_diffusion",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": []
-                }
-            ]
-        },
-        {
-            "name": "Generic Prompts",
-            "description": "Boards with Prompt-Trees for generic tasks.",
-            "templates": [
-                {
-                    "name": "Document Chatbot",
-                    "isOverview": false,
-                    "description": "Perform document-based inquiries, providing instant, accurate responses based on the content of specific documents.",
-                    "automaticArguments": {
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/generic/document_chatbot",
+                        "source_directory": "templates/code_generation/code_and_unit_tests_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
                     "files": []
                 },
                 {
-                    "name": "Meeting Report Generator",
+                    "name": "Code Comments and Documentation Generator",
                     "isOverview": false,
-                    "description": "Efficiently capture, organize, and present key takeaways, decisions, and action items from meetings.",
+                    "description": "Generate insightful code comments and comprehensive documentation.",
                     "automaticArguments": {
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/generic/meeting_report_generator",
+                        "source_directory": "templates/code_generation/code_comments_and_documentation_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
                     "files": []
                 },
                 {
-                    "name": "Bot vs Bot",
+                    "name": "Code Refactoring and Review",
                     "isOverview": false,
-                    "description": "Use two bots to complete a task.",
+                    "description": "Refactor and Review existing code.",
                     "automaticArguments": {
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/generic/bot_vs_bot",
+                        "source_directory": "templates/code_generation/code_refactoring_and_review",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
                     "files": []
                 },
                 {
-                    "name": "Blogpost with Image Generator",
+                    "name": "Interactive Python Coder",
                     "isOverview": false,
-                    "description": "Use Text- and Imagebots to generate a Blogpost on any topic.",
+                    "description": "Generate, execute and debug Python code with a bot.",
                     "automaticArguments": {
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/generic/blogpost_with_image",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": []
-                },
-                {
-                    "name": "Bot Generator",
-                    "isOverview": false,
-                    "description": "Generate a bot to complete a task.",
-                    "automaticArguments": {
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/generic/bot_generator",
+                        "source_directory": "templates/code_generation/python_coder",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
@@ -221,60 +115,166 @@
             ]
         },
         {
-            "name": "Code Generation Prompts",
-            "description": "Boards with Prompt-Trees for code generation tasks.",
+            "name": "Generic Prompts",
+            "description": "Boards with Prompt-Trees for generic tasks.",
             "templates": [
                 {
-                    "name": "Code Refactoring and Review",
+                    "name": "Blogpost with Image Generator",
                     "isOverview": false,
-                    "description": "Refactor and Review existing code.",
+                    "description": "Use Text- and Imagebots to generate a Blogpost on any topic.",
                     "automaticArguments": {
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/code_generation/code_refactoring_and_review",
+                        "source_directory": "templates/generic/blogpost_with_image",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
                     "files": []
                 },
                 {
-                    "name": "Code Comments and Documentation Generator",
+                    "name": "Bot Generator",
                     "isOverview": false,
-                    "description": "Generate insightful code comments and comprehensive documentation.",
+                    "description": "Generate a bot to complete a task.",
                     "automaticArguments": {
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/code_generation/code_comments_and_documentation_generator",
+                        "source_directory": "templates/generic/bot_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
                     "files": []
                 },
                 {
-                    "name": "Interactive Python Coder",
+                    "name": "Bot vs Bot",
                     "isOverview": false,
-                    "description": "Generate, execute and debug Python code with a bot.",
+                    "description": "Use two bots to complete a task.",
                     "automaticArguments": {
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/code_generation/python_coder",
+                        "source_directory": "templates/generic/bot_vs_bot",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
                     "files": []
                 },
                 {
-                    "name": "Code and Unit Tests Generator",
+                    "name": "Document Chatbot",
                     "isOverview": false,
-                    "description": "Generate foundational code structures and corresponding unit tests based on user-defined specifications.",
+                    "description": "Perform document-based inquiries, providing instant, accurate responses based on the content of specific documents.",
                     "automaticArguments": {
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "templates/code_generation/code_and_unit_tests_generator",
+                        "source_directory": "templates/generic/document_chatbot",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
+                    "name": "Meeting Report Generator",
+                    "isOverview": false,
+                    "description": "Efficiently capture, organize, and present key takeaways, decisions, and action items from meetings.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "templates/generic/meeting_report_generator",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                }
+            ]
+        },
+        {
+            "name": "Image Generation Prompts",
+            "description": "Boards with Prompt-Trees for image generation.",
+            "templates": [
+                {
+                    "name": "Stable Diffusion Generator",
+                    "isOverview": false,
+                    "description": "Create prompts for Stable Diffusion",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "templates/image_generation/stable_diffusion",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                }
+            ]
+        },
+        {
+            "name": "Workflow",
+            "description": "Templates facilitating the Halerium workflow",
+            "templates": [
+                {
+                    "name": "Data Prototype",
+                    "isOverview": false,
+                    "description": "Folder structure for a new data analysis prototype.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "prototype_name": "new prototype",
+                        "source_directory": "templates/workflow_templates/new_prototype",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
+                    "name": "Data Strategy Workshop",
+                    "isOverview": false,
+                    "description": "Board for a new data strategy workshop",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "templates/workflow_templates/new_workshop",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                }
+            ]
+        },
+        {
+            "name": "Workspaces",
+            "description": "Templates for Halerium workspaces",
+            "templates": [
+                {
+                    "name": "Project Workspace",
+                    "isOverview": false,
+                    "description": "All files and folders for a data project workspace",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "folder_name": "__new_workspace__",
+                        "workspace_name": "New Workspace",
+                        "source_directory": "templates/workspace_templates/project_template",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                },
+                {
+                    "name": "Strategy Workspace",
+                    "isOverview": false,
+                    "description": "All files and folders of the data strategy workspace",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "workspace_name": "DataStrategy",
+                        "source_directory": "templates/workspace_templates/strategy_workspace",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},

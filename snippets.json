@@ -1,34 +1,13 @@
 {
     "categories": [
         {
-            "name": "Document Tools",
-            "description": "Tools for quickly reading, extracting information or getting feedback.",
-            "snippets": [
-                {
-                    "name": "Document Analyser",
-                    "description": "A tool to analyse and breakdown documents",
-                    "path": "snippets/06_document_tools/02_document_analyser/snippet.board"
-                },
-                {
-                    "name": "Long Text Summariser",
-                    "description": "A tool to summarise long text and provide the main information",
-                    "path": "snippets/06_document_tools/03_long_text_summariser/snippet.board"
-                },
-                {
-                    "name": "Feedback Provider",
-                    "description": "A tool to provide feedback on text documents",
-                    "path": "snippets/06_document_tools/01_feedback_provider/snippet.board"
-                }
-            ]
-        },
-        {
             "name": "Essentials",
             "description": "Fundamental tools for creating workflows and understanding board structures.",
             "snippets": [
                 {
-                    "name": "Board Interpreter",
-                    "description": "Provides explanations of boards and their functionality.",
-                    "path": "snippets/01_essentials/03_board_interpreter/snippet.board"
+                    "name": "Bot with context",
+                    "description": "Basic building block for workflows.",
+                    "path": "snippets/01_essentials/01_bot_with_context/snippet.board"
                 },
                 {
                     "name": "Board Creator",
@@ -36,14 +15,56 @@
                     "path": "snippets/01_essentials/02_board_creator/snippet.board"
                 },
                 {
-                    "name": "Bot with context",
-                    "description": "Basic building block for workflows.",
-                    "path": "snippets/01_essentials/01_bot_with_context/snippet.board"
+                    "name": "Board Interpreter",
+                    "description": "Provides explanations of boards and their functionality.",
+                    "path": "snippets/01_essentials/03_board_interpreter/snippet.board"
                 },
                 {
                     "name": "Bot Personality Generator",
                     "description": "Defines task specific roles and behaviours for Bots.",
                     "path": "snippets/01_essentials/04_bot_personality_generator/snippet.board"
+                }
+            ]
+        },
+        {
+            "name": "Communication & Administration",
+            "description": "Snippets to streamline and enhance communication and writing.",
+            "snippets": [
+                {
+                    "name": "Meeting Minutes Analyzer",
+                    "description": "Condenses key points from meetings into actionable summaries and allows follow up questions.",
+                    "path": "snippets/02_communication_and_administration/01_meeting_minutes_analyzer/snippet.board"
+                },
+                {
+                    "name": "Fast Email Writer",
+                    "description": "Composes emails with a consistend tone and style based on an email chain and predefined style parameters.",
+                    "path": "snippets/02_communication_and_administration/02_fast_email_writer/snippet.board"
+                },
+                {
+                    "name": "Advanced Email Writer",
+                    "description": "Extracts a specific writing style from past communications and composes emails based on that style guide.",
+                    "path": "snippets/02_communication_and_administration/03_advanced_email_writer/snippet.board"
+                }
+            ]
+        },
+        {
+            "name": "Project Management",
+            "description": "Tools to enable project management",
+            "snippets": [
+                {
+                    "name": "Jira Ticket Creator",
+                    "description": "Tools to create jira tickets",
+                    "path": "snippets/03_project_management/01_jira_ticket_creator/snippet.board"
+                },
+                {
+                    "name": "Jira Ticket Refiner",
+                    "description": "Tools to refine existing work tickets",
+                    "path": "snippets/03_project_management/02_jira_ticket_refiner/snippet.board"
+                },
+                {
+                    "name": "Work Instructions Generator",
+                    "description": "Tools to create work instructions",
+                    "path": "snippets/03_project_management/03_work_instructions_generator/snippet.board"
                 }
             ]
         },
@@ -60,6 +81,11 @@
                     "name": "Syntax Learner and Document Generator",
                     "description": "Extracts syntax rules from a set of documents and creates documents using those rules.",
                     "path": "snippets/04_coding_and_data/02_syntax_learner_and_document_generator/snippet.board"
+                },
+                {
+                    "name": "Halerium Model Coder",
+                    "description": "Helps you to code out any functions and features.",
+                    "path": "snippets/04_coding_and_data/03_halerium_model_coder/snippet.board"
                 }
             ]
         },
@@ -75,49 +101,23 @@
             ]
         },
         {
-            "name": "Communication & Administration",
-            "description": "Snippets to streamline and enhance communication and writing.",
+            "name": "Document Tools",
+            "description": "Tools for quickly reading, extracting information or getting feedback.",
             "snippets": [
                 {
-                    "name": "Meeting Minutes Analyzer",
-                    "description": "Condenses key points from meetings into actionable summaries and allows follow up questions.",
-                    "path": "snippets/02_communication_and_administration/01_meeting_minutes_analyzer/snippet.board"
+                    "name": "Feedback Provider",
+                    "description": "A tool to provide feedback on text documents",
+                    "path": "snippets/06_document_tools/01_feedback_provider/snippet.board"
                 },
                 {
-                    "name": "Content Reviewer",
-                    "description": "Delivers constructive feedback on texts to enhance quality and speed up iteration.",
-                    "path": "snippets/02_communication_and_administration/03_content_reviewer/snippet.board"
+                    "name": "Document Analyzer",
+                    "description": "A tool to analyze and breakdown documents",
+                    "path": "snippets/06_document_tools/02_document_analyzer/snippet.board"
                 },
                 {
-                    "name": "Fast Email Writer",
-                    "description": "Composes emails with a consistend tone and style based on an email chain and predefined style parameters.",
-                    "path": "snippets/02_communication_and_administration/02_fast_email_writer/snippet.board"
-                },
-                {
-                    "name": "Advanced Email Writer",
-                    "description": "Extracts a specific writing style from past communications and composes emails based on that style guide.",
-                    "path": "snippets/02_communication_and_administration/04_advanced_email_writer/snippet.board"
-                }
-            ]
-        },
-        {
-            "name": "Project Management",
-            "description": "Tools to enable project management",
-            "snippets": [
-                {
-                    "name": "Work Ticket Refiner",
-                    "description": "Tools to refine existing work tickets",
-                    "path": "snippets/03_project_management/02_work_ticket_refiner/snippet.board"
-                },
-                {
-                    "name": "Ticket Creator",
-                    "description": "Tools to create tickets",
-                    "path": "snippets/03_project_management/01_ticket_creator/snippet.board"
-                },
-                {
-                    "name": "Work Instructions",
-                    "description": "Tools to create work instructions",
-                    "path": "snippets/03_project_management/03_work_instructions/snippet.board"
+                    "name": "Long Text Summarizer",
+                    "description": "A tool to summarise long text and provide the main information",
+                    "path": "snippets/06_document_tools/03_long_text_summarizer/snippet.board"
                 }
             ]
         }
