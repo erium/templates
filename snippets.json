@@ -78,14 +78,14 @@
                     "path": "snippets/04_coding_and_data/01_python_developer/snippet.board"
                 },
                 {
-                    "name": "Syntax Learner and Document Generator",
-                    "description": "Extracts syntax rules from a set of documents and creates documents using those rules.",
-                    "path": "snippets/04_coding_and_data/02_syntax_learner_and_document_generator/snippet.board"
-                },
-                {
                     "name": "Halerium Model Coder",
                     "description": "Helps you to code out any functions and features.",
-                    "path": "snippets/04_coding_and_data/03_halerium_model_coder/snippet.board"
+                    "path": "snippets/04_coding_and_data/02_halerium_model_coder/snippets.board"
+                },
+                {
+                    "name": "Syntax Learner and Document Generator",
+                    "description": "Extracts syntax rules from a set of documents and creates documents using those rules.",
+                    "path": "snippets/04_coding_and_data/03_syntax_learner_and_document_generator/snippet.board"
                 }
             ]
         },
