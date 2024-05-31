@@ -1,1 +1,498 @@
-{"version": "1.2", "nodes": [{"id": "5c991816-1523-472d-8a3b-abd638b946d8", "type": "note", "position": {"x": -525, "y": -1425}, "size": {"width": 250, "height": 150}, "type_specific": {"title": "Enabling Data", "message": "What do the data represent?\nWhere do the data come from?\nWhat is the quality of the data?\n", "color": "note-color-8", "auto_size": false, "attachments": {}}}, {"id": "bde01212-0aef-4aad-9a52-bcb643e2aaab", "type": "note", "position": {"x": -175, "y": -1350}, "size": {"width": 200, "height": 150}, "type_specific": {"title": "Data Preparation", "message": "What kind of transformation and filtering is applied?", "color": "note-color-4", "auto_size": false, "attachments": {}}}, {"id": "1195d93f-17a8-4c15-9178-84fa4febea21", "type": "note", "position": {"x": 125, "y": -1225}, "size": {"width": 275, "height": 150}, "type_specific": {"title": "Model", "message": "High-level description of the model.\n\nIs it a prediction/classification/...?\n\nWhat kind of inputs does it convert into what kind of outputs?", "color": "note-color-4", "auto_size": false, "attachments": {}}}, {"id": "2fb8b4b2-e483-4208-9d58-4eb6c052dd9b", "type": "note", "position": {"x": -525, "y": -825}, "size": {"width": 225, "height": 125}, "type_specific": {"title": "User problem", "message": "What is the problem that the prototype is to solve?", "color": "note-color-6", "auto_size": false, "attachments": {}}}, {"id": "d4b30927-d90d-4a52-9126-c95695a5e9a5", "type": "note", "position": {"x": -525, "y": -1000}, "size": {"width": 225, "height": 125}, "type_specific": {"title": "User", "message": "Who is the user?\nWhat is their role in the organization?", "color": "note-color-6", "auto_size": false, "attachments": {}}}, {"id": "23cb409b-ac87-4282-ba25-e66815974412", "type": "note", "position": {"x": 125, "y": -1000}, "size": {"width": 275, "height": 150}, "type_specific": {"title": "Application", "message": "Is it an App with a graphical user interface? Is it an API?\n\nWhat is the user story?", "color": "note-color-4", "auto_size": false, "attachments": {}}}, {"id": "0cabe3de-25b1-4227-b1a1-cea16f3a3361", "type": "note", "position": {"x": 725, "y": -825}, "size": {"width": 225, "height": 125}, "type_specific": {"title": "User benefit", "message": "How do the application outputs solve the problem of the user.", "color": "note-color-6", "auto_size": false, "attachments": {}}}, {"id": "bfa2d215-f915-41a9-ade6-b397374c0831", "type": "note", "position": {"x": 725, "y": -1000}, "size": {"width": 225, "height": 125}, "type_specific": {"title": "Business benefit", "message": "How does the application benefit the business?", "color": "note-color-6", "auto_size": false, "attachments": {}}}, {"id": "69a60b6f-dbbb-4e33-824f-aba9aff357bd", "type": "note", "position": {"x": 725, "y": -1400}, "size": {"width": 225, "height": 150}, "type_specific": {"title": "Test scenario   ", "message": "What is the test that the model and/or application have to pass?", "color": "note-color-2", "auto_size": false, "attachments": {}}}, {"id": "2af5b1bc-3228-4806-a652-55a491165335", "type": "note", "position": {"x": 725, "y": -1200}, "size": {"width": 225, "height": 150}, "type_specific": {"title": "Target KPI", "message": "What measurable KPI  reflects the business benefit?\nWhat number must be reached for the business case to work?", "color": "note-color-2", "auto_size": false, "attachments": {}}}, {"id": "51317489-de0b-4eff-8d92-7a4bcba68b43", "type": "note", "position": {"x": -700, "y": -625}, "size": {"width": 1825, "height": 34}, "type_specific": {"title": "\u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc", "message": "", "color": "note-color-8", "auto_size": false, "attachments": {}}}, {"id": "f9f4fae9-66f7-4006-8934-ae026588aeed", "type": "note", "position": {"x": -425, "y": -500}, "size": {"width": 150, "height": 125}, "type_specific": {"title": "Experiment 1", "message": "High-level summary of the experiment", "color": "note-color-4", "auto_size": false, "attachments": {}}}, {"id": "d3fa553b-1a83-4662-8832-0674d147d804", "type": "note", "position": {"x": -200, "y": -525}, "size": {"width": 150, "height": 125}, "type_specific": {"title": "Finding 1", "message": "How has the experiment improved the module?", "color": "note-color-2", "auto_size": false, "attachments": {}}}, {"id": "f9ee2ffb-a4fd-41cc-9cc2-d9c073c37205", "type": "note", "position": {"x": -675, "y": -500}, "size": {"width": 150, "height": 125}, "type_specific": {"title": "Experiment goal", "message": "e.g. to improve the model performance", "color": "note-color-6", "auto_size": false, "attachments": {}}}], "edges": [{"id": "9954c783-a4e5-4051-a619-f0c68cafe3bf", "type": "solid_arrow", "connections": {"source": {"id": "5c991816-1523-472d-8a3b-abd638b946d8", "connector": "note-right"}, "target": {"id": "bde01212-0aef-4aad-9a52-bcb643e2aaab", "connector": "note-left"}}, "type_specific": {}}, {"id": "4f32dc85-5144-4b8b-83f4-c0b7f4743c88", "type": "solid_arrow", "connections": {"source": {"id": "bde01212-0aef-4aad-9a52-bcb643e2aaab", "connector": "note-right"}, "target": {"id": "1195d93f-17a8-4c15-9178-84fa4febea21", "connector": "note-left"}}, "type_specific": {}}, {"id": "d8885ec2-080b-4fe4-a317-d14917c7621e", "type": "dashed_line", "connections": {"source": {"id": "1195d93f-17a8-4c15-9178-84fa4febea21", "connector": "note-bottom"}, "target": {"id": "23cb409b-ac87-4282-ba25-e66815974412", "connector": "note-top"}}, "type_specific": {}}, {"id": "525ea53a-596c-4244-9305-54c6340ac1a7", "type": "solid_arrow", "connections": {"source": {"id": "d4b30927-d90d-4a52-9126-c95695a5e9a5", "connector": "note-right"}, "target": {"id": "23cb409b-ac87-4282-ba25-e66815974412", "connector": "note-left"}}, "type_specific": {}}, {"id": "dd15bd43-720e-4c44-b752-84fb33322fe8", "type": "solid_arrow", "connections": {"source": {"id": "2fb8b4b2-e483-4208-9d58-4eb6c052dd9b", "connector": "note-right"}, "target": {"id": "23cb409b-ac87-4282-ba25-e66815974412", "connector": "note-left"}}, "type_specific": {}}, {"id": "10b53345-eeac-48fe-9745-efe200caab7c", "type": "dashed_line", "connections": {"source": {"id": "d4b30927-d90d-4a52-9126-c95695a5e9a5", "connector": "note-bottom"}, "target": {"id": "2fb8b4b2-e483-4208-9d58-4eb6c052dd9b", "connector": "note-top"}}, "type_specific": {}}, {"id": "26c03ccb-82be-47f3-8a3b-94e61b019301", "type": "solid_arrow", "connections": {"source": {"id": "2fb8b4b2-e483-4208-9d58-4eb6c052dd9b", "connector": "note-right"}, "target": {"id": "0cabe3de-25b1-4227-b1a1-cea16f3a3361", "connector": "note-left"}}, "type_specific": {}}, {"id": "00c010ec-9914-4bc3-83b4-3d1aafaa27d3", "type": "solid_arrow", "connections": {"source": {"id": "23cb409b-ac87-4282-ba25-e66815974412", "connector": "note-right"}, "target": {"id": "0cabe3de-25b1-4227-b1a1-cea16f3a3361", "connector": "note-left"}}, "type_specific": {}}, {"id": "bc8a3c8c-be51-4958-aace-f29169d14f59", "type": "dashed_line", "connections": {"source": {"id": "bfa2d215-f915-41a9-ade6-b397374c0831", "connector": "note-bottom"}, "target": {"id": "0cabe3de-25b1-4227-b1a1-cea16f3a3361", "connector": "note-top"}}, "type_specific": {}}, {"id": "ce93a9e1-1649-4f1a-918d-96c0cf81b0b4", "type": "solid_arrow", "connections": {"source": {"id": "23cb409b-ac87-4282-ba25-e66815974412", "connector": "note-right"}, "target": {"id": "bfa2d215-f915-41a9-ade6-b397374c0831", "connector": "note-left"}}, "type_specific": {}}, {"id": "ad386e7e-37be-45aa-b747-1c847c31fcc1", "type": "dashed_line", "connections": {"source": {"id": "2af5b1bc-3228-4806-a652-55a491165335", "connector": "note-bottom"}, "target": {"id": "bfa2d215-f915-41a9-ade6-b397374c0831", "connector": "note-top"}}, "type_specific": {}}, {"id": "00100d93-0e90-4387-b62c-78f8506583b6", "type": "solid_arrow", "connections": {"source": {"id": "2af5b1bc-3228-4806-a652-55a491165335", "connector": "note-left"}, "target": {"id": "69a60b6f-dbbb-4e33-824f-aba9aff357bd", "connector": "note-left"}}, "type_specific": {}}, {"id": "dffa2752-de0f-4908-a5ea-54a823d53070", "type": "solid_arrow", "connections": {"source": {"id": "1195d93f-17a8-4c15-9178-84fa4febea21", "connector": "note-right"}, "target": {"id": "69a60b6f-dbbb-4e33-824f-aba9aff357bd", "connector": "note-left"}}, "type_specific": {}}, {"id": "522b2957-ae5d-48d8-8e9a-aca8a9423f8f", "type": "solid_arrow", "connections": {"source": {"id": "f9ee2ffb-a4fd-41cc-9cc2-d9c073c37205", "connector": "note-right"}, "target": {"id": "f9f4fae9-66f7-4006-8934-ae026588aeed", "connector": "note-left"}}, "type_specific": {}}, {"id": "ae5f284b-280b-4b3e-9496-2aeab0eb27b4", "type": "solid_arrow", "connections": {"source": {"id": "f9f4fae9-66f7-4006-8934-ae026588aeed", "connector": "note-right"}, "target": {"id": "d3fa553b-1a83-4662-8832-0674d147d804", "connector": "note-left"}}, "type_specific": {}}]}
+{
+"version": "1.2",
+"nodes": [
+{
+"id": "88709e61-97bc-482a-84d8-3c4ca6d1c09a",
+"type": "note",
+"position": {
+"x": -525,
+"y": -1425
+},
+"size": {
+"width": 250,
+"height": 150
+},
+"type_specific": {
+"title": "Enabling Data",
+"message": "What do the data represent?\nWhere do the data come from?\nWhat is the quality of the data?\n",
+"color": "note-color-8",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "c0935402-6ed6-42eb-9eac-bd3c92914940",
+"type": "note",
+"position": {
+"x": -175,
+"y": -1350
+},
+"size": {
+"width": 200,
+"height": 150
+},
+"type_specific": {
+"title": "Data Preparation",
+"message": "What kind of transformation and filtering is applied?",
+"color": "note-color-4",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "14665128-f58d-4445-ba19-2825a9c091ac",
+"type": "note",
+"position": {
+"x": 125,
+"y": -1225
+},
+"size": {
+"width": 275,
+"height": 150
+},
+"type_specific": {
+"title": "Model",
+"message": "High-level description of the model.\n\nIs it a prediction/classification/...?\n\nWhat kind of inputs does it convert into what kind of outputs?",
+"color": "note-color-4",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "2679c0bb-a2c9-49a7-aa23-485a3cd67e87",
+"type": "note",
+"position": {
+"x": -525,
+"y": -825
+},
+"size": {
+"width": 225,
+"height": 125
+},
+"type_specific": {
+"title": "User problem",
+"message": "What is the problem that the prototype is to solve?",
+"color": "note-color-6",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "3f20e871-d48b-499c-83b0-2415ffced1b5",
+"type": "note",
+"position": {
+"x": -525,
+"y": -1000
+},
+"size": {
+"width": 225,
+"height": 125
+},
+"type_specific": {
+"title": "User",
+"message": "Who is the user?\nWhat is their role in the organization?",
+"color": "note-color-6",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "d40b43bc-509e-4ed6-a6b9-b880ca618118",
+"type": "note",
+"position": {
+"x": 125,
+"y": -1000
+},
+"size": {
+"width": 275,
+"height": 150
+},
+"type_specific": {
+"title": "Application",
+"message": "Is it an App with a graphical user interface? Is it an API?\n\nWhat is the user story?",
+"color": "note-color-4",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "a1feb306-e6cc-463f-bcf2-4b28423975ad",
+"type": "note",
+"position": {
+"x": 725,
+"y": -825
+},
+"size": {
+"width": 225,
+"height": 125
+},
+"type_specific": {
+"title": "User benefit",
+"message": "How do the application outputs solve the problem of the user.",
+"color": "note-color-6",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "7c6446f0-982a-469a-b7c0-6fc7693fda2a",
+"type": "note",
+"position": {
+"x": 725,
+"y": -1000
+},
+"size": {
+"width": 225,
+"height": 125
+},
+"type_specific": {
+"title": "Business benefit",
+"message": "How does the application benefit the business?",
+"color": "note-color-6",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "76a35ce3-3bd5-419f-8da9-7da976ac0729",
+"type": "note",
+"position": {
+"x": 725,
+"y": -1400
+},
+"size": {
+"width": 225,
+"height": 150
+},
+"type_specific": {
+"title": "Test scenario   ",
+"message": "What is the test that the model and/or application have to pass?",
+"color": "note-color-2",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "718dc030-4297-468e-85c4-151efd33b337",
+"type": "note",
+"position": {
+"x": 725,
+"y": -1200
+},
+"size": {
+"width": 225,
+"height": 150
+},
+"type_specific": {
+"title": "Target KPI",
+"message": "What measurable KPI  reflects the business benefit?\nWhat number must be reached for the business case to work?",
+"color": "note-color-2",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "77fd4fff-a3d2-40b6-a1bb-9c84eb21253d",
+"type": "note",
+"position": {
+"x": -700,
+"y": -625
+},
+"size": {
+"width": 1825,
+"height": 34
+},
+"type_specific": {
+"title": "\u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc Experiments \u25bc \u25bc \u25bc",
+"message": "",
+"color": "note-color-8",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "df43844a-d1cd-4d3a-9c63-07908f59dc80",
+"type": "note",
+"position": {
+"x": -425,
+"y": -500
+},
+"size": {
+"width": 150,
+"height": 125
+},
+"type_specific": {
+"title": "Experiment 1",
+"message": "High-level summary of the experiment",
+"color": "note-color-4",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "bc0f427a-183d-4930-b47b-9f617a306585",
+"type": "note",
+"position": {
+"x": -200,
+"y": -525
+},
+"size": {
+"width": 150,
+"height": 125
+},
+"type_specific": {
+"title": "Finding 1",
+"message": "How has the experiment improved the module?",
+"color": "note-color-2",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "c78de98b-c8b2-4b5d-bd86-60e2485bdcb2",
+"type": "note",
+"position": {
+"x": -675,
+"y": -500
+},
+"size": {
+"width": 150,
+"height": 125
+},
+"type_specific": {
+"title": "Experiment goal",
+"message": "e.g. to improve the model performance",
+"color": "note-color-6",
+"auto_size": false,
+"attachments": {}
+}
+}
+],
+"edges": [
+{
+"id": "9954c783-a4e5-4051-a619-f0c68cafe3bf",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "88709e61-97bc-482a-84d8-3c4ca6d1c09a",
+"connector": "note-right"
+},
+"target": {
+"id": "c0935402-6ed6-42eb-9eac-bd3c92914940",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "4f32dc85-5144-4b8b-83f4-c0b7f4743c88",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "c0935402-6ed6-42eb-9eac-bd3c92914940",
+"connector": "note-right"
+},
+"target": {
+"id": "14665128-f58d-4445-ba19-2825a9c091ac",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "d8885ec2-080b-4fe4-a317-d14917c7621e",
+"type": "dashed_line",
+"connections": {
+"source": {
+"id": "14665128-f58d-4445-ba19-2825a9c091ac",
+"connector": "note-bottom"
+},
+"target": {
+"id": "d40b43bc-509e-4ed6-a6b9-b880ca618118",
+"connector": "note-top"
+}
+},
+"type_specific": {}
+},
+{
+"id": "525ea53a-596c-4244-9305-54c6340ac1a7",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "3f20e871-d48b-499c-83b0-2415ffced1b5",
+"connector": "note-right"
+},
+"target": {
+"id": "d40b43bc-509e-4ed6-a6b9-b880ca618118",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "dd15bd43-720e-4c44-b752-84fb33322fe8",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "2679c0bb-a2c9-49a7-aa23-485a3cd67e87",
+"connector": "note-right"
+},
+"target": {
+"id": "d40b43bc-509e-4ed6-a6b9-b880ca618118",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "10b53345-eeac-48fe-9745-efe200caab7c",
+"type": "dashed_line",
+"connections": {
+"source": {
+"id": "3f20e871-d48b-499c-83b0-2415ffced1b5",
+"connector": "note-bottom"
+},
+"target": {
+"id": "2679c0bb-a2c9-49a7-aa23-485a3cd67e87",
+"connector": "note-top"
+}
+},
+"type_specific": {}
+},
+{
+"id": "26c03ccb-82be-47f3-8a3b-94e61b019301",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "2679c0bb-a2c9-49a7-aa23-485a3cd67e87",
+"connector": "note-right"
+},
+"target": {
+"id": "a1feb306-e6cc-463f-bcf2-4b28423975ad",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "00c010ec-9914-4bc3-83b4-3d1aafaa27d3",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "d40b43bc-509e-4ed6-a6b9-b880ca618118",
+"connector": "note-right"
+},
+"target": {
+"id": "a1feb306-e6cc-463f-bcf2-4b28423975ad",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "bc8a3c8c-be51-4958-aace-f29169d14f59",
+"type": "dashed_line",
+"connections": {
+"source": {
+"id": "7c6446f0-982a-469a-b7c0-6fc7693fda2a",
+"connector": "note-bottom"
+},
+"target": {
+"id": "a1feb306-e6cc-463f-bcf2-4b28423975ad",
+"connector": "note-top"
+}
+},
+"type_specific": {}
+},
+{
+"id": "ce93a9e1-1649-4f1a-918d-96c0cf81b0b4",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "d40b43bc-509e-4ed6-a6b9-b880ca618118",
+"connector": "note-right"
+},
+"target": {
+"id": "7c6446f0-982a-469a-b7c0-6fc7693fda2a",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "ad386e7e-37be-45aa-b747-1c847c31fcc1",
+"type": "dashed_line",
+"connections": {
+"source": {
+"id": "718dc030-4297-468e-85c4-151efd33b337",
+"connector": "note-bottom"
+},
+"target": {
+"id": "7c6446f0-982a-469a-b7c0-6fc7693fda2a",
+"connector": "note-top"
+}
+},
+"type_specific": {}
+},
+{
+"id": "00100d93-0e90-4387-b62c-78f8506583b6",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "718dc030-4297-468e-85c4-151efd33b337",
+"connector": "note-left"
+},
+"target": {
+"id": "76a35ce3-3bd5-419f-8da9-7da976ac0729",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "dffa2752-de0f-4908-a5ea-54a823d53070",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "14665128-f58d-4445-ba19-2825a9c091ac",
+"connector": "note-right"
+},
+"target": {
+"id": "76a35ce3-3bd5-419f-8da9-7da976ac0729",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "522b2957-ae5d-48d8-8e9a-aca8a9423f8f",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "c78de98b-c8b2-4b5d-bd86-60e2485bdcb2",
+"connector": "note-right"
+},
+"target": {
+"id": "df43844a-d1cd-4d3a-9c63-07908f59dc80",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "ae5f284b-280b-4b3e-9496-2aeab0eb27b4",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "df43844a-d1cd-4d3a-9c63-07908f59dc80",
+"connector": "note-right"
+},
+"target": {
+"id": "bc0f427a-183d-4930-b47b-9f617a306585",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+}
+]
+}

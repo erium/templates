@@ -1,1 +1,128 @@
-{"version": "1.2", "nodes": [{"id": "5fc1f0f7-8792-4483-9e08-2bb8fdd05453", "type": "note", "position": {"x": -158, "y": -248}, "size": {"width": 183, "height": 130}, "type_specific": {"title": "idea 1", "message": "", "color": "note-color-6", "auto_size": false, "attachments": {}}}, {"id": "550fe32f-50f6-4501-854b-9562167b0f2e", "type": "note", "position": {"x": 173, "y": -199}, "size": {"width": 149, "height": 34}, "type_specific": {"title": "experiment 1", "message": "", "color": "note-color-4", "auto_size": false, "attachments": {}}}, {"id": "9cb59d8e-4c78-454c-b685-5f1e2856ee88", "type": "note", "position": {"x": 408, "y": -199}, "size": {"width": 114, "height": 34}, "type_specific": {"title": "finding 1", "message": "", "color": "note-color-2", "auto_size": false, "attachments": {}}}, {"id": "b76745a7-2f39-4e84-8e5f-094321665a0e", "type": "note", "position": {"x": -417, "y": -251}, "size": {"width": 100, "height": 130}, "type_specific": {"title": "Domain Knowledge", "message": "", "color": "note-color-8", "auto_size": false, "attachments": {}}}], "edges": [{"id": "8297f07a-ecc9-40d2-9b0f-d458529a78a6", "type": "solid_arrow", "connections": {"source": {"id": "5fc1f0f7-8792-4483-9e08-2bb8fdd05453", "connector": "note-right"}, "target": {"id": "550fe32f-50f6-4501-854b-9562167b0f2e", "connector": "note-left"}}, "type_specific": {}}, {"id": "a8f3af3e-7d0a-40bc-b310-8b00febb423f", "type": "solid_arrow", "connections": {"source": {"id": "550fe32f-50f6-4501-854b-9562167b0f2e", "connector": "note-right"}, "target": {"id": "9cb59d8e-4c78-454c-b685-5f1e2856ee88", "connector": "note-left"}}, "type_specific": {}}, {"id": "f65e7aff-d24e-450c-9380-feb4c1c07ad4", "type": "solid_arrow", "connections": {"source": {"id": "b76745a7-2f39-4e84-8e5f-094321665a0e", "connector": "note-right"}, "target": {"id": "5fc1f0f7-8792-4483-9e08-2bb8fdd05453", "connector": "note-left"}}, "type_specific": {}}]}
+{
+"version": "1.2",
+"nodes": [
+{
+"id": "bce6c47a-9c82-49b6-9304-48035590862d",
+"type": "note",
+"position": {
+"x": -158,
+"y": -248
+},
+"size": {
+"width": 183,
+"height": 130
+},
+"type_specific": {
+"title": "idea 1",
+"message": "",
+"color": "note-color-6",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "be66da36-36f4-4e50-82d8-7e1b371b47e9",
+"type": "note",
+"position": {
+"x": 173,
+"y": -199
+},
+"size": {
+"width": 149,
+"height": 34
+},
+"type_specific": {
+"title": "experiment 1",
+"message": "",
+"color": "note-color-4",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "d10eb55c-e80c-49e6-9d50-95270cbd7120",
+"type": "note",
+"position": {
+"x": 408,
+"y": -199
+},
+"size": {
+"width": 114,
+"height": 34
+},
+"type_specific": {
+"title": "finding 1",
+"message": "",
+"color": "note-color-2",
+"auto_size": false,
+"attachments": {}
+}
+},
+{
+"id": "3a72f1b0-688a-412b-abdf-e4cc15238d22",
+"type": "note",
+"position": {
+"x": -417,
+"y": -251
+},
+"size": {
+"width": 100,
+"height": 130
+},
+"type_specific": {
+"title": "Domain Knowledge",
+"message": "",
+"color": "note-color-8",
+"auto_size": false,
+"attachments": {}
+}
+}
+],
+"edges": [
+{
+"id": "8297f07a-ecc9-40d2-9b0f-d458529a78a6",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "bce6c47a-9c82-49b6-9304-48035590862d",
+"connector": "note-right"
+},
+"target": {
+"id": "be66da36-36f4-4e50-82d8-7e1b371b47e9",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "a8f3af3e-7d0a-40bc-b310-8b00febb423f",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "be66da36-36f4-4e50-82d8-7e1b371b47e9",
+"connector": "note-right"
+},
+"target": {
+"id": "d10eb55c-e80c-49e6-9d50-95270cbd7120",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+},
+{
+"id": "f65e7aff-d24e-450c-9380-feb4c1c07ad4",
+"type": "solid_arrow",
+"connections": {
+"source": {
+"id": "3a72f1b0-688a-412b-abdf-e4cc15238d22",
+"connector": "note-right"
+},
+"target": {
+"id": "bce6c47a-9c82-49b6-9304-48035590862d",
+"connector": "note-left"
+}
+},
+"type_specific": {}
+}
+]
+}

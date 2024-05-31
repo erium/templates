@@ -23,6 +23,16 @@
                     "name": "Bot Personality Generator",
                     "description": "Defines task specific roles and behaviours for Bots.",
                     "path": "snippets/01_essentials/04_bot_personality_generator/snippet.board"
+                },
+                {
+                    "name": "Image Generator",
+                    "description": "Generates image based on description provided",
+                    "path": "snippets/01_essentials/05_Image_Generator/snippet.board"
+                },
+                {
+                    "name": "Questionnaire Chatbot",
+                    "description": "Build Chatbots with safety mechanism already in place.",
+                    "path": "snippets/01_essentials/06_questionnaire_creator/snippet.board"
                 }
             ]
         },
@@ -78,14 +88,29 @@
                     "path": "snippets/04_coding_and_data/01_python_developer/snippet.board"
                 },
                 {
+                    "name": "Data Files Reader",
+                    "description": "Read, Clean and Transform messy data files.",
+                    "path": "snippets/04_coding_and_data/02_data_file_reader/snippet.board"
+                },
+                {
+                    "name": "Data Visualization",
+                    "description": "Perform basic data visualization for your exploratory data analytics.",
+                    "path": "snippets/04_coding_and_data/03_data_visualization/snippet.board"
+                },
+                {
                     "name": "Halerium Model Coder",
                     "description": "Helps you to code out any functions and features.",
-                    "path": "snippets/04_coding_and_data/02_halerium_model_coder/snippets.board"
+                    "path": "snippets/04_coding_and_data/04_halerium_model_coder/snippet.board"
+                },
+                {
+                    "name": "Code Review Report",
+                    "description": "Write Code Review Report in a few clicks",
+                    "path": "snippets/04_coding_and_data/05_code_review_report/snippet.board"
                 },
                 {
                     "name": "Syntax Learner and Document Generator",
                     "description": "Extracts syntax rules from a set of documents and creates documents using those rules.",
-                    "path": "snippets/04_coding_and_data/03_syntax_learner_and_document_generator/snippet.board"
+                    "path": "snippets/04_coding_and_data/06_syntax_learner_and_document_generator/snippet.board"
                 }
             ]
         },
@@ -94,9 +119,19 @@
             "description": "Snippets to streamline the sales process.",
             "snippets": [
                 {
-                    "name": "Sales Meeting Analyzer",
-                    "description": "Extracts actionable summaries from sales meeting minutes or transcripts for quick reference and follow-up questions.",
-                    "path": "snippets/05_sales/01_sales_meeting_analyzer/snippet.board"
+                    "name": "Sales Meeting Anlayzer",
+                    "description": "Anlayze your meetings and give you insights about your sales calls.",
+                    "path": "snippets/05_sales/01_sales_meeting_anlayzer/snippet.board"
+                },
+                {
+                    "name": "Sales Email Writer",
+                    "description": "Extracts actionable summaries and generate a sales email.",
+                    "path": "snippets/05_sales/02_sales_email_writer/snippet.board"
+                },
+                {
+                    "name": "Sales Meeting Minutes Generator",
+                    "description": "Extracts actionable summaries from sales meeting for quick reference and follow-up questions.",
+                    "path": "snippets/05_sales/03_sales_meeting_minutes_generator/snippet.board"
                 }
             ]
         },
@@ -118,6 +153,22 @@
                     "name": "Long Text Summarizer",
                     "description": "A tool to summarise long text and provide the main information",
                     "path": "snippets/06_document_tools/03_long_text_summarizer/snippet.board"
+                }
+            ]
+        },
+        {
+            "name": "Canvas",
+            "description": "Read to use most frequently used canvas.",
+            "snippets": [
+                {
+                    "name": "Business Model Canvas",
+                    "description": "Template for Business Model Canvas.",
+                    "path": "snippets/07_canvas/01_Business_Model_Canvas/snippet.board"
+                },
+                {
+                    "name": "Value Proposition Canvas",
+                    "description": "Template for Value Proposition Canvas",
+                    "path": "snippets/07_canvas/02_Value_Proposition_Canvas/snippet.board"
                 }
             ]
         }
