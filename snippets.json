@@ -5,6 +5,11 @@
             "description": "Fundamental tools for creating workflows and understanding board structures.",
             "snippets": [
                 {
+                    "name": "Hal-E - your Halerium support bot",
+                    "description": "Hal-E can advise you in using Halerium.",
+                    "path": "snippets/01_essentials/00_hal_e/snippet.board"
+                },
+                {
                     "name": "Bot with context",
                     "description": "Basic building block for workflows.",
                     "path": "snippets/01_essentials/01_bot_with_context/snippet.board"
@@ -62,19 +67,24 @@
             "description": "Tools to enable project management",
             "snippets": [
                 {
+                    "name": "Project Meeting Analyzer",
+                    "description": "Anlayzer project meetings and develop useful summaries.",
+                    "path": "snippets/03_project_management/01_Project_Meeting_Analyzer/snippet.board"
+                },
+                {
                     "name": "Jira Ticket Creator",
                     "description": "Tools to create jira tickets",
-                    "path": "snippets/03_project_management/01_jira_ticket_creator/snippet.board"
+                    "path": "snippets/03_project_management/02_jira_ticket_creator/snippet.board"
                 },
                 {
                     "name": "Jira Ticket Refiner",
                     "description": "Tools to refine existing work tickets",
-                    "path": "snippets/03_project_management/02_jira_ticket_refiner/snippet.board"
+                    "path": "snippets/03_project_management/03_jira_ticket_refiner/snippet.board"
                 },
                 {
                     "name": "Work Instructions Generator",
                     "description": "Tools to create work instructions",
-                    "path": "snippets/03_project_management/03_work_instructions_generator/snippet.board"
+                    "path": "snippets/03_project_management/04_work_instructions_generator/snippet.board"
                 }
             ]
         },
@@ -119,7 +129,7 @@
             "description": "Snippets to streamline the sales process.",
             "snippets": [
                 {
-                    "name": "Sales Meeting Anlayzer",
+                    "name": "Sales Meeting Analyzer",
                     "description": "Anlayze your meetings and give you insights about your sales calls.",
                     "path": "snippets/05_sales/01_sales_meeting_anlayzer/snippet.board"
                 },
@@ -127,11 +137,6 @@
                     "name": "Sales Email Writer",
                     "description": "Extracts actionable summaries and generate a sales email.",
                     "path": "snippets/05_sales/02_sales_email_writer/snippet.board"
-                },
-                {
-                    "name": "Sales Meeting Minutes Generator",
-                    "description": "Extracts actionable summaries from sales meeting for quick reference and follow-up questions.",
-                    "path": "snippets/05_sales/03_sales_meeting_minutes_generator/snippet.board"
                 }
             ]
         },
