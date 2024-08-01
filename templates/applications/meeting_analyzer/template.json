@@ -1,0 +1,14 @@
+{
+    "name": "Meeting Analyzer",
+    "isOverview": false,
+    "description": "The Meeting Analyzer application for recording and summarizing meetings.",
+    "automaticArguments": {
+        "author_name": "{{user.name}}",
+        "author_initials": "{{user.initials}}",
+        "timestamp": "{{timestamp}}",
+        "folder_name": "meeting_analyzer"
+    },
+    "userArguments": {
+    },
+    "files": []
+}

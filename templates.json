@@ -1,6 +1,27 @@
 {
     "categories": [
         {
+            "name": "Applications",
+            "description": "Halerium Applications",
+            "templates": [
+                {
+                    "name": "Meeting Analyzer",
+                    "isOverview": false,
+                    "description": "The Meeting Analyzer application for recording and summarizing meetings.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "folder_name": "meeting_analyzer",
+                        "source_directory": "templates/applications/meeting_analyzer",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                }
+            ]
+        },
+        {
             "name": "Workflow",
             "description": "Templates facilitating the Halerium workflow",
             "templates": [
