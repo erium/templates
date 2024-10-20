@@ -1,5 +1,6 @@
 {
-"version": "1.2",
+"version": "2.0",
+"workflows": [],
 "nodes": [
 {
 "id": "754260d4-9985-47ff-8cc5-43479246d146",

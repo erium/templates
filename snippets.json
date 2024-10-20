@@ -1,6 +1,27 @@
 {
     "categories": [
         {
+            "name": "Basics",
+            "description": "Fundamental tools for getting started with Halerium.",
+            "snippets": [
+                {
+                    "name": "Custom Agent Chat",
+                    "description": "Get you started with chatting with a custom agent.",
+                    "path": "snippets/00_basics/00_custom_agent/snippet.board"
+                },
+                {
+                    "name": "Meeting Analyzer",
+                    "description": "Condenses key points from meetings into actionable summaries and allows follow up questions.",
+                    "path": "snippets/00_basics/01_meeting_analyzer/snippet.board"
+                },
+                {
+                    "name": "Email Response Writer",
+                    "description": "Composes emails with a consistend tone and style based on an email chain and predefined style parameters.",
+                    "path": "snippets/00_basics/02_email_response_writer/snippet.board"
+                }
+            ]
+        },
+        {
             "name": "Essentials",
             "description": "Fundamental tools for creating workflows and understanding board structures.",
             "snippets": [
