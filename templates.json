@@ -1,6 +1,24 @@
 {
     "categories": [
         {
+            "name": "Internal",
+            "description": "Internal Halerium Templates",
+            "templates": [
+                {
+                    "name": "Default HAL-Es",
+                    "isOverview": false,
+                    "description": "Default HAL-Es applied for each new workspace",
+                    "automaticArguments": {
+                        "folder_name": ".hal-e",
+                        "source_directory": "templates/.internal/HAL-Es",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
+                }
+            ]
+        },
+        {
             "name": "Applications",
             "description": "Halerium Applications",
             "templates": [

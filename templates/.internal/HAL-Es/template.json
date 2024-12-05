@@ -1,0 +1,11 @@
+{
+    "name": "Default HAL-Es",
+    "isOverview": false,
+    "description": "Default HAL-Es applied for each new workspace",
+    "automaticArguments": {
+        "folder_name": ".hal-e"
+    },
+    "userArguments": {
+    },
+    "files": []
+}
