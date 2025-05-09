@@ -41,12 +41,9 @@ for board_path in ("chatbot.board", "template.board"):
         if card.type == "setup":
             if "store_uuids" in card.type_specific.setup_args:
                 if placeholder_store_id in card.type_specific.setup_args["store_uuids"]:
-                    index = card.type_specific.setup_args["store_uuids"].index(placeholder_store_id)
+                    rights = card.type_specific.setup_args["store_uuids"].pop(placeholder_store_id)
                     if store_id:
-                        card.type_specific.setup_args["store_uuids"][index] = store_id
-                    else:
-                        # remove placeholder if store_id is none
-                        card.type_specific.setup_args["store_uuids"].pop(index)
+                        card.type_specific.setup_args["store_uuids"][store_id] = rights
     board.to_json(board_path)
 
 print("Hal_Magic_Template_done.")
