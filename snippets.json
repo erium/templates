@@ -1,200 +1,45 @@
 {
     "categories": [
         {
-            "name": "Basics",
-            "description": "Fundamental tools for getting started with Halerium.",
+            "name": "Canvas Templates",
+            "description": "Templates for business and value proposition canvases.",
             "snippets": [
                 {
-                    "name": "Custom Agent Chat",
-                    "description": "Get you started with chatting with a custom agent.",
-                    "path": "snippets/00_basics/00_custom_agent/snippet.board"
+                    "name": "Business_Model_Canvas",
+                    "description": "A template for creating business model canvases.",
+                    "path": "snippets/Canvas Templates/Business Model Canvas/snippet.board"
                 },
                 {
-                    "name": "Meeting Analyzer",
-                    "description": "Condenses key points from meetings into actionable summaries and allows follow up questions.",
-                    "path": "snippets/00_basics/01_meeting_analyzer/snippet.board"
-                },
-                {
-                    "name": "Email Response Writer",
-                    "description": "Composes emails with a consistend tone and style based on an email chain and predefined style parameters.",
-                    "path": "snippets/00_basics/02_email_response_writer/snippet.board"
-                }
-            ]
-        },
-        {
-            "name": "Essentials",
-            "description": "Fundamental tools for creating workflows and understanding board structures.",
-            "snippets": [
-                {
-                    "name": "Hal-E - your Halerium support bot",
-                    "description": "Hal-E can advise you in using Halerium.",
-                    "path": "snippets/01_essentials/00_hal_e/snippet.board"
-                },
-                {
-                    "name": "Bot with context",
-                    "description": "Basic building block for workflows.",
-                    "path": "snippets/01_essentials/01_bot_with_context/snippet.board"
-                },
-                {
-                    "name": "Board Creator",
-                    "description": "Create new board based on the description",
-                    "path": "snippets/01_essentials/02_board_creator/snippet.board"
-                },
-                {
-                    "name": "Board Interpreter",
-                    "description": "Provides explanations of boards and their functionality.",
-                    "path": "snippets/01_essentials/03_board_interpreter/snippet.board"
-                },
-                {
-                    "name": "Bot Personality Generator",
-                    "description": "Defines task specific roles and behaviours for Bots.",
-                    "path": "snippets/01_essentials/04_bot_personality_generator/snippet.board"
-                },
-                {
-                    "name": "Image Generator",
-                    "description": "Generates image based on description provided",
-                    "path": "snippets/01_essentials/05_Image_Generator/snippet.board"
-                },
-                {
-                    "name": "Questionnaire Chatbot",
-                    "description": "Build Chatbots with safety mechanism already in place.",
-                    "path": "snippets/01_essentials/06_questionnaire_creator/snippet.board"
+                    "name": "Value_Proposition_Canvas",
+                    "description": "A template for creating value proposition canvases.",
+                    "path": "snippets/Canvas Templates/Value Proposition Canvas/snippet.board"
                 }
             ]
         },
         {
             "name": "Communication & Administration",
-            "description": "Snippets to streamline and enhance communication and writing.",
+            "description": "Tools for managing communication and administrative tasks.",
             "snippets": [
                 {
-                    "name": "Meeting Minutes Analyzer",
-                    "description": "Condenses key points from meetings into actionable summaries and allows follow up questions.",
-                    "path": "snippets/02_communication_and_administration/01_meeting_minutes_analyzer/snippet.board"
+                    "name": "Email_Response_Writer",
+                    "description": "Automates email responses.",
+                    "path": "snippets/Communication & Administration/Email Response Writer/snippet.board"
                 },
                 {
-                    "name": "Fast Email Writer",
-                    "description": "Composes emails with a consistend tone and style based on an email chain and predefined style parameters.",
-                    "path": "snippets/02_communication_and_administration/02_fast_email_writer/snippet.board"
-                },
-                {
-                    "name": "Advanced Email Writer",
-                    "description": "Extracts a specific writing style from past communications and composes emails based on that style guide.",
-                    "path": "snippets/02_communication_and_administration/03_advanced_email_writer/snippet.board"
+                    "name": "Meeting_Analyzer",
+                    "description": "Analyzes meeting minutes for important information.",
+                    "path": "snippets/Communication & Administration/Meeting Analyzer/snippet.board"
                 }
             ]
         },
         {
-            "name": "Project Management",
-            "description": "Tools to enable project management",
+            "name": "Custom Hal-E board",
+            "description": "Custom templates and boards for the Hal-E support bot.",
             "snippets": [
                 {
-                    "name": "Project Meeting Analyzer",
-                    "description": "Anlayzer project meetings and develop useful summaries.",
-                    "path": "snippets/03_project_management/01_Project_Meeting_Analyzer/snippet.board"
-                },
-                {
-                    "name": "Jira Ticket Creator",
-                    "description": "Tools to create jira tickets",
-                    "path": "snippets/03_project_management/02_jira_ticket_creator/snippet.board"
-                },
-                {
-                    "name": "Jira Ticket Refiner",
-                    "description": "Tools to refine existing work tickets",
-                    "path": "snippets/03_project_management/03_jira_ticket_refiner/snippet.board"
-                },
-                {
-                    "name": "Work Instructions Generator",
-                    "description": "Tools to create work instructions",
-                    "path": "snippets/03_project_management/04_work_instructions_generator/snippet.board"
-                }
-            ]
-        },
-        {
-            "name": "Coding & Data",
-            "description": "Tools for developers and scientists to automate coding and analyze data and data structures.",
-            "snippets": [
-                {
-                    "name": "Python Developer",
-                    "description": "A coding assistant for the Python programming language",
-                    "path": "snippets/04_coding_and_data/01_python_developer/snippet.board"
-                },
-                {
-                    "name": "Data Files Reader",
-                    "description": "Read, Clean and Transform messy data files.",
-                    "path": "snippets/04_coding_and_data/02_data_file_reader/snippet.board"
-                },
-                {
-                    "name": "Data Visualization",
-                    "description": "Perform basic data visualization for your exploratory data analytics.",
-                    "path": "snippets/04_coding_and_data/03_data_visualization/snippet.board"
-                },
-                {
-                    "name": "Halerium Model Coder",
-                    "description": "Helps you to code out any functions and features.",
-                    "path": "snippets/04_coding_and_data/04_halerium_model_coder/snippet.board"
-                },
-                {
-                    "name": "Code Review Report",
-                    "description": "Write Code Review Report in a few clicks",
-                    "path": "snippets/04_coding_and_data/05_code_review_report/snippet.board"
-                },
-                {
-                    "name": "Syntax Learner and Document Generator",
-                    "description": "Extracts syntax rules from a set of documents and creates documents using those rules.",
-                    "path": "snippets/04_coding_and_data/06_syntax_learner_and_document_generator/snippet.board"
-                }
-            ]
-        },
-        {
-            "name": "Sales",
-            "description": "Snippets to streamline the sales process.",
-            "snippets": [
-                {
-                    "name": "Sales Meeting Analyzer",
-                    "description": "Anlayze your meetings and give you insights about your sales calls.",
-                    "path": "snippets/05_sales/01_sales_meeting_anlayzer/snippet.board"
-                },
-                {
-                    "name": "Sales Email Writer",
-                    "description": "Extracts actionable summaries and generate a sales email.",
-                    "path": "snippets/05_sales/02_sales_email_writer/snippet.board"
-                }
-            ]
-        },
-        {
-            "name": "Document Tools",
-            "description": "Tools for quickly reading, extracting information or getting feedback.",
-            "snippets": [
-                {
-                    "name": "Feedback Provider",
-                    "description": "A tool to provide feedback on text documents",
-                    "path": "snippets/06_document_tools/01_feedback_provider/snippet.board"
-                },
-                {
-                    "name": "Document Analyzer",
-                    "description": "A tool to analyze and breakdown documents",
-                    "path": "snippets/06_document_tools/02_document_analyzer/snippet.board"
-                },
-                {
-                    "name": "Long Text Summarizer",
-                    "description": "A tool to summarise long text and provide the main information",
-                    "path": "snippets/06_document_tools/03_long_text_summarizer/snippet.board"
-                }
-            ]
-        },
-        {
-            "name": "Canvas",
-            "description": "Read to use most frequently used canvas.",
-            "snippets": [
-                {
-                    "name": "Business Model Canvas",
-                    "description": "Template for Business Model Canvas.",
-                    "path": "snippets/07_canvas/01_Business_Model_Canvas/snippet.board"
-                },
-                {
-                    "name": "Value Proposition Canvas",
-                    "description": "Template for Value Proposition Canvas",
-                    "path": "snippets/07_canvas/02_Value_Proposition_Canvas/snippet.board"
+                    "name": "Custom Hal-E board",
+                    "description": "A custom board for the Hal-E support bot.",
+                    "path": "snippets/Custom Hal-E/Custom Hal-E board/snippet.board"
                 }
             ]
         }
