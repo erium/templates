@@ -5,14 +5,14 @@
             "description": "Templates for business and value proposition canvases.",
             "snippets": [
                 {
-                    "name": "Business_Model_Canvas",
+                    "name": "Business Model Canvas",
                     "description": "A template for creating business model canvases.",
-                    "path": "snippets/Canvas Templates/Business Model Canvas/snippet.board"
+                    "path": "snippets/canvas_templates/business_model_canvas/snippet.board"
                 },
                 {
-                    "name": "Value_Proposition_Canvas",
+                    "name": "Value Proposition Canvas",
                     "description": "A template for creating value proposition canvases.",
-                    "path": "snippets/Canvas Templates/Value Proposition Canvas/snippet.board"
+                    "path": "snippets/canvas_templates/value_proposition_canvas/snippet.board"
                 }
             ]
         },
@@ -21,14 +21,14 @@
             "description": "Tools for managing communication and administrative tasks.",
             "snippets": [
                 {
-                    "name": "Email_Response_Writer",
-                    "description": "Automates email responses.",
-                    "path": "snippets/Communication & Administration/Email Response Writer/snippet.board"
+                    "name": "Email Response Writer",
+                    "description": "Automates e-mail responses.",
+                    "path": "snippets/communication_and_administration/email_response_writer/snippet.board"
                 },
                 {
-                    "name": "Meeting_Analyzer",
+                    "name": "Meeting Analyzer",
                     "description": "Analyzes meeting minutes for important information.",
-                    "path": "snippets/Communication & Administration/Meeting Analyzer/snippet.board"
+                    "path": "snippets/communication_and_administration/meeting_analyzer/snippet.board"
                 }
             ]
         },
@@ -39,7 +39,7 @@
                 {
                     "name": "Custom Hal-E board",
                     "description": "A custom board for the Hal-E support bot.",
-                    "path": "snippets/Custom Hal-E/Custom Hal-E board/snippet.board"
+                    "path": "snippets/custom_hal_e/custom_hal_e_board/snippet.board"
                 }
             ]
         }
